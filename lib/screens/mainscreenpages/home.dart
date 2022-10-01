@@ -57,19 +57,67 @@ class _HomeState extends State<Home> {
                           color: Color.fromRGBO(0, 0, 0, 0.43),
                         )
                       ],
-                      image: DecorationImage(
+                      image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
                               "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp")),
                       borderRadius: BorderRadius.circular(10)),
                   child: Container(
-                      child: Column(),
+                      height: height / 2.5,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          gradient: LinearGradient(
+                          gradient: const LinearGradient(
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter,
-                              colors: [Colors.transparent, Colors.black]))),
+                              colors: [Colors.transparent, Colors.black])),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Spacer(),
+                            const Text("Tenet",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 25)),
+                            const Text("Sci-Fi | 2020-08-26",
+                                style: TextStyle(color: Colors.white)),
+                            const Text(
+                              "The Protagonist, a CIA operative, participates in an extraction at the Kyiv Opera House. His team retrieves an artifact but he is captured, tortured by mercenaries, and ultimately consumes a suicide pill. Some time later, the Protagonist awakens to learn the artifact was lost and the pill was a fake, designed as a test. A highly secretive organization called Tenet recruits him and briefs him on bullets with  entropy, meaning they move backward through time. After meeting his handler, Neil, they trace the inverted bullets to arms dealer Priya Singh in Mumbai.",
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  color: Color.fromARGB(171, 255, 255, 255)),
+                              maxLines: 2,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5),
+                              child: Container(
+                                width: 83,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.white),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: const [
+                                      Text("Rating:",
+                                          style: TextStyle(
+                                              color: Color.fromARGB(
+                                                  192, 255, 255, 255))),
+                                      Text("8.4",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.white)),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            )
+                          ],
+                        ),
+                      )),
                 ),
               );
             },
@@ -113,8 +161,44 @@ class _HomeState extends State<Home> {
                             color: Color.fromRGBO(0, 0, 0, 0.43),
                           )
                         ],
-                        color: Colors.green,
-                        borderRadius: BorderRadius.circular(10)),
+                        image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                "https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp")),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          gradient: const LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Colors.transparent, Colors.black])),
+                      height: height / 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Spacer(),
+                            Text(
+                              "Joker",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Tragedy | 9.2 \u066D",
+                              style: TextStyle(
+                                color: Color.fromARGB(194, 255, 255, 255),
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 );
               }),
@@ -157,8 +241,44 @@ class _HomeState extends State<Home> {
                             color: Color.fromRGBO(0, 0, 0, 0.43),
                           )
                         ],
-                        color: Colors.green,
+                        image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                "https://github.com/diptanshumahish/watch_images/raw/main/drama.webp")),
                         borderRadius: BorderRadius.circular(10)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          gradient: const LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Colors.transparent, Colors.black])),
+                      height: height / 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Spacer(),
+                            Text(
+                              "Joker",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Tragedy | 9.2 \u066D",
+                              style: TextStyle(
+                                color: Color.fromARGB(194, 255, 255, 255),
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 );
               }),
@@ -201,8 +321,44 @@ class _HomeState extends State<Home> {
                             color: Color.fromRGBO(0, 0, 0, 0.43),
                           )
                         ],
-                        color: Colors.green,
+                        image: const DecorationImage(
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                                "https://github.com/diptanshumahish/watch_images/raw/main/action.webp")),
                         borderRadius: BorderRadius.circular(10)),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          gradient: const LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Colors.transparent, Colors.black])),
+                      height: height / 4,
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: const [
+                            Spacer(),
+                            Text(
+                              "Joker",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "Tragedy | 9.2 \u066D",
+                              style: TextStyle(
+                                color: Color.fromARGB(194, 255, 255, 255),
+                                fontSize: 15,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                 );
               }),
