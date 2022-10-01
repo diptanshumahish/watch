@@ -10,6 +10,22 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getTheme() {
+      if (Theme.of(context).brightness == Brightness.dark) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
+    getThemeInv() {
+      if (Theme.of(context).brightness == Brightness.light) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -50,12 +66,17 @@ class LoginPage extends StatelessWidget {
                   child: Text(
                     "Login",
                     style: TextStyle(
-                        fontSize: height / 20, fontWeight: FontWeight.w900),
+                        fontSize: height / 20,
+                        fontWeight: FontWeight.w900,
+                        color: getTheme()),
                   ),
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 5.0),
-                  child: Text("Email"),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: Text(
+                    "Email",
+                    style: TextStyle(color: getTheme()),
+                  ),
                 ),
                 CupertinoTextField(
                   padding: const EdgeInsets.all(13),
@@ -64,9 +85,12 @@ class LoginPage extends StatelessWidget {
                       color: const Color.fromARGB(52, 158, 158, 158)),
                   placeholder: "Enter your email",
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(top: 8.0, bottom: 5),
-                  child: Text("Password"),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0, bottom: 5),
+                  child: Text(
+                    "Password",
+                    style: TextStyle(color: getTheme()),
+                  ),
                 ),
                 CupertinoTextField(
                   obscureText: true,
@@ -80,9 +104,10 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    children: const [
+                    children: [
                       Text("Forgot password?",
-                          style: TextStyle(fontWeight: FontWeight.bold))
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: getTheme()))
                     ],
                   ),
                 ),
@@ -111,10 +136,10 @@ class LoginPage extends StatelessWidget {
                             )
                           ],
                           borderRadius: BorderRadius.circular(5),
-                          color: Colors.black),
-                      child: const Center(
+                          color: getTheme()),
+                      child: Center(
                         child: Text("Log In",
-                            style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: getThemeInv())),
                       ),
                     ),
                   ),
@@ -128,13 +153,14 @@ class LoginPage extends StatelessWidget {
               children: [
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       "By clicking sign in you agree to our",
                       style: TextStyle(color: Colors.grey),
                     ),
                     Text("Terms and Conditions",
-                        style: TextStyle(fontWeight: FontWeight.w600))
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, color: getTheme()))
                   ],
                 ),
                 Padding(
@@ -185,8 +211,9 @@ class LoginPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text(
+                    Text(
                       "Don't have an account? ",
+                      style: TextStyle(color: getTheme().withOpacity(0.7)),
                     ),
                     InkWell(
                       onTap: (() {
@@ -197,8 +224,9 @@ class LoginPage extends StatelessWidget {
                                 child: const SignUpPage(),
                                 type: PageTransitionType.rightToLeft));
                       }),
-                      child: const Text("Sign up now!",
-                          style: TextStyle(fontWeight: FontWeight.bold)),
+                      child: Text("Sign up now!",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold, color: getTheme())),
                     )
                   ],
                 )

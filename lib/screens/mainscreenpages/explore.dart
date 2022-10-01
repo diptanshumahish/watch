@@ -22,6 +22,14 @@ class _ExploreState extends State<Explore> {
 
   @override
   Widget build(BuildContext context) {
+    getTheme() {
+      if (Theme.of(context).brightness == Brightness.dark) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
     var height = MediaQuery.of(context).size.height;
 
     var images = [
@@ -60,14 +68,17 @@ class _ExploreState extends State<Explore> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text(
                 "Explore &",
-                style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: getTheme()),
               ),
               Text(
                 "Search for movies/Web series",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: getTheme()),
               )
             ],
           ),

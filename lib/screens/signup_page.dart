@@ -8,6 +8,22 @@ class SignUpPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    getTheme() {
+      if (Theme.of(context).brightness == Brightness.dark) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
+    getThemeInv() {
+      if (Theme.of(context).brightness == Brightness.light) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.height;
     return SafeArea(
@@ -48,12 +64,17 @@ class SignUpPage extends StatelessWidget {
                     child: Text(
                       "Sign Up",
                       style: TextStyle(
-                          fontSize: height / 20, fontWeight: FontWeight.w900),
+                          fontSize: height / 20,
+                          fontWeight: FontWeight.w900,
+                          color: getTheme()),
                     ),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 8.0, bottom: 5),
-                    child: Text("Full name"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 5),
+                    child: Text(
+                      "Full name",
+                      style: TextStyle(color: getTheme()),
+                    ),
                   ),
                   CupertinoTextField(
                     autofocus: true,
@@ -63,9 +84,12 @@ class SignUpPage extends StatelessWidget {
                         color: const Color(0x349E9E9E)),
                     placeholder: "Enter your full name",
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(bottom: 5.0, top: 8),
-                    child: Text("Email"),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 5.0, top: 8),
+                    child: Text(
+                      "Email",
+                      style: TextStyle(color: getTheme()),
+                    ),
                   ),
                   CupertinoTextField(
                     padding: const EdgeInsets.all(13),
@@ -74,9 +98,12 @@ class SignUpPage extends StatelessWidget {
                         color: const Color.fromARGB(52, 158, 158, 158)),
                     placeholder: "Enter your email",
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 8.0, bottom: 5),
-                    child: Text("Enter your age"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 5),
+                    child: Text(
+                      "Enter your age",
+                      style: TextStyle(color: getTheme()),
+                    ),
                   ),
                   CupertinoTextField(
                     keyboardType: TextInputType.number,
@@ -86,9 +113,12 @@ class SignUpPage extends StatelessWidget {
                         color: const Color(0x349E9E9E)),
                     placeholder: "Enter your age here",
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 8.0, bottom: 5),
-                    child: Text("Password"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 5),
+                    child: Text(
+                      "Password",
+                      style: TextStyle(color: getTheme()),
+                    ),
                   ),
                   CupertinoTextField(
                     obscureText: true,
@@ -98,9 +128,12 @@ class SignUpPage extends StatelessWidget {
                         color: const Color(0x349E9E9E)),
                     placeholder: "Enter your password",
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 8.0, bottom: 5),
-                    child: Text("Re-enter your password"),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0, bottom: 5),
+                    child: Text(
+                      "Re-enter your password",
+                      style: TextStyle(color: getTheme()),
+                    ),
                   ),
                   CupertinoTextField(
                     obscureText: true,
@@ -125,10 +158,10 @@ class SignUpPage extends StatelessWidget {
                             )
                           ],
                           borderRadius: BorderRadius.circular(5),
-                          color: Colors.black),
-                      child: const Center(
+                          color: getTheme()),
+                      child: Center(
                         child: Text("Sign up",
-                            style: TextStyle(color: Colors.white)),
+                            style: TextStyle(color: getThemeInv())),
                       ),
                     ),
                   ),
@@ -141,13 +174,14 @@ class SignUpPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
-                    children: const [
-                      Text(
+                    children: [
+                      const Text(
                         "By clicking sign up you agree to our",
                         style: TextStyle(color: Colors.grey),
                       ),
                       Text("Terms and Conditions",
-                          style: TextStyle(fontWeight: FontWeight.w600))
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600, color: getTheme()))
                     ],
                   ),
                   const SizedBox(
@@ -156,8 +190,9 @@ class SignUpPage extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text(
+                      Text(
                         "Alreday have an account? ",
+                        style: TextStyle(color: getTheme().withOpacity(0.6)),
                       ),
                       InkWell(
                         onTap: (() {
@@ -170,8 +205,10 @@ class SignUpPage extends StatelessWidget {
                                   child: const LoginPage(),
                                   type: PageTransitionType.leftToRight));
                         }),
-                        child: const Text("Sign in!",
-                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text("Sign in!",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: getTheme())),
                       )
                     ],
                   )

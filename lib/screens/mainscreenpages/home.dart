@@ -11,6 +11,14 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  getTheme() {
+    if (Theme.of(context).brightness == Brightness.dark) {
+      return Colors.white;
+    } else {
+      return Colors.black;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
@@ -22,10 +30,13 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: [
               Text("Welcome Friend",
-                  style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-              Text("Let's see what's here for you",
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                      color: getTheme())),
+              const Text("Let's see what's here for you",
                   style: TextStyle(fontSize: 25, color: Colors.grey))
             ],
           ),
@@ -141,9 +152,9 @@ class _HomeState extends State<Home> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Specialy picked for you",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: getTheme()),
               ),
               IconButton(
                   padding: const EdgeInsets.all(0),
@@ -162,53 +173,60 @@ class _HomeState extends State<Home> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: height / 3,
-                    width: width / 4,
-                    decoration: BoxDecoration(
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(4, 1),
-                            spreadRadius: -10,
-                            blurRadius: 17,
-                            color: Color.fromRGBO(0, 0, 0, 0.43),
-                          )
-                        ],
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp")),
-                        borderRadius: BorderRadius.circular(8)),
+                  child: InkWell(
+                    onTap: (() => Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const FullDetails(),
+                            type: PageTransitionType.rightToLeft))),
                     child: Container(
+                      height: height / 3,
+                      width: width / 4,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Colors.transparent, Colors.black])),
-                      height: height / 4,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Spacer(),
-                            Text(
-                              "Joker",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "Tragedy | 9.2 \u066D",
-                              style: TextStyle(
-                                color: Color.fromARGB(194, 255, 255, 255),
-                                fontSize: 15,
-                              ),
-                            ),
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(4, 1),
+                              spreadRadius: -10,
+                              blurRadius: 17,
+                              color: Color.fromRGBO(0, 0, 0, 0.43),
+                            )
                           ],
+                          image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  "https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp")),
+                          borderRadius: BorderRadius.circular(8)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.transparent, Colors.black])),
+                        height: height / 4,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Spacer(),
+                              Text(
+                                "Joker",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Tragedy | 9.2 \u066D",
+                                style: TextStyle(
+                                  color: Color.fromARGB(194, 255, 255, 255),
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -221,9 +239,9 @@ class _HomeState extends State<Home> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Horror Specials",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: getTheme()),
               ),
               IconButton(
                   padding: const EdgeInsets.all(0),
@@ -242,53 +260,60 @@ class _HomeState extends State<Home> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: height / 3,
-                    width: width / 4,
-                    decoration: BoxDecoration(
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(4, 1),
-                            spreadRadius: -10,
-                            blurRadius: 17,
-                            color: Color.fromRGBO(0, 0, 0, 0.43),
-                          )
-                        ],
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://github.com/diptanshumahish/watch_images/raw/main/drama.webp")),
-                        borderRadius: BorderRadius.circular(10)),
+                  child: InkWell(
+                    onTap: (() => Navigator.push(
+                        context,
+                        PageTransition(
+                            child: const FullDetails(),
+                            type: PageTransitionType.rightToLeft))),
                     child: Container(
+                      height: height / 3,
+                      width: width / 4,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Colors.transparent, Colors.black])),
-                      height: height / 4,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Spacer(),
-                            Text(
-                              "Joker",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "Tragedy | 9.2 \u066D",
-                              style: TextStyle(
-                                color: Color.fromARGB(194, 255, 255, 255),
-                                fontSize: 15,
-                              ),
-                            ),
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(4, 1),
+                              spreadRadius: -10,
+                              blurRadius: 17,
+                              color: Color.fromRGBO(0, 0, 0, 0.43),
+                            )
                           ],
+                          image: const DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  "https://github.com/diptanshumahish/watch_images/raw/main/drama.webp")),
+                          borderRadius: BorderRadius.circular(10)),
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            gradient: const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.transparent, Colors.black])),
+                        height: height / 4,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: const [
+                              Spacer(),
+                              Text(
+                                "Joker",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "Tragedy | 9.2 \u066D",
+                                style: TextStyle(
+                                  color: Color.fromARGB(194, 255, 255, 255),
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -301,9 +326,9 @@ class _HomeState extends State<Home> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
+              Text(
                 "Thrillers",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 20, color: getTheme()),
               ),
               IconButton(
                   padding: const EdgeInsets.all(0),

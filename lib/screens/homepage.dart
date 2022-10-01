@@ -17,17 +17,35 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    getTheme() {
+      if (Theme.of(context).brightness == Brightness.dark) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
+    getThemeInv() {
+      if (Theme.of(context).brightness == Brightness.light) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
     var pages = [const Home(), const Explore(), const Fav(), const Profile()];
 
     return SafeArea(
       child: Scaffold(
         body: pages[currenIndex],
         bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: getThemeInv(),
             elevation: 5,
             enableFeedback: true,
             currentIndex: currenIndex,
-            unselectedItemColor: const Color.fromARGB(255, 116, 112, 112),
-            selectedItemColor: Colors.black,
+            unselectedItemColor: getTheme().withOpacity(0.6),
+            selectedItemColor: getTheme(),
             showUnselectedLabels: true,
             onTap: (index) {
               setState(() {

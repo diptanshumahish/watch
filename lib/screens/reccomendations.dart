@@ -27,6 +27,22 @@ class _ReccomendationsState extends State<Reccomendations> {
   var filter = Colors.transparent;
   @override
   Widget build(BuildContext context) {
+    getTheme() {
+      if (Theme.of(context).brightness == Brightness.dark) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
+    getThemeInv() {
+      if (Theme.of(context).brightness == Brightness.light) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
     var image = [
       "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp",
       "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/beng.webp",
@@ -60,13 +76,13 @@ class _ReccomendationsState extends State<Reccomendations> {
                           "Chose 3 shows",
                           style: TextStyle(
                               fontSize: height / 22,
-                              fontWeight: FontWeight.w600),
+                              fontWeight: FontWeight.w600,
+                              color: getTheme()),
                         ),
                         Text(
                           "that interest you",
                           style: TextStyle(
-                            fontSize: height / 24,
-                          ),
+                              fontSize: height / 24, color: getTheme()),
                         ),
                       ],
                     ),
@@ -160,10 +176,9 @@ class _ReccomendationsState extends State<Reccomendations> {
                 width: width,
                 height: 45,
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(5),
-                    color: Colors.black),
-                child: const Center(
-                  child: Text("Done", style: TextStyle(color: Colors.white)),
+                    borderRadius: BorderRadius.circular(5), color: getTheme()),
+                child: Center(
+                  child: Text("Done", style: TextStyle(color: getThemeInv())),
                 ),
               ),
             ),
