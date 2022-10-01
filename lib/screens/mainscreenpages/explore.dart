@@ -13,6 +13,14 @@ class Explore extends StatefulWidget {
 
 class _ExploreState extends State<Explore> {
   @override
+  void initState() {
+    setState(() {
+      visibility = true;
+    });
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.height;
 
@@ -98,56 +106,63 @@ class _ExploreState extends State<Explore> {
                     crossAxisCount: 2,
                     childAspectRatio: 9 / 16),
                 itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(7, 6),
-                            spreadRadius: -10,
-                            blurRadius: 17,
-                            color: Color.fromRGBO(0, 0, 0, 0.43),
-                          )
-                        ],
-                        borderRadius: BorderRadius.circular(5),
-                        image: DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(images[index]))),
-                    // height: height / 4,
-                    child: Stack(children: [
-                      Container(
-                        height: height / 2,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            gradient: const LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Colors.transparent, Colors.black])),
-                      ),
-                      Positioned(
-                        bottom: 0,
-                        child: Padding(
-                          padding: const EdgeInsets.all(14.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                searchTags[index],
-                                textAlign: TextAlign.center,
-                                style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                tagLines[index],
-                                style:
-                                    const TextStyle(color: Color(0xFFCBCACA)),
-                              )
-                            ],
-                          ),
+                  return InkWell(
+                    onTap: (() {
+                      setState(() {
+                        visibility = false;
+                      });
+                    }),
+                    child: Container(
+                      decoration: BoxDecoration(
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(7, 6),
+                              spreadRadius: -10,
+                              blurRadius: 17,
+                              color: Color.fromRGBO(0, 0, 0, 0.43),
+                            )
+                          ],
+                          borderRadius: BorderRadius.circular(5),
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(images[index]))),
+                      // height: height / 4,
+                      child: Stack(children: [
+                        Container(
+                          height: height / 2,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5),
+                              gradient: const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.transparent, Colors.black])),
                         ),
-                      )
-                    ]),
+                        Positioned(
+                          bottom: 0,
+                          child: Padding(
+                            padding: const EdgeInsets.all(14.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  searchTags[index],
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                Text(
+                                  tagLines[index],
+                                  style:
+                                      const TextStyle(color: Color(0xFFCBCACA)),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
+                      ]),
+                    ),
                   );
                 }),
           ),

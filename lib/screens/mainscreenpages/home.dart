@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:page_transition/page_transition.dart';
+import 'package:watch/screens/mainscreenpages/fulldetails.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -62,62 +64,73 @@ class _HomeState extends State<Home> {
                           image: NetworkImage(
                               "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp")),
                       borderRadius: BorderRadius.circular(10)),
-                  child: Container(
-                      height: height / 2.5,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Colors.transparent, Colors.black])),
-                      child: Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Spacer(),
-                            const Text("Tenet",
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          PageTransition(
+                              child: const FullDetails(),
+                              type: PageTransitionType.rightToLeft));
+                    },
+                    child: Container(
+                        height: height / 2.5,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10),
+                            gradient: const LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [Colors.transparent, Colors.black])),
+                        child: Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Spacer(),
+                              const Text("Tenet",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 25)),
+                              const Text("Sci-Fi | 2020-08-26",
+                                  style: TextStyle(color: Colors.white)),
+                              const Text(
+                                "The Protagonist, a CIA operative, participates in an extraction at the Kyiv Opera House. His team retrieves an artifact but he is captured, tortured by mercenaries, and ultimately consumes a suicide pill. Some time later, the Protagonist awakens to learn the artifact was lost and the pill was a fake, designed as a test. A highly secretive organization called Tenet recruits him and briefs him on bullets with  entropy, meaning they move backward through time. After meeting his handler, Neil, they trace the inverted bullets to arms dealer Priya Singh in Mumbai.",
+                                overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 25)),
-                            const Text("Sci-Fi | 2020-08-26",
-                                style: TextStyle(color: Colors.white)),
-                            const Text(
-                              "The Protagonist, a CIA operative, participates in an extraction at the Kyiv Opera House. His team retrieves an artifact but he is captured, tortured by mercenaries, and ultimately consumes a suicide pill. Some time later, the Protagonist awakens to learn the artifact was lost and the pill was a fake, designed as a test. A highly secretive organization called Tenet recruits him and briefs him on bullets with  entropy, meaning they move backward through time. After meeting his handler, Neil, they trace the inverted bullets to arms dealer Priya Singh in Mumbai.",
-                              overflow: TextOverflow.ellipsis,
-                              style: TextStyle(
-                                  color: Color.fromARGB(171, 255, 255, 255)),
-                              maxLines: 2,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5),
-                              child: Container(
-                                width: 83,
-                                height: 20,
-                                decoration: BoxDecoration(
-                                    border: Border.all(color: Colors.white),
-                                    borderRadius: BorderRadius.circular(10)),
-                                child: Center(
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
-                                      Text("Rating:",
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  192, 255, 255, 255))),
-                                      Text("8.4",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white)),
-                                    ],
+                                    color: Color.fromARGB(171, 255, 255, 255)),
+                                maxLines: 2,
+                              ),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 5),
+                                child: Container(
+                                  width: 83,
+                                  height: 20,
+                                  decoration: BoxDecoration(
+                                      border: Border.all(color: Colors.white),
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Center(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: const [
+                                        Text("Rating: ",
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    192, 255, 255, 255))),
+                                        Text("8.4",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white)),
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
-                        ),
-                      )),
+                              )
+                            ],
+                          ),
+                        )),
+                  ),
                 ),
               );
             },
