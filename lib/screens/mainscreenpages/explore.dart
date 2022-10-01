@@ -100,6 +100,14 @@ class _ExploreState extends State<Explore> {
                 itemBuilder: (context, index) {
                   return Container(
                     decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(7, 6),
+                            spreadRadius: -10,
+                            blurRadius: 17,
+                            color: Color.fromRGBO(0, 0, 0, 0.43),
+                          )
+                        ],
                         borderRadius: BorderRadius.circular(5),
                         image: DecorationImage(
                             fit: BoxFit.cover,

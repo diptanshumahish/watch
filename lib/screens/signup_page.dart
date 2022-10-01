@@ -116,6 +116,14 @@ class SignUpPage extends StatelessWidget {
                       width: width,
                       height: 45,
                       decoration: BoxDecoration(
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(4, 1),
+                              spreadRadius: -10,
+                              blurRadius: 17,
+                              color: Color.fromRGBO(0, 0, 0, 0.43),
+                            )
+                          ],
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.black),
                       child: const Center(

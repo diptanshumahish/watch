@@ -40,6 +40,7 @@ dependencies:
   iconsax: ^0.0.8
   font_awesome_flutter: ^10.2.1
   page_transition: ^2.0.9
+  cached_network_image: ^3.2.2
 
 dev_dependencies:
   flutter_test:

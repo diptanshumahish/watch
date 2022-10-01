@@ -102,6 +102,14 @@ class LoginPage extends StatelessWidget {
                       width: width,
                       height: 45,
                       decoration: BoxDecoration(
+                          boxShadow: const [
+                            BoxShadow(
+                              offset: Offset(4, 1),
+                              spreadRadius: -10,
+                              blurRadius: 17,
+                              color: Color.fromRGBO(0, 0, 0, 0.43),
+                            )
+                          ],
                           borderRadius: BorderRadius.circular(5),
                           color: Colors.black),
                       child: const Center(
@@ -135,17 +143,42 @@ class LoginPage extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(FontAwesomeIcons.google)),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            FontAwesomeIcons.apple,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(FontAwesomeIcons.facebookF))
+                      Padding(
+                        padding: const EdgeInsets.only(right: 2),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0x2C9E9E9E)),
+                          child: Center(
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(FontAwesomeIcons.google)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 2),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0x2C9E9E9E)),
+                          child: Center(
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(FontAwesomeIcons.apple)),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 2),
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              shape: BoxShape.circle, color: Color(0x2C9E9E9E)),
+                          child: Center(
+                            child: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(FontAwesomeIcons.facebookF)),
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ),

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:watch/screens/homepage.dart';
+
+var selectedList = [];
+bool isLoaded = false;
 
 class Reccomendations extends StatefulWidget {
   const Reccomendations({super.key});
@@ -10,9 +14,31 @@ class Reccomendations extends StatefulWidget {
 }
 
 class _ReccomendationsState extends State<Reccomendations> {
+  @override
+  void initState() {
+    Future.delayed(const Duration(milliseconds: 3000), () {
+      setState(() {
+        isLoaded = true;
+      });
+    });
+    super.initState();
+  }
+
   var filter = Colors.transparent;
   @override
   Widget build(BuildContext context) {
+    var image = [
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp",
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/beng.webp",
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/dc.webp",
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/anime.webp",
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/comedy.webp",
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/dark.webp",
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi.webp",
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/horror.webp",
+      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi3.webp"
+    ];
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -39,8 +65,8 @@ class _ReccomendationsState extends State<Reccomendations> {
                         Text(
                           "that interest you",
                           style: TextStyle(
-                              fontSize: height / 22,
-                              fontWeight: FontWeight.w600),
+                            fontSize: height / 24,
+                          ),
                         ),
                       ],
                     ),
@@ -61,41 +87,64 @@ class _ReccomendationsState extends State<Reccomendations> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(2.0),
             child: GridView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 9,
+                itemCount: image.length,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     mainAxisSpacing: 5,
-                    childAspectRatio: 3 / 4,
+                    childAspectRatio: 4 / 6,
                     crossAxisCount: 3),
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: GestureDetector(
-                      onTap: (() {
-                        setState(() {
-                          filter = Colors.black;
-                        });
-                      }),
-                      child: AnimatedContainer(
-                        duration: const Duration(milliseconds: 500),
-                        decoration: BoxDecoration(
-                            color: Colors.red,
-                            borderRadius: BorderRadius.circular(10)),
-                        height: height / 3,
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: filter,
-                                borderRadius: BorderRadius.circular(10))),
-                      ),
-                    ),
+                        onTap: (() {
+                          setState(() {
+                            !selectedList.contains(index)
+                                ? selectedList.add(index)
+                                : selectedList.remove(index);
+                          });
+                        }),
+                        child: AnimatedContainer(
+                          duration: const Duration(milliseconds: 800),
+                          curve: Curves.bounceIn,
+                          decoration: BoxDecoration(
+                              boxShadow: [
+                                BoxShadow(
+                                    offset: const Offset(7, 9),
+                                    spreadRadius: -8,
+                                    blurRadius: 17,
+                                    color: isLoaded
+                                        ? const Color.fromRGBO(0, 0, 0, 0.43)
+                                        : Colors.transparent)
+                              ],
+                              image: DecorationImage(
+                                  fit: BoxFit.cover,
+                                  image: NetworkImage(image[index])),
+                              borderRadius: BorderRadius.circular(5)),
+                          child: Container(
+                              decoration: BoxDecoration(
+                                  color: selectedList.contains(index)
+                                      ? const Color(0xAF000000)
+                                      : Colors.transparent,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Center(
+                                child: selectedList.contains(index)
+                                    ? const Icon(
+                                        Iconsax.tick_circle,
+                                        color: Colors.white,
+                                        size: 35,
+                                      )
+                                    : const Text(""),
+                              )),
+                        )),
                   );
                 }),
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 7),
             child: InkWell(
               onTap: (() {
                 Navigator.pop(context);

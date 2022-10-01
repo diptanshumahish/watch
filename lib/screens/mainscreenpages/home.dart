@@ -43,13 +43,33 @@ class _HomeState extends State<Home> {
             shrinkWrap: true,
             itemBuilder: (context, index) {
               return Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 8, vertical: 15),
                 child: Container(
                   height: height / 2.5,
                   width: width / 3,
                   decoration: BoxDecoration(
-                      color: Colors.green,
+                      boxShadow: const [
+                        BoxShadow(
+                          offset: Offset(7, 6),
+                          spreadRadius: -10,
+                          blurRadius: 17,
+                          color: Color.fromRGBO(0, 0, 0, 0.43),
+                        )
+                      ],
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: NetworkImage(
+                              "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp")),
                       borderRadius: BorderRadius.circular(10)),
+                  child: Container(
+                      child: Column(),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [Colors.transparent, Colors.black]))),
                 ),
               );
             },
@@ -85,6 +105,14 @@ class _HomeState extends State<Home> {
                     height: height / 3,
                     width: width / 4,
                     decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(4, 1),
+                            spreadRadius: -10,
+                            blurRadius: 17,
+                            color: Color.fromRGBO(0, 0, 0, 0.43),
+                          )
+                        ],
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(10)),
                   ),
@@ -121,6 +149,14 @@ class _HomeState extends State<Home> {
                     height: height / 3,
                     width: width / 4,
                     decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(4, 1),
+                            spreadRadius: -10,
+                            blurRadius: 17,
+                            color: Color.fromRGBO(0, 0, 0, 0.43),
+                          )
+                        ],
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(10)),
                   ),
@@ -157,6 +193,14 @@ class _HomeState extends State<Home> {
                     height: height / 3,
                     width: width / 4,
                     decoration: BoxDecoration(
+                        boxShadow: const [
+                          BoxShadow(
+                            offset: Offset(4, 1),
+                            spreadRadius: -10,
+                            blurRadius: 17,
+                            color: Color.fromRGBO(0, 0, 0, 0.43),
+                          )
+                        ],
                         color: Colors.green,
                         borderRadius: BorderRadius.circular(10)),
                   ),
