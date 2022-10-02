@@ -14,6 +14,22 @@ class FullDetails extends StatefulWidget {
 class _FullDetailsState extends State<FullDetails> {
   @override
   Widget build(BuildContext context) {
+    getTheme() {
+      if (Theme.of(context).brightness == Brightness.dark) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
+    getThemeInv() {
+      if (Theme.of(context).brightness == Brightness.light) {
+        return Colors.white;
+      } else {
+        return Colors.black;
+      }
+    }
+
     var height = MediaQuery.of(context).size.height;
     var width = MediaQuery.of(context).size.width;
     return SafeArea(
@@ -170,17 +186,15 @@ class _FullDetailsState extends State<FullDetails> {
                           )
                         ],
                         borderRadius: BorderRadius.circular(5),
-                        color: Colors.black),
+                        color: getTheme()),
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: const [
-                          Icon(
-                            CupertinoIcons.play_arrow_solid,
-                            color: Colors.white,
-                          ),
+                        children: [
+                          Icon(CupertinoIcons.play_arrow_solid,
+                              color: getThemeInv()),
                           Text("Watch Trailer",
-                              style: TextStyle(color: Colors.white)),
+                              style: TextStyle(color: getThemeInv())),
                         ],
                       ),
                     ),
@@ -197,8 +211,8 @@ class _FullDetailsState extends State<FullDetails> {
                       height: 45,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
-                          border: Border.all(
-                              color: const Color.fromARGB(107, 0, 0, 0))),
+                          border:
+                              Border.all(color: getTheme().withOpacity(0.5))),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Center(
@@ -212,11 +226,14 @@ class _FullDetailsState extends State<FullDetails> {
                 ],
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(10.0),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
               child: Text(
                 "In Santa Monica, California, John Form, a doctor, presents his expectant wife Mia with a rare vintage porcelain doll as a gift for their first child to be placed in a collection of dolls in their daughter's nursery.That night, the couple is disturbed by the sounds of their next door neighbors, the Higgins, being murdered during a home invasion. While Mia calls the police, she and John are attacked by the Higgins' killers. The police arrive and shoot one killer, a man, dead while the female killer kills herself by slitting her throat inside the nursery while holding the doll. News reports identify the assailants as the Higgins' estranged daughter, Annabelle, and her unidentified boyfriend, both members of a cult.",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
+                style: TextStyle(
+                    color: getTheme(),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500),
               ),
             )
           ],

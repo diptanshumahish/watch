@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 var visibility = true;
+bool searchVisibility = false;
 var controller = TextEditingController();
 
 class Explore extends StatefulWidget {
@@ -32,6 +33,7 @@ class _ExploreState extends State<Explore> {
 
     var height = MediaQuery.of(context).size.height;
 
+    var width = MediaQuery.of(context).size.width;
     var images = [
       "https://github.com/diptanshumahish/watch_images/raw/main/horror.webp",
       "https://github.com/diptanshumahish/watch_images/raw/main/scifi.webp",
@@ -93,14 +95,17 @@ class _ExploreState extends State<Explore> {
                 setState(() {
                   controller.clear();
                   visibility = true;
+                  searchVisibility = false;
                 });
               } else {
                 setState(() {
                   visibility = false;
+                  searchVisibility = true;
                 });
               }
             }),
             placeholder: "Search for movies/webseries",
+            style: TextStyle(color: getTheme()),
           ),
         ),
         Visibility(
@@ -176,6 +181,75 @@ class _ExploreState extends State<Explore> {
                     ),
                   );
                 }),
+          ),
+        ),
+        Visibility(
+          visible: searchVisibility,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView.builder(
+              shrinkWrap: true,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 1,
+                  mainAxisSpacing: 10,
+                  childAspectRatio: 16 / 6),
+              itemCount: 2,
+              itemBuilder: (BuildContext context, int index) {
+                return Row(
+                  children: [
+                    Container(
+                      width: width * 0.3,
+                      decoration: const BoxDecoration(
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(5),
+                              bottomLeft: Radius.circular(5)),
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: NetworkImage(
+                                  "https://github.com/diptanshumahish/watch_images/raw/main/horror.webp"))),
+                    ),
+                    Container(
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(5),
+                            bottomRight: Radius.circular(5)),
+                      ),
+                      width: width * 0.659,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: const [
+                            Text(
+                              "Annabelle",
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                  fontSize: 20,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Text("Horror",
+                                style: TextStyle(color: Colors.black)),
+                            Text(
+                              "9.4",
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                            Text(
+                              "In Santa Monica, California, John Form, a doctor, presents his expectant wife Mia with a rare vintage porcelain doll as a gift for their first child to be placed in a collection of dolls in their daughter's nursery.That night, the couple is disturbed by the sounds of their next door neighbors, the Higgins, being murdered during a home invasion. While Mia calls the police, she and John are attacked by the Higgins' killers. The police arrive and shoot one killer, a man, dead while the female killer kills herself by slitting her throat inside the nursery while holding the doll. News reports identify the assailants as the Higgins' estranged daughter, Annabelle, and her unidentified boyfriend, both members of a cult.",
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                            )
+                          ],
+                        ),
+                      ),
+                    )
+                  ],
+                );
+              },
+            ),
           ),
         )
       ],
