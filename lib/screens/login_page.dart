@@ -80,6 +80,7 @@ class LoginPage extends StatelessWidget {
                 ),
                 CupertinoTextField(
                   padding: const EdgeInsets.all(13),
+                  style: TextStyle(color: getTheme()),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: const Color.fromARGB(52, 158, 158, 158)),
@@ -95,6 +96,7 @@ class LoginPage extends StatelessWidget {
                 CupertinoTextField(
                   obscureText: true,
                   padding: const EdgeInsets.all(13),
+                  style: TextStyle(color: getTheme()),
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(5),
                       color: const Color(0x349E9E9E)),

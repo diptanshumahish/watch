@@ -79,6 +79,7 @@ class SignUpPage extends StatelessWidget {
                   CupertinoTextField(
                     autofocus: true,
                     padding: const EdgeInsets.all(13),
+                    style: TextStyle(color: getTheme()),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: const Color(0x349E9E9E)),
@@ -93,6 +94,7 @@ class SignUpPage extends StatelessWidget {
                   ),
                   CupertinoTextField(
                     padding: const EdgeInsets.all(13),
+                    style: TextStyle(color: getTheme()),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: const Color.fromARGB(52, 158, 158, 158)),
@@ -101,13 +103,14 @@ class SignUpPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.only(top: 8.0, bottom: 5),
                     child: Text(
-                      "Enter your age",
+                      "Age",
                       style: TextStyle(color: getTheme()),
                     ),
                   ),
                   CupertinoTextField(
                     keyboardType: TextInputType.number,
                     padding: const EdgeInsets.all(13),
+                    style: TextStyle(color: getTheme()),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: const Color(0x349E9E9E)),
@@ -123,6 +126,7 @@ class SignUpPage extends StatelessWidget {
                   CupertinoTextField(
                     obscureText: true,
                     padding: const EdgeInsets.all(13),
+                    style: TextStyle(color: getTheme()),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: const Color(0x349E9E9E)),
@@ -138,6 +142,7 @@ class SignUpPage extends StatelessWidget {
                   CupertinoTextField(
                     obscureText: true,
                     padding: const EdgeInsets.all(13),
+                    style: TextStyle(color: getTheme()),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: const Color(0x349E9E9E)),
