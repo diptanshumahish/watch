@@ -1,12 +1,20 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:watch/screens/login_page.dart';
 
 class SignUpPage extends StatelessWidget {
-  const SignUpPage({super.key});
+  SignUpPage({super.key});
 
   @override
+  String fullName = "";
+  String email = "";
+  String age = "";
+  String password = "";
+  String reEnteredPassword = "";
+
   Widget build(BuildContext context) {
     getTheme() {
       if (Theme.of(context).brightness == Brightness.dark) {
@@ -22,6 +30,60 @@ class SignUpPage extends StatelessWidget {
       } else {
         return Colors.black;
       }
+    }
+
+    bool snackBar({
+      required String name,
+      required String email,
+      required String password,
+      required String reEnteredPassword,
+      required String age,
+    }) {
+      if (!email.contains('@')) {
+        print(true);
+        final snackBar = SnackBar(
+          content: const Text('Please enter a vaild email'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+      if (password != reEnteredPassword) {
+        final snackBar = SnackBar(
+          content: const Text('Password dosen\'t match'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+      if (name == '') {
+        final snackBar = SnackBar(
+          content: const Text('Name cannot be empty'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+
+      if (email == '') {
+        final snackBar = SnackBar(
+          content: const Text('Email cannot be empty'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+      if (password == '') {
+        final snackBar = SnackBar(
+          content: const Text('Password cannot be empty'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+      if (age == "" || int.parse(age) <= 0) {
+        final snackBar = SnackBar(
+          content: const Text('Invalid Age'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+      return true;
     }
 
     var height = MediaQuery.of(context).size.height;
@@ -85,6 +147,9 @@ class SignUpPage extends StatelessWidget {
                       autofocus: true,
                       padding: const EdgeInsets.all(13),
                       style: TextStyle(color: getTheme()),
+                      onChanged: (value) {
+                        fullName = value;
+                      },
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: const Color(0x349E9E9E)),
@@ -100,6 +165,10 @@ class SignUpPage extends StatelessWidget {
                     CupertinoTextField(
                       padding: const EdgeInsets.all(13),
                       style: TextStyle(color: getTheme()),
+                      onChanged: (value) {
+                        email = value;
+                        print(email);
+                      },
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: const Color.fromARGB(52, 158, 158, 158)),
@@ -116,6 +185,9 @@ class SignUpPage extends StatelessWidget {
                       keyboardType: TextInputType.number,
                       padding: const EdgeInsets.all(13),
                       style: TextStyle(color: getTheme()),
+                      onChanged: (value) {
+                        age = value;
+                      },
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: const Color(0x349E9E9E)),
@@ -132,6 +204,9 @@ class SignUpPage extends StatelessWidget {
                       obscureText: true,
                       padding: const EdgeInsets.all(13),
                       style: TextStyle(color: getTheme()),
+                      onChanged: (value) {
+                        password = value;
+                      },
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: const Color(0x349E9E9E)),
@@ -148,6 +223,9 @@ class SignUpPage extends StatelessWidget {
                       obscureText: true,
                       padding: const EdgeInsets.all(13),
                       style: TextStyle(color: getTheme()),
+                      onChanged: (value) {
+                        reEnteredPassword = value;
+                      },
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
                           color: const Color(0x349E9E9E)),
@@ -155,23 +233,37 @@ class SignUpPage extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Container(
-                        width: width,
-                        height: 45,
-                        decoration: BoxDecoration(
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(4, 1),
-                                spreadRadius: -10,
-                                blurRadius: 17,
-                                color: Color.fromRGBO(0, 0, 0, 0.43),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(5),
-                            color: getTheme()),
-                        child: Center(
-                          child: Text("Sign up",
-                              style: TextStyle(color: getThemeInv())),
+                      child: InkWell(
+                        onTap: () {
+                          print(email);
+                          if (snackBar(
+                            name: fullName,
+                            email: email,
+                            password: password,
+                            reEnteredPassword: reEnteredPassword,
+                            age: age,
+                          )) {
+                            print("Signed In");
+                          }
+                        },
+                        child: Container(
+                          width: width,
+                          height: 45,
+                          decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  offset: Offset(4, 1),
+                                  spreadRadius: -10,
+                                  blurRadius: 17,
+                                  color: Color.fromRGBO(0, 0, 0, 0.43),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(5),
+                              color: getTheme()),
+                          child: Center(
+                            child: Text("Sign up",
+                                style: TextStyle(color: getThemeInv())),
+                          ),
                         ),
                       ),
                     ),
@@ -212,7 +304,7 @@ class SignUpPage extends StatelessWidget {
                                 context,
                                 PageTransition(
                                     curve: Curves.bounceOut,
-                                    child: const LoginPage(),
+                                    child: LoginPage(),
                                     type: PageTransitionType.leftToRight));
                           }),
                           child: Text("Sign in!",

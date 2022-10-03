@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,7 +8,10 @@ import 'package:watch/screens/reccomendations.dart';
 import 'package:watch/screens/signup_page.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  LoginPage({super.key});
+
+  String email = "";
+  String password = "";
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +29,37 @@ class LoginPage extends StatelessWidget {
       } else {
         return Colors.black;
       }
+    }
+
+    bool snackBar({
+      required String email,
+      required String password,
+    }) {
+      if (!email.contains('@')) {
+        print(true);
+        final snackBar = SnackBar(
+          content: const Text('Please enter a vaild email'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+
+      if (email == '') {
+        final snackBar = SnackBar(
+          content: const Text('Email cannot be empty'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+      if (password == '') {
+        final snackBar = SnackBar(
+          content: const Text('Password cannot be empty'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
+      }
+
+      return true;
     }
 
     var height = MediaQuery.of(context).size.height;
@@ -85,6 +121,9 @@ class LoginPage extends StatelessWidget {
                   CupertinoTextField(
                     padding: const EdgeInsets.all(13),
                     style: TextStyle(color: getTheme()),
+                    onChanged: (value) {
+                      email = value;
+                    },
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: const Color.fromARGB(52, 158, 158, 158)),
@@ -101,6 +140,9 @@ class LoginPage extends StatelessWidget {
                     obscureText: true,
                     padding: const EdgeInsets.all(13),
                     style: TextStyle(color: getTheme()),
+                    onChanged: (value) {
+                      password = value;
+                    },
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
                         color: const Color(0x349E9E9E)),
@@ -129,23 +171,30 @@ class LoginPage extends StatelessWidget {
                                 child: const Reccomendations(),
                                 type: PageTransitionType.rightToLeft));
                       }),
-                      child: Container(
-                        width: width,
-                        height: 45,
-                        decoration: BoxDecoration(
-                            boxShadow: const [
-                              BoxShadow(
-                                offset: Offset(4, 1),
-                                spreadRadius: -10,
-                                blurRadius: 17,
-                                color: Color.fromRGBO(0, 0, 0, 0.43),
-                              )
-                            ],
-                            borderRadius: BorderRadius.circular(5),
-                            color: getTheme()),
-                        child: Center(
-                          child: Text("Log In",
-                              style: TextStyle(color: getThemeInv())),
+                      child: InkWell(
+                        onTap: () {
+                          if (snackBar(email: email, password: password)) {
+                            print("Logged in");
+                          }
+                        },
+                        child: Container(
+                          width: width,
+                          height: 45,
+                          decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  offset: Offset(4, 1),
+                                  spreadRadius: -10,
+                                  blurRadius: 17,
+                                  color: Color.fromRGBO(0, 0, 0, 0.43),
+                                )
+                              ],
+                              borderRadius: BorderRadius.circular(5),
+                              color: getTheme()),
+                          child: Center(
+                            child: Text("Log In",
+                                style: TextStyle(color: getThemeInv())),
+                          ),
                         ),
                       ),
                     ),
@@ -230,7 +279,7 @@ class LoginPage extends StatelessWidget {
                           Navigator.push(
                               context,
                               PageTransition(
-                                  child: const SignUpPage(),
+                                  child: SignUpPage(),
                                   type: PageTransitionType.rightToLeft));
                         }),
                         child: Text("Sign up now!",
