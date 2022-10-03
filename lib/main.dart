@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch/screens/signup_page.dart';
+import 'package:watch/screens/splashscreen.dart';
 import 'package:watch/util/theme.dart';
 
 void main() async {
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       // debugShowCheckedModeBanner: false,
       title: 'Watch',
-      home: const SignUpPage(),
+      home: const SplashScreen(),
       theme: themeNotifier.getTheme(),
       darkTheme: darkTheme,
     );
