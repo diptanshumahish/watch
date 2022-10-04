@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:watch/screens/reccomendations.dart';
 import 'package:watch/screens/signup_page.dart';
+import 'package:watch/util/color_theme.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -15,21 +16,21 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    getTheme() {
-      if (Theme.of(context).brightness == Brightness.dark) {
-        return Colors.white;
-      } else {
-        return Colors.black;
-      }
-    }
+    // getTheme() {
+    //   if (Theme.of(context).brightness == Brightness.dark) {
+    //     return Colors.white;
+    //   } else {
+    //     return Colors.red;
+    //   }
+    // }
 
-    getThemeInv() {
-      if (Theme.of(context).brightness == Brightness.light) {
-        return Colors.white;
-      } else {
-        return Colors.black;
-      }
-    }
+    // getThemeInv() {
+    //   if (Theme.of(context).brightness == Brightness.light) {
+    //     return Colors.white;
+    //   } else {
+    //     return Colors.black;
+    //   }
+    // }
 
     bool snackBar({
       required String email,
@@ -108,19 +109,19 @@ class LoginPage extends StatelessWidget {
                       style: TextStyle(
                           fontSize: height / 20,
                           fontWeight: FontWeight.w900,
-                          color: getTheme()),
+                          color: ColorTheme.getTheme(context)),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 5.0),
                     child: Text(
                       "Email",
-                      style: TextStyle(color: getTheme()),
+                      style: TextStyle(color: ColorTheme.getTheme(context)),
                     ),
                   ),
                   CupertinoTextField(
                     padding: const EdgeInsets.all(13),
-                    style: TextStyle(color: getTheme()),
+                    style: TextStyle(color: ColorTheme.getTheme(context)),
                     onChanged: (value) {
                       email = value;
                     },
@@ -133,13 +134,13 @@ class LoginPage extends StatelessWidget {
                     padding: const EdgeInsets.only(top: 8.0, bottom: 5),
                     child: Text(
                       "Password",
-                      style: TextStyle(color: getTheme()),
+                      style: TextStyle(color: ColorTheme.getTheme(context)),
                     ),
                   ),
                   CupertinoTextField(
                     obscureText: true,
                     padding: const EdgeInsets.all(13),
-                    style: TextStyle(color: getTheme()),
+                    style: TextStyle(color: ColorTheme.getTheme(context)),
                     onChanged: (value) {
                       password = value;
                     },
@@ -155,7 +156,8 @@ class LoginPage extends StatelessWidget {
                       children: [
                         Text("Forgot password?",
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, color: getTheme()))
+                                fontWeight: FontWeight.bold,
+                                color: ColorTheme.getTheme(context)))
                       ],
                     ),
                   ),
@@ -190,10 +192,11 @@ class LoginPage extends StatelessWidget {
                                 )
                               ],
                               borderRadius: BorderRadius.circular(5),
-                              color: getTheme()),
+                              color: ColorTheme.getTheme(context)),
                           child: Center(
                             child: Text("Log In",
-                                style: TextStyle(color: getThemeInv())),
+                                style: TextStyle(
+                                    color: ColorTheme.getThemeInv(context))),
                           ),
                         ),
                       ),
@@ -215,7 +218,8 @@ class LoginPage extends StatelessWidget {
                       ),
                       Text("Terms and Conditions",
                           style: TextStyle(
-                              fontWeight: FontWeight.w600, color: getTheme()))
+                              fontWeight: FontWeight.w600,
+                              color: ColorTheme.getTheme(context)))
                     ],
                   ),
                   Padding(
@@ -271,7 +275,9 @@ class LoginPage extends StatelessWidget {
                     children: [
                       Text(
                         "Don't have an account? ",
-                        style: TextStyle(color: getTheme().withOpacity(0.7)),
+                        style: TextStyle(
+                            color:
+                                ColorTheme.getTheme(context).withOpacity(0.7)),
                       ),
                       InkWell(
                         onTap: (() {
@@ -285,7 +291,7 @@ class LoginPage extends StatelessWidget {
                         child: Text("Sign up now!",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
-                                color: getTheme())),
+                                color: ColorTheme.getTheme(context))),
                       )
                     ],
                   )
