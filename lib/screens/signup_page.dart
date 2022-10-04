@@ -97,7 +97,7 @@ class SignUpPage extends StatelessWidget {
           body: Scrollbar(
             child: ListView(children: [
               SizedBox(
-                height: height / 3.5,
+                height: height / 8,
                 width: width,
                 child: Stack(children: [
                   Container(
@@ -105,17 +105,25 @@ class SignUpPage extends StatelessWidget {
                   ),
                   Center(
                       child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Text(
                         "Watch",
                         style: TextStyle(
+                          fontWeight: FontWeight.bold,
                             color: Colors.white, fontSize: height / 20),
                       ),
                       const Text(
                         "The best movie/web series reccomendations",
-                        style: TextStyle(color: Colors.white, fontSize: 13),
-                      )
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                      const Divider(
+                        thickness: 1, // thickness of the line
+                        indent: 20, // empty space to the leading edge of divider.
+                        endIndent: 20, // empty space to the trailing edge of the divider.
+                        color: Colors.grey, // The color to use when painting the line.
+                        height: 20, // The divider's height extent.
+                      ),
                     ],
                   ))
                 ]),
