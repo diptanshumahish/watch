@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
       backgroundColor: Colors.black45,
       splash: 'assets/logo.png',
       splashIconSize: 200,
-      nextScreen: const HomePage(),
+      nextScreen: SignUpPage(),
       splashTransition: SplashTransition.sizeTransition,
       pageTransitionType: PageTransitionType.bottomToTop,
     );
