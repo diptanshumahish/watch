@@ -1,34 +1,44 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:watch/provider/theme_provider.dart';
 import 'package:watch/screens/signup_page.dart';
 import 'package:watch/screens/splashscreen.dart';
 import 'package:watch/util/theme.dart';
 
-void main() async {
+Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  SharedPreferences.getInstance().then((prefs) {
-    var darkModeOn = prefs.getBool('darkMode') ?? true;
-    runApp(
-      ChangeNotifierProvider<ThemeNotifier>(
-        create: (_) => ThemeNotifier(darkModeOn ? darkTheme : lightTheme),
-        child: const MyApp(),
-      ),
-    );
-  });
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.portraitUp,
+    DeviceOrientation.portraitDown,
+  ]);
+
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    final themeNotifier = Provider.of<ThemeNotifier>(context);
-    return MaterialApp(
-      // debugShowCheckedModeBanner: false,
-      title: 'Watch',
-      home: const SplashScreen(),
-      theme: themeNotifier.getTheme(),
-      darkTheme: darkTheme,
-    );
-  }
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  @override
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+        create: (context) => ThemeProvider(),
+        builder: (context, _) {
+          final themeProvider = Provider.of<ThemeProvider>(context);
+
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            title: 'Watch',
+            themeMode: themeProvider.themeMode,
+            theme: MyThemes.lightTheme,
+            darkTheme: MyThemes.darkTheme,
+            home: SplashScreen(),
+          );
+        },
+      );
 }
