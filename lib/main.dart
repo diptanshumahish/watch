@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch/provider/theme_provider.dart';
-import 'package:watch/screens/signup_page.dart';
 import 'package:watch/screens/splashscreen.dart';
-import 'package:watch/util/theme.dart';
 
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -14,7 +11,7 @@ Future main() async {
     DeviceOrientation.portraitDown,
   ]);
 
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
@@ -37,7 +34,7 @@ class _MyAppState extends State<MyApp> {
             themeMode: themeProvider.themeMode,
             theme: MyThemes.lightTheme,
             darkTheme: MyThemes.darkTheme,
-            home: SplashScreen(),
+            home: const SplashScreen(),
           );
         },
       );

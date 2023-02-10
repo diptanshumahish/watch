@@ -16,8 +16,9 @@ bool isAdult = false;
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
+    // final themeProvider = Provider.of<ThemeProvider>(context);
 
+    var themeProvider;
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -26,9 +27,9 @@ class _ProfileState extends State<Profile> {
               padding: const EdgeInsets.only(top: 64),
               child: Center(
                 child: ClipRRect(
-                  borderRadius: BorderRadius.all(
+                  borderRadius: const BorderRadius.all(
                       Radius.circular(64)), //add border radius here
-                  child: Container(
+                  child: SizedBox(
                     height: 136,
                     child: Image.network(
                         'https://images.unsplash.com/photo-1601925662822-510b76665bd9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80'),
@@ -36,18 +37,18 @@ class _ProfileState extends State<Profile> {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 12,
             ),
-            Text(
+            const Text(
               'Rahul Yadav',
               style: TextStyle(
                   fontSize: 32, fontWeight: FontWeight.bold, letterSpacing: 0),
             ),
-            SizedBox(
+            const SizedBox(
               height: 4,
             ),
-            Text(
+            const Text(
               'blake@email.com',
               style: TextStyle(
                   fontSize: 16,
@@ -55,14 +56,14 @@ class _ProfileState extends State<Profile> {
                   letterSpacing: 0,
                   color: Color.fromRGBO(175, 175, 175, 1)),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24),
                 border: Border.all(
-                  color: Color(0xffe9f4ff),
+                  color: const Color(0xffe9f4ff),
                   width: 2,
                 ),
               ),
@@ -74,7 +75,7 @@ class _ProfileState extends State<Profile> {
                 mainAxisSize: MainAxisSize.min,
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
+                children: const [
                   Text(
                     "Edit",
                     textAlign: TextAlign.center,
@@ -88,7 +89,7 @@ class _ProfileState extends State<Profile> {
                 ],
               ),
             ),
-            SizedBox(height: 11.43),
+            const SizedBox(height: 11.43),
             Column(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -104,7 +105,7 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 32,
                           height: 32,
                           child: Stack(
@@ -112,7 +113,7 @@ class _ProfileState extends State<Profile> {
                               Container(
                                 width: 32,
                                 height: 32,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Color(0xffe9f3ff),
                                 ),
@@ -129,8 +130,8 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 12),
-                        Text(
+                        const SizedBox(width: 12),
+                        const Text(
                           "Dark mode",
                           style: TextStyle(
                             fontSize: 16,
@@ -138,7 +139,7 @@ class _ProfileState extends State<Profile> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 177),
+                    const SizedBox(width: 177),
                     Container(
                       width: 51,
                       height: 31,
@@ -149,8 +150,8 @@ class _ProfileState extends State<Profile> {
                         // This bool value toggles the switch.
                         value: themeProvider.isDarkMode,
                         thumbColor: Colors.white,
-                        trackColor: Color.fromRGBO(120, 120, 128, .16),
-                        activeColor: Color.fromRGBO(52, 199, 89, 1),
+                        trackColor: const Color.fromRGBO(120, 120, 128, .16),
+                        activeColor: const Color.fromRGBO(52, 199, 89, 1),
                         onChanged: (value) {
                           final provider = Provider.of<ThemeProvider>(context,
                               listen: false);
@@ -160,16 +161,16 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
-                SizedBox(height: 14),
+                const SizedBox(height: 14),
                 Container(
                   width: 358,
                   height: 1,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
-                    color: Color(0xfff2f2f2),
+                    color: const Color(0xfff2f2f2),
                   ),
                 ),
-                SizedBox(height: 14),
+                const SizedBox(height: 14),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -180,7 +181,7 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 32,
                           height: 32,
                           child: Stack(
@@ -188,7 +189,7 @@ class _ProfileState extends State<Profile> {
                               Container(
                                 width: 32,
                                 height: 32,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Color(0xffe9f3ff),
                                 ),
@@ -212,8 +213,8 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 12),
-                        Text(
+                        const SizedBox(width: 12),
+                        const Text(
                           "App Language",
                           style: TextStyle(
                             fontSize: 16,
@@ -221,12 +222,12 @@ class _ProfileState extends State<Profile> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 120),
+                    const SizedBox(width: 120),
                     Row(
                       mainAxisSize: MainAxisSize.min,
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
+                      children: const [
                         Text(
                           "English",
                           style: TextStyle(
@@ -238,17 +239,17 @@ class _ProfileState extends State<Profile> {
                     ),
                   ],
                 ),
-                SizedBox(height: 14),
+                const SizedBox(height: 14),
                 Container(
                   width: 358,
                   height: 1,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
-                    color: Color(0xfff2f2f2),
+                    color: const Color(0xfff2f2f2),
                   ),
                 ),
-                SizedBox(height: 14),
-                Container(
+                const SizedBox(height: 14),
+                SizedBox(
                   width: 358,
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
@@ -260,7 +261,7 @@ class _ProfileState extends State<Profile> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
+                          SizedBox(
                             width: 32,
                             height: 32,
                             child: Stack(
@@ -268,7 +269,7 @@ class _ProfileState extends State<Profile> {
                                 Container(
                                   width: 32,
                                   height: 32,
-                                  decoration: BoxDecoration(
+                                  decoration: const BoxDecoration(
                                     shape: BoxShape.circle,
                                     color: Color(0xffe9f3ff),
                                   ),
@@ -291,8 +292,8 @@ class _ProfileState extends State<Profile> {
                               ],
                             ),
                           ),
-                          SizedBox(width: 12),
-                          SizedBox(
+                          const SizedBox(width: 12),
+                          const SizedBox(
                             width: 106,
                             child: Text(
                               "Adult Content",
@@ -303,7 +304,7 @@ class _ProfileState extends State<Profile> {
                           ),
                         ],
                       ),
-                      SizedBox(width: 157),
+                      const SizedBox(width: 157),
                       Container(
                         width: 51,
                         height: 31,
@@ -314,8 +315,8 @@ class _ProfileState extends State<Profile> {
                           // This bool value toggles the switch.
                           value: isAdult,
                           thumbColor: Colors.white,
-                          trackColor: Color.fromRGBO(120, 120, 128, .16),
-                          activeColor: Color.fromRGBO(52, 199, 89, 1),
+                          trackColor: const Color.fromRGBO(120, 120, 128, .16),
+                          activeColor: const Color.fromRGBO(52, 199, 89, 1),
                           onChanged: (bool? value) {
                             setState(() {
                               isAdult = value!;
@@ -326,16 +327,16 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                 ),
-                SizedBox(height: 14),
+                const SizedBox(height: 14),
                 Container(
                   width: 358,
                   height: 1,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(2),
-                    color: Color(0xfff2f2f2),
+                    color: const Color(0xfff2f2f2),
                   ),
                 ),
-                SizedBox(height: 14),
+                const SizedBox(height: 14),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -346,7 +347,7 @@ class _ProfileState extends State<Profile> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        Container(
+                        SizedBox(
                           width: 32,
                           height: 32,
                           child: Stack(
@@ -354,7 +355,7 @@ class _ProfileState extends State<Profile> {
                               Container(
                                 width: 32,
                                 height: 32,
-                                decoration: BoxDecoration(
+                                decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Color(0xffe9f3ff),
                                 ),
@@ -370,8 +371,8 @@ class _ProfileState extends State<Profile> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 12),
-                        Text(
+                        const SizedBox(width: 12),
+                        const Text(
                           "Help",
                           style: TextStyle(
                             fontSize: 16,
@@ -379,19 +380,19 @@ class _ProfileState extends State<Profile> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 268),
+                    const SizedBox(width: 268),
                   ],
                 ),
               ],
             ),
-            SizedBox(height: 48),
+            const SizedBox(height: 48),
             InkWell(
               onTap: (() => {}),
               child: Container(
                 width: 358,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
-                  color: Color(0xff007aff),
+                  color: const Color(0xff007aff),
                 ),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -401,7 +402,7 @@ class _ProfileState extends State<Profile> {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
+                  children: const [
                     Text(
                       "Log out",
                       textAlign: TextAlign.center,

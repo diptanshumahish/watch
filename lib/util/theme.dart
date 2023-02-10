@@ -5,7 +5,6 @@ final lightTheme = ThemeData(
     brightness: Brightness.light,
     textTheme: GoogleFonts.interTextTheme().apply());
 final darkTheme = ThemeData(
-    backgroundColor: Colors.black,
     brightness: Brightness.dark,
     scaffoldBackgroundColor: Colors.black,
     textTheme: GoogleFonts.interTextTheme().apply());

@@ -8,6 +8,7 @@ import 'package:watch/screens/reccomendations.dart';
 import 'package:watch/screens/signup_page.dart';
 import 'package:watch/util/color_theme.dart';
 
+// ignore: must_be_immutable
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
@@ -16,28 +17,11 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // getTheme() {
-    //   if (Theme.of(context).brightness == Brightness.dark) {
-    //     return Colors.white;
-    //   } else {
-    //     return Colors.red;
-    //   }
-    // }
-
-    // getThemeInv() {
-    //   if (Theme.of(context).brightness == Brightness.light) {
-    //     return Colors.white;
-    //   } else {
-    //     return Colors.black;
-    //   }
-    // }
-
     bool snackBar({
       required String email,
       required String password,
     }) {
       if (!email.contains('@')) {
-        print(true);
         final snackBar = SnackBar(
           content: const Text('Please enter a vaild email'),
         );
@@ -176,7 +160,6 @@ class LoginPage extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           if (snackBar(email: email, password: password)) {
-                            print("Logged in");
                           }
                         },
                         child: Container(

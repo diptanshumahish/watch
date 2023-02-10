@@ -3,18 +3,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:watch/screens/homepage.dart';
 import 'package:watch/screens/login_page.dart';
 
+// ignore: must_be_immutable
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
 
-  @override
   String fullName = "";
   String email = "";
   String age = "";
   String password = "";
   String reEnteredPassword = "";
 
+  @override
   Widget build(BuildContext context) {
     getTheme() {
       if (Theme.of(context).brightness == Brightness.dark) {
@@ -40,7 +42,6 @@ class SignUpPage extends StatelessWidget {
       required String age,
     }) {
       if (!email.contains('@')) {
-        print(true);
         final snackBar = SnackBar(
           content: const Text('Please enter a vaild email'),
         );
@@ -110,8 +111,9 @@ class SignUpPage extends StatelessWidget {
                       Text(
                         "Watch",
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                            color: Colors.white, fontSize: height / 20),
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: height / 20),
                       ),
                       const Text(
                         "The best movie/web series reccomendations",
@@ -119,9 +121,12 @@ class SignUpPage extends StatelessWidget {
                       ),
                       const Divider(
                         thickness: 1, // thickness of the line
-                        indent: 20, // empty space to the leading edge of divider.
-                        endIndent: 20, // empty space to the trailing edge of the divider.
-                        color: Colors.grey, // The color to use when painting the line.
+                        indent:
+                            20, // empty space to the leading edge of divider.
+                        endIndent:
+                            20, // empty space to the trailing edge of the divider.
+                        color: Colors
+                            .grey, // The color to use when painting the line.
                         height: 20, // The divider's height extent.
                       ),
                     ],
@@ -175,7 +180,6 @@ class SignUpPage extends StatelessWidget {
                       style: TextStyle(color: getTheme()),
                       onChanged: (value) {
                         email = value;
-                        print(email);
                       },
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
@@ -243,16 +247,13 @@ class SignUpPage extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(vertical: 20),
                       child: InkWell(
                         onTap: () {
-                          print(email);
                           if (snackBar(
                             name: fullName,
                             email: email,
                             password: password,
                             reEnteredPassword: reEnteredPassword,
                             age: age,
-                          )) {
-                            print("Signed In");
-                          }
+                          )) {}
                         },
                         child: Container(
                           width: width,
@@ -269,8 +270,14 @@ class SignUpPage extends StatelessWidget {
                               borderRadius: BorderRadius.circular(5),
                               color: getTheme()),
                           child: Center(
-                            child: Text("Sign up",
-                                style: TextStyle(color: getThemeInv())),
+                            child: InkWell(
+                              onTap: () => Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: ((context) => HomePage()))),
+                              child: Text("Sign up",
+                                  style: TextStyle(color: getThemeInv())),
+                            ),
                           ),
                         ),
                       ),
