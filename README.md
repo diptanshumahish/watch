@@ -1,5 +1,5 @@
 # Watch : A flutter movie reccomendation app
-
+![alt text](https://github.com/diptanshumahish/watch/blob/master/watch%20app%20logo.png?raw=true)
 A flutter based movie reccomendation app that reccomends movies/ web series using the TMBD api.
 
 ## About this project
