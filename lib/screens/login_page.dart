@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:watch/screens/homepage.dart';
 import 'package:watch/screens/reccomendations.dart';
 import 'package:watch/screens/signup_page.dart';
 import 'package:watch/util/color_theme.dart';
@@ -31,6 +32,7 @@ class LoginPage extends StatelessWidget {
 
       if (email == '') {
         final snackBar = SnackBar(
+          backgroundColor: Colors.black,
           content: const Text('Email cannot be empty'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -160,6 +162,10 @@ class LoginPage extends StatelessWidget {
                       child: InkWell(
                         onTap: () {
                           if (snackBar(email: email, password: password)) {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => HomePage()));
                           }
                         },
                         child: Container(

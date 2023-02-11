@@ -16,9 +16,7 @@ bool isAdult = false;
 class _ProfileState extends State<Profile> {
   @override
   Widget build(BuildContext context) {
-    // final themeProvider = Provider.of<ThemeProvider>(context);
-
-    var themeProvider;
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return SafeArea(
       child: Scaffold(
         body: Column(
