@@ -7,8 +7,8 @@ part 'user_model.g.dart';
 @JsonSerializable(includeIfNull: false)
 class UserModel with _$UserModel {
   const factory UserModel({
-    String? user,
     String? displayName,
+    String? age,
     String? email,
     @Default(false) bool isAdult,
   }) = _UserModel;

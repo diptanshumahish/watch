@@ -11,8 +11,21 @@ class PrefsService {
 
   ///Save current user data into the disk
   ///Returns [true] if the data is saved successfully
-  Future<bool> setUser(UserModel user) async {
-    return await setValue<String>('user', jsonEncode(user));
+  Future<bool> setUser({
+    required String displayName,
+    required String age,
+    required String email,
+    bool? isAdult = false,
+  }) async {
+    return await setValue<String>(
+      'user',
+      jsonEncode(UserModel(
+        displayName: displayName,
+        age: age,
+        email: email,
+        isAdult: isAdult ?? false,
+      )),
+    );
   }
 
   ///Get the current user data from the disk

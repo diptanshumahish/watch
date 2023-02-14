@@ -16,8 +16,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$UserModel {
-  String? get user => throw _privateConstructorUsedError;
   String? get displayName => throw _privateConstructorUsedError;
+  String? get age => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   bool get isAdult => throw _privateConstructorUsedError;
 
@@ -32,7 +32,7 @@ abstract class $UserModelCopyWith<$Res> {
   factory $UserModelCopyWith(UserModel value, $Res Function(UserModel) then) =
       _$UserModelCopyWithImpl<$Res, UserModel>;
   @useResult
-  $Res call({String? user, String? displayName, String? email, bool isAdult});
+  $Res call({String? displayName, String? age, String? email, bool isAdult});
 }
 
 /// @nodoc
@@ -48,19 +48,19 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
     Object? displayName = freezed,
+    Object? age = freezed,
     Object? email = freezed,
     Object? isAdult = null,
   }) {
     return _then(_value.copyWith(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as String?,
       displayName: freezed == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
               as String?,
       email: freezed == email
           ? _value.email
@@ -81,7 +81,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       __$$_UserModelCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? user, String? displayName, String? email, bool isAdult});
+  $Res call({String? displayName, String? age, String? email, bool isAdult});
 }
 
 /// @nodoc
@@ -95,19 +95,19 @@ class __$$_UserModelCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? user = freezed,
     Object? displayName = freezed,
+    Object? age = freezed,
     Object? email = freezed,
     Object? isAdult = null,
   }) {
     return _then(_$_UserModel(
-      user: freezed == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as String?,
       displayName: freezed == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
               as String?,
       email: freezed == email
           ? _value.email
@@ -125,12 +125,12 @@ class __$$_UserModelCopyWithImpl<$Res>
 @JsonSerializable(createFactory: false)
 class _$_UserModel implements _UserModel {
   const _$_UserModel(
-      {this.user, this.displayName, this.email, this.isAdult = false});
+      {this.displayName, this.age, this.email, this.isAdult = false});
 
   @override
-  final String? user;
-  @override
   final String? displayName;
+  @override
+  final String? age;
   @override
   final String? email;
   @override
@@ -139,7 +139,7 @@ class _$_UserModel implements _UserModel {
 
   @override
   String toString() {
-    return 'UserModel(user: $user, displayName: $displayName, email: $email, isAdult: $isAdult)';
+    return 'UserModel(displayName: $displayName, age: $age, email: $email, isAdult: $isAdult)';
   }
 
   @override
@@ -147,9 +147,9 @@ class _$_UserModel implements _UserModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_UserModel &&
-            (identical(other.user, user) || other.user == user) &&
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
+            (identical(other.age, age) || other.age == age) &&
             (identical(other.email, email) || other.email == email) &&
             (identical(other.isAdult, isAdult) || other.isAdult == isAdult));
   }
@@ -157,7 +157,7 @@ class _$_UserModel implements _UserModel {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, user, displayName, email, isAdult);
+      Object.hash(runtimeType, displayName, age, email, isAdult);
 
   @JsonKey(ignore: true)
   @override
@@ -175,15 +175,15 @@ class _$_UserModel implements _UserModel {
 
 abstract class _UserModel implements UserModel {
   const factory _UserModel(
-      {final String? user,
-      final String? displayName,
+      {final String? displayName,
+      final String? age,
       final String? email,
       final bool isAdult}) = _$_UserModel;
 
   @override
-  String? get user;
-  @override
   String? get displayName;
+  @override
+  String? get age;
   @override
   String? get email;
   @override
