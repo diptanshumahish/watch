@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch/provider/theme_provider.dart';
 import 'package:watch/screens/splashscreen.dart';
+import 'package:watch/services/service_locator.dart';
 
-Future main() async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
+  SharedPreferences prefsInstance = await SharedPreferences.getInstance();
+  await initServiceLocator(prefsInstance);
   runApp(const MyApp());
 }
 
