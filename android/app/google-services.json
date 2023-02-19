@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "647780884529",
+    "project_id": "watch-247e7",
+    "storage_bucket": "watch-247e7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:647780884529:android:dc9f59d53d65766d3bf510",
+        "android_client_info": {
+          "package_name": "com.diptanshumahish.watch"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "647780884529-upa52f2gr7pl2ggvmf8hvbp11cj3r402.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-D9iFj-yj3og2wmAA21eaQ8OP0Aw5msk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "647780884529-upa52f2gr7pl2ggvmf8hvbp11cj3r402.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

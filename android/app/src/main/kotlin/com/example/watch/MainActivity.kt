@@ -1,4 +1,4 @@
-package com.example.watch
+package com.diptanshumahish.watch
 
 import io.flutter.embedding.android.FlutterActivity
 
