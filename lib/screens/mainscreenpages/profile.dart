@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:watch/provider/theme_provider.dart';
+import 'package:watch/providers/theme_provider.dart';
 
 class Profile extends StatefulWidget {
   const Profile({super.key});

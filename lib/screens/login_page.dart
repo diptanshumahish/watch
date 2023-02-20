@@ -243,9 +243,10 @@ class LoginPage extends StatelessWidget {
                                           color: Color(0x2C9E9E9E)),
                                       child: Center(
                                         child: IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                                FontAwesomeIcons.apple)),
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                              FontAwesomeIcons.apple),
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -306,4 +307,3 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
-

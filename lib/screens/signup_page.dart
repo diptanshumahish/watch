@@ -40,47 +40,47 @@ class SignUpPage extends StatelessWidget {
       required String age,
     }) {
       if (!email.contains('@')) {
-        final snackBar = SnackBar(
+        const snackBar = SnackBar(
           backgroundColor: Colors.black,
-          content: const Text('Please enter a vaild email'),
+          content: Text('Please enter a vaild email'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return false;
       }
       if (password != reEnteredPassword) {
-        final snackBar = SnackBar(
+        const snackBar = SnackBar(
           backgroundColor: Colors.black,
-          content: const Text('Password dosen\'t match'),
+          content: Text('Password dosen\'t match'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return false;
       }
       if (name == '') {
-        final snackBar = SnackBar(
+        const snackBar = SnackBar(
           backgroundColor: Colors.black,
-          content: const Text('Name cannot be empty'),
+          content: Text('Name cannot be empty'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return false;
       }
 
       if (email == '') {
-        final snackBar = SnackBar(
-          content: const Text('Email cannot be empty'),
+        const snackBar = SnackBar(
+          content: Text('Email cannot be empty'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return false;
       }
       if (password == '') {
-        final snackBar = SnackBar(
+        const snackBar = SnackBar(
           backgroundColor: Colors.black,
-          content: const Text('Password cannot be empty'),
+          content: Text('Password cannot be empty'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return false;
       }
       if (age == "" || int.parse(age) <= 0) {
-        final snackBar = SnackBar(
+        const snackBar = SnackBar(
           backgroundColor: Colors.black,
           content: Text('Invalid Age'),
         );
@@ -135,15 +135,14 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(
-                           left: 20, right: 20),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
                       child: Text(
                         "Full name",
                         style: TextStyle(color: getTheme()),
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 20, right: 20),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
                       child: CupertinoTextField(
                         autofocus: true,
                         padding: const EdgeInsets.all(13),
@@ -157,7 +156,7 @@ class SignUpPage extends StatelessWidget {
                         placeholder: "Enter your full name",
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Padding(
@@ -169,7 +168,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(left: 20, right: 20),
+                      padding: const EdgeInsets.only(left: 20, right: 20),
                       child: CupertinoTextField(
                         padding: const EdgeInsets.all(13),
                         style: TextStyle(color: getTheme()),
@@ -289,7 +288,7 @@ class SignUpPage extends StatelessWidget {
                                 onTap: () => Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
-                                    builder: ((context) => HomePage()),
+                                    builder: ((context) => const HomePage()),
                                   ),
                                 ),
                                 child: Text(
