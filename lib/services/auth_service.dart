@@ -41,7 +41,7 @@ class AuthService {
   Future<SignInEither> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
-      var result = await _auth.signInWithEmailAndPassword(
+      UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       return right(result);
     } on FirebaseAuthException catch (e) {
