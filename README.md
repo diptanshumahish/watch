@@ -44,7 +44,7 @@ This is also a cross platform app , as it's ,made using flutter , so we need to 
 JWoC (JGEC Winter of Code) is a begineer friendly open-source coding event organised annually by JGEC which helps students to plunge into Open Source contribution and get the realm of Software Development.
 
 If you are willing to contibute to this project, you are warmly welcome.
-Do check the [Contribution guidelines](https://github.com/watch/blob/master/CONTRIBUTION.md) before contributing.
+Do check the [Contribution guidelines](https://github.com/Code1705/watch/blob/master/CONTRIBUTING.md) before contributing.
 
 # Watch : A flutter movie reccomendation app
 
