@@ -3,9 +3,9 @@
 <div align="center">
 
 ![Contributors](https://img.shields.io/github/contributors/diptanshumahish/watch?style=for-the-badge)
-  ![Forks](https://img.shields.io/github/forks/diptanshumahish/watch?style=for-the-badge)
+ ![Forks](https://img.shields.io/github/forks/diptanshumahish/watch?style=for-the-badge)
 ![Stars](https://img.shields.io/github/stars/diptanshumahish/watch?style=for-the-badge)
-![License](https://img.shields.io/github/licensediptanshumahish/watch?style=for-the-badge)
+![License](https://img.shields.io/github/license/diptanshumahish/watch?style=for-the-badge)
 ![PRs-Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)  
 
 ![](https://img.shields.io/github/issues-raw/diptanshumahish/watch?color=orange&style=for-the-badge)
@@ -59,8 +59,8 @@ Do check the [Contribution guidelines](https://github.com/Code1705/watch/blob/ma
 <table align='center'>
 <tr>
     <td align="center">
-        <a href="https://github.com/roshaen">
-            <img src="https://avatars.githubusercontent.com/u/58213083?v=4" width="100;" alt="Roshan Kumar"/>
+        <a href="https://github.com/diptanshumahish">
+            <img src="[https://avatars.githubusercontent.com/u/58213083?v=4](https://github.com/account)" width="100;" alt="Diptanshu Mahish"/>
             <br />
             <sub><b>Dipatnshu Mahish</b></sub>
         </a>
@@ -72,8 +72,8 @@ Do check the [Contribution guidelines](https://github.com/Code1705/watch/blob/ma
 ## Our Amazing Contributors of this Project 👨‍👨‍👦‍👦❤️
 Thanks to all the contributors who worked for this project to stay alive! 😊😎
 
-<a align="center" href="https://github.com/Clueless-Community/flutter-ui-components/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=Clueless-Community/flutter-ui-components&&max=817" />  
+<a align="center" href="https://github.com/diptanshumahish/watch/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=diptanshumahish/watch&&max=817" />  
 </a>
 
 <br>
