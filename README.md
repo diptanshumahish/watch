@@ -60,7 +60,7 @@ Do check the [Contribution guidelines](https://github.com/Code1705/watch/blob/ma
 <tr>
     <td align="center">
         <a href="https://github.com/diptanshumahish">
-            <img src="https://avatars.githubusercontent.com/u/58213083?v=4" width="100;" alt="Diptanshu Mahish"/>
+            <img src="[https://avatars.githubusercontent.com/u/58213083?v=4](https://avatars.githubusercontent.com/u/92803178?v=4)" width="100;" alt="Diptanshu Mahish"/>
             <br />
             <sub><b>Dipatnshu Mahish</b></sub>
         </a>
