@@ -2,16 +2,16 @@
 
 <div align="center">
 
-![Contributors](https://img.shields.io/github/contributors/harshita214/Chrome-Extension?style=for-the-badge)
-  ![Forks](https://img.shields.io/github/forks/harshita214/Chrome-Extension?style=for-the-badge)
-![Stars](https://img.shields.io/github/stars/harshita214/Chrome-Extension?style=for-the-badge)
-![License](https://img.shields.io/github/license/harshita214/Chrome-Extension?style=for-the-badge)
+![Contributors](https://img.shields.io/github/contributors/diptanshumahish/watch?style=for-the-badge)
+  ![Forks](https://img.shields.io/github/forks/diptanshumahish/watch?style=for-the-badge)
+![Stars](https://img.shields.io/github/stars/diptanshumahish/watch?style=for-the-badge)
+![License](https://img.shields.io/github/licensediptanshumahish/watch?style=for-the-badge)
 ![PRs-Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)  
 
-![](https://img.shields.io/github/issues-raw/harshita214/Chrome-Extension?color=orange&style=for-the-badge)
-![](https://img.shields.io/github/issues-closed/harshita214/Chrome-Extension?style=for-the-badge)
-![](https://img.shields.io/github/issues-pr/harshita214/Chrome-Extension?style=for-the-badge)
-![](https://img.shields.io/github/issues-pr-closed-raw/harshita214/Chrome-Extension?style=for-the-badge)
+![](https://img.shields.io/github/issues-raw/diptanshumahish/watch?color=orange&style=for-the-badge)
+![](https://img.shields.io/github/issues-closed/diptanshumahish/watch?style=for-the-badge)
+![](https://img.shields.io/github/issues-pr/diptanshumahish/watch?style=for-the-badge)
+![](https://img.shields.io/github/issues-pr-closed-raw/diptanshumahish/watch?style=for-the-badge)
   
 </div>
 
