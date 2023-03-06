@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
       title: 'Watch',
       //TODO: fix the theming for the application as dark theme causes text to be white in color
       // themeMode: context.watch<ThemeProvider>().themeMode,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeMode.dark,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
       home: Consumer<User?>(
