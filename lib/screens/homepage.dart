@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:watch/screens/mainscreenpages/explore.dart';
 import 'package:watch/screens/mainscreenpages/fav.dart';
-import 'package:watch/screens/mainscreenpages/profile.dart';
+import 'package:watch/screens/profile/profile.dart';
+
 import 'mainscreenpages/home.dart';
 
 int currenIndex = 0;
@@ -33,7 +34,12 @@ class _HomePageState extends State<HomePage> {
       }
     }
 
-    var pages = [const Home(), const Explore(), const Fav(), const Profile()];
+    var pages = [
+      const Home(),
+      const Explore(),
+      const Fav(),
+      const ProfileScreen()
+    ];
 
     return SafeArea(
       child: Scaffold(
