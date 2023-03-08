@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:watch/screens/mainscreenpages/explore.dart';
 import 'package:watch/screens/mainscreenpages/fav.dart';
 import 'package:watch/screens/profile/profile.dart';
 
 import 'mainscreenpages/home.dart';
+import 'movie_details/movie_details_screen.dart';
 
 int currenIndex = 0;
 
@@ -36,7 +36,9 @@ class _HomePageState extends State<HomePage> {
 
     var pages = [
       const Home(),
-      const Explore(),
+      //TODO: uncomment this after checking the movie details page and remove it
+      // const Explore(),
+      const MovieDetails(),
       const Fav(),
       const ProfileScreen()
     ];
