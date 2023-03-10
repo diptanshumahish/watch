@@ -1,25 +1,30 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch/providers/theme_provider.dart';
 import 'package:watch/services/auth_service.dart';
-import 'package:watch/services/service_locator.dart';
+import 'package:watch/services/shared_preference_service.dart';
 
-class MultiProviderWrapper extends StatelessWidget {
-  final Widget child;
-  const MultiProviderWrapper({Key? key, required this.child}) : super(key: key);
+final sharedPreferenceProvider = Provider<SharedPreferences>(
+  (ref) => throw UnimplementedError(),
+);
 
-  @override
-  Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (_) => ThemeProvider()),
-        StreamProvider<User?>(
-          create: (_) => getIt.get<AuthService>().user,
-          initialData: null,
-        ),
-      ],
-      child: child,
-    );
-  }
-}
+final localStorageAPIProvider = Provider<LocalStorageAPI>(
+  (ref) => LocalStorageAPI(ref.watch(sharedPreferenceProvider)),
+);
+
+final themeProvider = ChangeNotifierProvider(
+  (ref) => ThemeNotifier(),
+);
+
+final sessionStatusProvider = StreamProvider<User?>((ref) async* {
+  yield* ref.watch(authAPIProvider.select((value) => value.user));
+});
+
+final firebaseAuthProvider = Provider<FirebaseAuth>(
+  (ref) => FirebaseAuth.instance,
+);
+
+final authAPIProvider = Provider<AuthAPI>(
+  (ref) => AuthAPI(ref.watch(firebaseAuthProvider)),
+);

@@ -10,8 +10,8 @@ typedef SignOutEither = Either<Unit, Unit>;
 typedef SignInEither = Either<String, UserCredential>;
 typedef SignUpEither = Either<String, UserCredential>;
 
-class AuthService {
-  AuthService(this._auth);
+class AuthAPI {
+  AuthAPI(FirebaseAuth auth) : _auth = auth;
 
   late final FirebaseAuth _auth;
 

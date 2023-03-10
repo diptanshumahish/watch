@@ -15,7 +15,10 @@ class MovieDetails extends StatelessWidget {
     return Scaffold(
       body: PaintedBackground(
         painter: VariableColorPainter(
-          [const Color(0xFF6326C6).withOpacity(0.8), const Color(0xFF1A1A1D)],
+          [
+            const Color(0xFF6326C6).withOpacity(0.8),
+            const Color(0xFF1A1A1D),
+          ],
         ),
         child: CustomScrollView(
           physics: const BouncingScrollPhysics(),

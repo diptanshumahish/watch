@@ -1,14 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch/providers/multi_provider.dart';
 import 'package:watch/providers/theme_provider.dart';
 import 'package:watch/screens/homepage.dart';
 import 'package:watch/screens/login_page.dart';
-import 'package:watch/services/service_locator.dart';
 
 import 'firebase_options.dart';
 
@@ -20,18 +18,17 @@ Future<void> main() async {
   ]);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SharedPreferences prefsInstance = await SharedPreferences.getInstance();
-  await initServiceLocator(prefsInstance);
-  runApp(const MultiProviderWrapper(child: MyApp()));
+  runApp(
+    ProviderScope(
+      overrides: [sharedPreferenceProvider.overrideWithValue(prefsInstance)],
+      child: const MyApp(),
+    ),
+  );
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -42,13 +39,20 @@ class _MyAppState extends State<MyApp> {
       themeMode: ThemeMode.dark,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
-      home: Consumer<User?>(
-        builder: (context, user, child) {
-          if (user != null) {
-            return const HomePage();
-          } else {
-            return LoginPage();
-          }
+      home: Consumer(
+        builder: (context, ref, child) {
+          final user = ref.watch(sessionStatusProvider);
+          return user.when(
+            data: (user) {
+              if (user != null) {
+                return const HomePage();
+              } else {
+                return LoginPage();
+              }
+            },
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stack) => const Center(child: Text('Error')),
+          );
         },
       ),
     );
