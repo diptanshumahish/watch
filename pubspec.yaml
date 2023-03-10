@@ -42,14 +42,13 @@ dependencies:
   font_awesome_flutter: ^10.2.1
   freezed: ^2.3.2
   freezed_annotation: ^2.2.0
-  get_it: ^7.2.0
   google_fonts: ^3.0.1
   google_sign_in: ^6.0.0
+  hooks_riverpod: ^2.3.1
   iconsax: ^0.0.8
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
   page_transition: ^2.0.9
-  provider: ^6.0.5
   shared_preferences: ^2.0.17
 
 dev_dependencies:

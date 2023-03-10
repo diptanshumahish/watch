@@ -1,13 +1,20 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch/models/user_model.dart';
 
-///[SharedPreferenceService] class to handle saving data locally
-class PrefsService {
+import '../providers/multi_provider.dart';
+
+final localStorageAPIProvider = Provider<LocalStorageAPI>(
+  (ref) => LocalStorageAPI(ref.watch(sharedPreferenceProvider)),
+);
+
+class LocalStorageAPI {
   late final SharedPreferences _prefs;
-  PrefsService(this._prefs);
+
+  LocalStorageAPI(SharedPreferences prefs) : _prefs = prefs;
 
   ///Save current user data into the disk
   ///Returns [true] if the data is saved successfully

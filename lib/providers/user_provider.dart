@@ -1,7 +1,7 @@
+import 'package:flutter/widgets.dart';
 import 'package:watch/models/user_model.dart';
-import 'package:watch/providers/disposable_provider/disposable_provider.dart';
 
-class UserNotifier extends DisposableProvider {
+class UserNotifier extends ChangeNotifier {
   UserNotifier() : _mounted = true;
 
   bool _mounted;
@@ -17,11 +17,6 @@ class UserNotifier extends DisposableProvider {
   }
 
   @override
-  void logoutDispose() {
-    _user = null;
-  }
-
-  @override
   void notifyListeners() {
     if (_mounted) {
       super.notifyListeners();
@@ -31,7 +26,7 @@ class UserNotifier extends DisposableProvider {
   @override
   void dispose() {
     _mounted = false;
-    logoutDispose();
+
     super.dispose();
   }
 }

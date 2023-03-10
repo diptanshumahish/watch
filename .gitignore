@@ -34,10 +34,10 @@ migrate_working_dir/
 
  
 #Firebase related
+**/firebase_options.dart
 **/google-services.json
 **/GoogleService-Info.plist
 /ios/firebase_app_id_file.json
-/lib/firebase_options.dart
 /macos/firebase_app_id_file.json
 /macos/Runner/GoogleService-Info.plist
 
