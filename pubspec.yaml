@@ -33,11 +33,13 @@ dependencies:
   cached_network_image: ^3.2.3
   cupertino_icons: ^1.0.2
   dartz: ^0.10.1
-  firebase_auth: ^4.2.8
-  firebase_core: ^2.6.1
+  equatable: ^2.0.5
+  firebase_auth: ^4.2.10
+  firebase_core: ^2.7.1
   flutter:
     sdk: flutter
   flutter_facebook_auth: ^5.0.7
+  flutter_lints: ^2.0.1
   flutter_rating_bar: ^4.0.1
   font_awesome_flutter: ^10.2.1
   freezed: ^2.3.2
@@ -49,11 +51,10 @@ dependencies:
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
   page_transition: ^2.0.9
-  shared_preferences: ^2.0.17
+  shared_preferences: ^2.0.18
 
 dev_dependencies:
   build_runner: ^2.3.3
-  flutter_lints: ^2.0.0
   flutter_test:
     sdk: flutter
 
