@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 class MyThemes {
-  static final darkTheme = ThemeData(
+  //dark theme
+  static final darkTheme = ThemeData.dark().copyWith(
     scaffoldBackgroundColor: Colors.black,
     primaryColor: Colors.black,
-    colorScheme: const ColorScheme.dark(),
   );
 
-  static final lightTheme = ThemeData(
+  //light theme
+  static final lightTheme = ThemeData.light().copyWith(
     scaffoldBackgroundColor: Colors.white,
     primaryColor: Colors.white,
-    colorScheme: const ColorScheme.light(),
   );
 }
