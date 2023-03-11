@@ -5,7 +5,7 @@ typedef SignOutEither = Either<Unit, Unit>;
 typedef SignInEither = Either<String, UserCredential>;
 typedef SignUpEither = Either<String, UserCredential>;
 
-abstract class AuthApiImpl {
+abstract class AuthAPIImpl {
   ///Auth status change user stream
   Stream<User?> get user;
 

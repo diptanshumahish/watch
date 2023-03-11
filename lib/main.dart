@@ -11,11 +11,13 @@ import 'src/providers/local_storage_provider.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+    [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown],
+  );
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   SharedPreferences prefsInstance = await SharedPreferences.getInstance();
   runApp(
     ProviderScope(
+      key: const Key('GlobalProviderScope'),
       overrides: [
         sharedPreferenceProvider.overrideWithValue(prefsInstance),
       ],

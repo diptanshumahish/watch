@@ -16,7 +16,7 @@ final authAPIProvider = Provider<AuthAPI>(
   (ref) => AuthAPI(ref.watch(firebaseAuthProvider)),
 );
 
-class AuthAPI implements AuthApiImpl {
+class AuthAPI implements AuthAPIImpl {
   AuthAPI(FirebaseAuth auth) : _auth = auth;
 
   late final FirebaseAuth _auth;

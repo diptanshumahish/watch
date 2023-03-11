@@ -1,33 +1,44 @@
-import 'package:flutter/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:watch/src/features/authentication/data/auth_api.dart';
 
 import '../models/user_model.dart';
 
-class UserNotifier extends ChangeNotifier {
-  UserNotifier() : _mounted = true;
+///User notifier provider
+final userNotifierProvider = StateNotifierProvider<UserNotifier, UserModel>(
+  (Ref ref) => UserNotifier(ref: ref),
+);
 
-  bool _mounted;
+class UserNotifier extends StateNotifier<UserModel> {
+  final Ref _ref;
+  UserNotifier({required Ref ref})
+      : _ref = ref,
+        super(const UserModel());
 
-  bool get isLoggedIn => _user != null;
+  bool get isUidNotEmpty => state.uid != null;
 
-  UserModel? _user;
-  UserModel? get user => _user;
+  bool get isUserAdult => state.isAdult;
 
-  void setUser(UserModel user) {
-    _user = user;
-    notifyListeners();
-  }
+  User? currentUser() => _ref.watch(firebaseAuthProvider).currentUser;
 
-  @override
-  void notifyListeners() {
-    if (_mounted) {
-      super.notifyListeners();
-    }
-  }
+  void setUser(UserModel user) => state = user;
 
-  @override
-  void dispose() {
-    _mounted = false;
+  void setUserProps({
+    String? displayName,
+    String? age,
+    String? email,
+    List<String>? selectedGenres,
+    List<String>? likedItems,
+    bool isAdult = false,
+  }) =>
+      state = state.copyWith(
+        displayName: displayName,
+        age: age,
+        email: email,
+        selectedGenres: selectedGenres,
+        likedItems: likedItems,
+        isAdult: isAdult,
+      );
 
-    super.dispose();
-  }
+  void clearUser() => state = const UserModel();
 }
