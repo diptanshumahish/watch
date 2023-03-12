@@ -26,6 +26,7 @@ class UserNotifier extends StateNotifier<UserModel> {
   void setUserProps({
     String? displayName,
     String? age,
+    String? uid,
     String? email,
     List<String>? selectedGenres,
     List<String>? likedItems,
@@ -34,6 +35,7 @@ class UserNotifier extends StateNotifier<UserModel> {
       state = state.copyWith(
         displayName: displayName,
         age: age,
+        uid: uid,
         email: email,
         selectedGenres: selectedGenres,
         likedItems: likedItems,

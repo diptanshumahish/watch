@@ -4,7 +4,12 @@ extension SnackBarExt on BuildContext {
   void showSnackBar(String message, {bool isError = false}) =>
       ScaffoldMessenger.of(this).showSnackBar(
         SnackBar(
-          content: Text(message),
+          content: Text(
+            message,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
           duration: const Duration(seconds: 2),
           backgroundColor:
               isError ? Colors.red.shade400 : Colors.green.shade400,
@@ -25,7 +30,12 @@ extension SnackBarExt on BuildContext {
   }) =>
       ScaffoldMessenger.of(this).showSnackBar(
         SnackBar(
-          content: Text(message),
+          content: Text(
+            message,
+            style: const TextStyle(
+              color: Colors.white,
+            ),
+          ),
           duration: const Duration(seconds: 2),
           backgroundColor:
               isError ? Colors.red.shade400 : Colors.green.shade400,

@@ -5,7 +5,12 @@ import '../../../src/app.dart';
 void showSnackbar(String message, {Color? backgroundColor}) =>
     scaffoldMessengerKey.currentState!.showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Text(
+          message,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
         duration: const Duration(seconds: 2),
         backgroundColor: backgroundColor,
       ),
@@ -19,7 +24,12 @@ void showSnackbarWithAction(
 }) =>
     scaffoldMessengerKey.currentState!.showSnackBar(
       SnackBar(
-        content: Text(message),
+        content: Text(
+          message,
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
         duration: const Duration(seconds: 2),
         backgroundColor: backgroundColor,
         action: SnackBarAction(
