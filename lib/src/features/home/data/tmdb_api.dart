@@ -16,7 +16,7 @@ final tmdbProvider = Provider<TMDB>(
 
 ///Provider to load horror movies
 final horrorMovieProvider =
-    FutureProvider.autoDispose<Either<Failure, GenreById>>(
+    FutureProvider.autoDispose<Either<Failure, MovieDetail>>(
   (ref) async => await ref
       .watch(tmdbProvider)
       .getGenreWiseMovies(genre: MovieGenre.horror.name),
@@ -24,7 +24,7 @@ final horrorMovieProvider =
 
 ///Provider to load action movies
 final thrillerMovieProvider =
-    FutureProvider.autoDispose<Either<Failure, GenreById>>(
+    FutureProvider.autoDispose<Either<Failure, MovieDetail>>(
   (ref) async => await ref
       .watch(tmdbProvider)
       .getGenreWiseMovies(genre: MovieGenre.thriller.name),
@@ -41,28 +41,21 @@ class TMDB {
 
   TMDB({required HttpBaseClient client}) : _client = client;
 
-  FutureEither<List<Genre>> getAllGenres() async {
+  FutureEither<AllGenres> getAllGenres() async {
     Either<Failure, String> data =
         await _client.get('$genreUrl?api_key=$apiKey');
     return data.fold(
       (l) => left(l),
-      (r) {
-        var result = jsonDecode(r)["genres"] as List<Genre>;
-        List<Genre> temp = [];
-        for (var item in result) {
-          temp.add(Genre(id: item.id, name: item.name));
-        }
-        return right(temp);
-      },
+      (r) => right(AllGenres.fromJson(jsonDecode(r))),
     );
   }
 
-  FutureEither<GenreById> getGenreWiseMovies({required String genre}) async {
+  FutureEither<MovieDetail> getGenreWiseMovies({required String genre}) async {
     Either<Failure, String> data = await _client.get(
         '$searchUrl?api_key=$apiKey&language=en-US&sort_by=popularity.desc&query=$genre');
     return data.fold(
       (l) => left(l),
-      (r) => right(GenreById.fromJson(jsonDecode(r))),
+      (r) => right(MovieDetail.fromJson(jsonDecode(r))),
     );
   }
 
@@ -101,6 +94,16 @@ class TMDB {
     return data.fold(
       (l) => left(l),
       (r) => right(AllCredits.fromJson(jsonDecode(r))),
+    );
+  }
+
+  FutureEither<MovieDetail> searchMovie(String query,
+      {bool isAdult = false, int page = 1}) async {
+    Either<Failure, String> data = await _client.get(
+        '$searchUrl?api_key=$apiKey&language=en-US&query=$query&page=$page&include_adult=$isAdult');
+    return data.fold(
+      (l) => left(l),
+      (r) => right(MovieDetail.fromJson(jsonDecode(r))),
     );
   }
 }

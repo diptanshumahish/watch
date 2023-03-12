@@ -10,13 +10,13 @@ import 'package:watch/src/shared/custom_paints.dart';
 import '../../../../../app/constants/api_urls.dart';
 import 'actors_tile.dart';
 
-class MovieDetails extends ConsumerWidget {
+class MovieDescScreen extends ConsumerWidget {
   final String title;
   final String overview;
   final double? votes;
   final int? movieId;
   final String? backdropPath;
-  const MovieDetails({
+  const MovieDescScreen({
     Key? key,
     this.movieId,
     required this.title,

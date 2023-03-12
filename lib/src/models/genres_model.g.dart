@@ -41,7 +41,8 @@ Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
       'vote_count': instance.voteCount,
     };
 
-_$_GenreById _$$_GenreByIdFromJson(Map<String, dynamic> json) => _$_GenreById(
+_$_MovieDetail _$$_MovieDetailFromJson(Map<String, dynamic> json) =>
+    _$_MovieDetail(
       page: json['page'] as int? ?? 0,
       results: (json['results'] as List<dynamic>?)
               ?.map((e) => Result.fromJson(e as Map<String, dynamic>))
@@ -51,7 +52,7 @@ _$_GenreById _$$_GenreByIdFromJson(Map<String, dynamic> json) => _$_GenreById(
       totalResults: json['totalResults'] as int? ?? 0,
     );
 
-Map<String, dynamic> _$$_GenreByIdToJson(_$_GenreById instance) =>
+Map<String, dynamic> _$$_MovieDetailToJson(_$_MovieDetail instance) =>
     <String, dynamic>{
       'page': instance.page,
       'results': instance.results,

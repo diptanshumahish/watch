@@ -3,7 +3,7 @@ import 'package:iconsax/iconsax.dart';
 import 'package:watch/src/features/home/presentation/home_view/components/fav.dart';
 import 'package:watch/src/features/home/presentation/profile/profile.dart';
 
-import 'components/explore.dart';
+import '../explore_screen/explore.dart';
 import 'components/home.dart';
 
 int currenIndex = 0;
@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
     var pages = [
       const Home(),
       //TODO: uncomment this after checking the movie details page and remove it
-      const Explore(),
+      const ExploreScreen(),
       // const MovieDetails(),
       const Fav(),
       const ProfileScreen()

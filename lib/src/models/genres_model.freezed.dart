@@ -14,12 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-GenreById _$GenreByIdFromJson(Map<String, dynamic> json) {
-  return _GenreById.fromJson(json);
+MovieDetail _$MovieDetailFromJson(Map<String, dynamic> json) {
+  return _MovieDetail.fromJson(json);
 }
 
 /// @nodoc
-mixin _$GenreById {
+mixin _$MovieDetail {
   int get page => throw _privateConstructorUsedError;
   List<Result> get results => throw _privateConstructorUsedError;
   int get totalPages => throw _privateConstructorUsedError;
@@ -27,22 +27,23 @@ mixin _$GenreById {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $GenreByIdCopyWith<GenreById> get copyWith =>
+  $MovieDetailCopyWith<MovieDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GenreByIdCopyWith<$Res> {
-  factory $GenreByIdCopyWith(GenreById value, $Res Function(GenreById) then) =
-      _$GenreByIdCopyWithImpl<$Res, GenreById>;
+abstract class $MovieDetailCopyWith<$Res> {
+  factory $MovieDetailCopyWith(
+          MovieDetail value, $Res Function(MovieDetail) then) =
+      _$MovieDetailCopyWithImpl<$Res, MovieDetail>;
   @useResult
   $Res call({int page, List<Result> results, int totalPages, int totalResults});
 }
 
 /// @nodoc
-class _$GenreByIdCopyWithImpl<$Res, $Val extends GenreById>
-    implements $GenreByIdCopyWith<$Res> {
-  _$GenreByIdCopyWithImpl(this._value, this._then);
+class _$MovieDetailCopyWithImpl<$Res, $Val extends MovieDetail>
+    implements $MovieDetailCopyWith<$Res> {
+  _$MovieDetailCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -79,21 +80,22 @@ class _$GenreByIdCopyWithImpl<$Res, $Val extends GenreById>
 }
 
 /// @nodoc
-abstract class _$$_GenreByIdCopyWith<$Res> implements $GenreByIdCopyWith<$Res> {
-  factory _$$_GenreByIdCopyWith(
-          _$_GenreById value, $Res Function(_$_GenreById) then) =
-      __$$_GenreByIdCopyWithImpl<$Res>;
+abstract class _$$_MovieDetailCopyWith<$Res>
+    implements $MovieDetailCopyWith<$Res> {
+  factory _$$_MovieDetailCopyWith(
+          _$_MovieDetail value, $Res Function(_$_MovieDetail) then) =
+      __$$_MovieDetailCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call({int page, List<Result> results, int totalPages, int totalResults});
 }
 
 /// @nodoc
-class __$$_GenreByIdCopyWithImpl<$Res>
-    extends _$GenreByIdCopyWithImpl<$Res, _$_GenreById>
-    implements _$$_GenreByIdCopyWith<$Res> {
-  __$$_GenreByIdCopyWithImpl(
-      _$_GenreById _value, $Res Function(_$_GenreById) _then)
+class __$$_MovieDetailCopyWithImpl<$Res>
+    extends _$MovieDetailCopyWithImpl<$Res, _$_MovieDetail>
+    implements _$$_MovieDetailCopyWith<$Res> {
+  __$$_MovieDetailCopyWithImpl(
+      _$_MovieDetail _value, $Res Function(_$_MovieDetail) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -104,7 +106,7 @@ class __$$_GenreByIdCopyWithImpl<$Res>
     Object? totalPages = null,
     Object? totalResults = null,
   }) {
-    return _then(_$_GenreById(
+    return _then(_$_MovieDetail(
       page: null == page
           ? _value.page
           : page // ignore: cast_nullable_to_non_nullable
@@ -127,16 +129,16 @@ class __$$_GenreByIdCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_GenreById implements _GenreById {
-  const _$_GenreById(
+class _$_MovieDetail implements _MovieDetail {
+  const _$_MovieDetail(
       {this.page = 0,
       final List<Result> results = const <Result>[],
       this.totalPages = 0,
       this.totalResults = 0})
       : _results = results;
 
-  factory _$_GenreById.fromJson(Map<String, dynamic> json) =>
-      _$$_GenreByIdFromJson(json);
+  factory _$_MovieDetail.fromJson(Map<String, dynamic> json) =>
+      _$$_MovieDetailFromJson(json);
 
   @override
   @JsonKey()
@@ -159,14 +161,14 @@ class _$_GenreById implements _GenreById {
 
   @override
   String toString() {
-    return 'GenreById(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
+    return 'MovieDetail(page: $page, results: $results, totalPages: $totalPages, totalResults: $totalResults)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_GenreById &&
+            other is _$_MovieDetail &&
             (identical(other.page, page) || other.page == page) &&
             const DeepCollectionEquality().equals(other._results, _results) &&
             (identical(other.totalPages, totalPages) ||
@@ -183,26 +185,26 @@ class _$_GenreById implements _GenreById {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_GenreByIdCopyWith<_$_GenreById> get copyWith =>
-      __$$_GenreByIdCopyWithImpl<_$_GenreById>(this, _$identity);
+  _$$_MovieDetailCopyWith<_$_MovieDetail> get copyWith =>
+      __$$_MovieDetailCopyWithImpl<_$_MovieDetail>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_GenreByIdToJson(
+    return _$$_MovieDetailToJson(
       this,
     );
   }
 }
 
-abstract class _GenreById implements GenreById {
-  const factory _GenreById(
+abstract class _MovieDetail implements MovieDetail {
+  const factory _MovieDetail(
       {final int page,
       final List<Result> results,
       final int totalPages,
-      final int totalResults}) = _$_GenreById;
+      final int totalResults}) = _$_MovieDetail;
 
-  factory _GenreById.fromJson(Map<String, dynamic> json) =
-      _$_GenreById.fromJson;
+  factory _MovieDetail.fromJson(Map<String, dynamic> json) =
+      _$_MovieDetail.fromJson;
 
   @override
   int get page;
@@ -214,7 +216,7 @@ abstract class _GenreById implements GenreById {
   int get totalResults;
   @override
   @JsonKey(ignore: true)
-  _$$_GenreByIdCopyWith<_$_GenreById> get copyWith =>
+  _$$_MovieDetailCopyWith<_$_MovieDetail> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
