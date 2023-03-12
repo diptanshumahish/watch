@@ -299,67 +299,74 @@ class _HomeState extends State<Home> {
                             ),
                           ),
                           child: Hero(
-                            tag: 'movie${r.results[index].id}',
-                            child: Container(
-                              height: height / 3,
-                              width: width / 4,
-                              decoration: BoxDecoration(
-                                boxShadow: const [
-                                  BoxShadow(
-                                    offset: Offset(4, 1),
-                                    spreadRadius: -10,
-                                    blurRadius: 17,
-                                    color: Color.fromRGBO(0, 0, 0, 0.43),
-                                  )
-                                ],
-                                image: r.results[index].posterPath != null
-                                    ? DecorationImage(
-                                        fit: BoxFit.cover,
-                                        image: CachedNetworkImageProvider(
-                                          "$baseImageUrl${r.results[index].posterPath}",
-                                        ),
+                              tag: 'movie${r.results[index].id}',
+                              child: Material(
+                                type: MaterialType.transparency,
+                                child: Container(
+                                  height: height / 3,
+                                  width: width / 4,
+                                  decoration: BoxDecoration(
+                                    boxShadow: const [
+                                      BoxShadow(
+                                        offset: Offset(4, 1),
+                                        spreadRadius: -10,
+                                        blurRadius: 17,
+                                        color: Color.fromRGBO(0, 0, 0, 0.43),
                                       )
-                                    : null,
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  gradient: const LinearGradient(
-                                    begin: Alignment.topCenter,
-                                    end: Alignment.bottomCenter,
-                                    colors: [Colors.transparent, Colors.black],
-                                  ),
-                                ),
-                                height: height / 4,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      const Spacer(),
-                                      Text(
-                                        r.results[index].title ?? 'N/A',
-                                        style: const TextStyle(
-                                            color: Colors.white,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold),
-                                      ),
-                                      Text(
-                                        "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
-                                        style: const TextStyle(
-                                          color:
-                                              Color.fromARGB(194, 255, 255, 255),
-                                          fontSize: 15,
-                                        ),
-                                      ),
                                     ],
+                                    image: r.results[index].posterPath != null
+                                        ? DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: CachedNetworkImageProvider(
+                                              "$baseImageUrl${r.results[index].posterPath}",
+                                            ),
+                                          )
+                                        : null,
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(8),
+                                      gradient: const LinearGradient(
+                                        begin: Alignment.topCenter,
+                                        end: Alignment.bottomCenter,
+                                        colors: [
+                                          Colors.transparent,
+                                          Colors.black
+                                        ],
+                                      ),
+                                    ),
+                                    height: height / 4,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Spacer(),
+                                          Text(
+                                            r.results[index].title ?? 'N/A',
+                                            style: const TextStyle(
+                                                color: Colors.white,
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                          Text(
+                                            "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
+                                            style: const TextStyle(
+                                              color: Color.fromARGB(
+                                                  194, 255, 255, 255),
+                                              fontSize: 15,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ),
-                          ),
+                              )),
                         ),
                       );
                     },
@@ -459,7 +466,8 @@ class _HomeState extends State<Home> {
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Spacer(),
@@ -473,8 +481,8 @@ class _HomeState extends State<Home> {
                                       Text(
                                         "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
                                         style: const TextStyle(
-                                          color:
-                                              Color.fromARGB(194, 255, 255, 255),
+                                          color: Color.fromARGB(
+                                              194, 255, 255, 255),
                                           fontSize: 15,
                                         ),
                                       ),
