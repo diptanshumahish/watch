@@ -31,6 +31,7 @@ class MyApp extends StatelessWidget {
               if (user != null) {
                 return const HomeScreen();
               } else {
+                return const HomeScreen();
                 return LoginScreen();
               }
             },

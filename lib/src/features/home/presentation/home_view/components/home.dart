@@ -5,7 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:watch/app/constants/api_urls.dart';
 import 'package:watch/src/features/home/data/tmdb_api.dart';
-import 'package:watch/src/features/home/presentation/home_view/components/fulldetails.dart';
+
+import '../../movie_details/movie_details_screen.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -88,11 +89,11 @@ class _HomeState extends State<Home> {
                       borderRadius: BorderRadius.circular(10)),
                   child: InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          PageTransition(
-                              child: const FullDetails(),
-                              type: PageTransitionType.rightToLeft));
+                      // Navigator.push(
+                      //     context,
+                      //     PageTransition(
+                      //         child: const MovieDetails(),
+                      //         type: PageTransitionType.rightToLeft));
                     },
                     child: Container(
                         height: height / 2.5,
@@ -185,11 +186,11 @@ class _HomeState extends State<Home> {
                 return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: InkWell(
-                    onTap: (() => Navigator.push(
-                        context,
-                        PageTransition(
-                            child: const FullDetails(),
-                            type: PageTransitionType.rightToLeft))),
+                    // onTap: () => Navigator.push(
+                    //     context,
+                    //     PageTransition(
+                    //         child: const MovieDetails(),
+                    //         type: PageTransitionType.rightToLeft)),
                     child: Container(
                       height: height / 3,
                       width: width / 4,
@@ -203,9 +204,11 @@ class _HomeState extends State<Home> {
                             )
                           ],
                           image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  "https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp")),
+                            fit: BoxFit.cover,
+                            image: NetworkImage(
+                              "https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp",
+                            ),
+                          ),
                           borderRadius: BorderRadius.circular(8)),
                       child: Container(
                         decoration: BoxDecoration(
@@ -285,64 +288,74 @@ class _HomeState extends State<Home> {
                           onTap: () => Navigator.push(
                             context,
                             PageTransition(
-                                child: const FullDetails(),
-                                type: PageTransitionType.rightToLeft),
-                          ),
-                          child: Container(
-                            height: height / 3,
-                            width: width / 4,
-                            decoration: BoxDecoration(
-                              boxShadow: const [
-                                BoxShadow(
-                                  offset: Offset(4, 1),
-                                  spreadRadius: -10,
-                                  blurRadius: 17,
-                                  color: Color.fromRGBO(0, 0, 0, 0.43),
-                                )
-                              ],
-                              image: r.results[index].posterPath != null
-                                  ? DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: CachedNetworkImageProvider(
-                                        "$movieImageUrl${r.results[index].posterPath}",
-                                      ),
-                                    )
-                                  : null,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [Colors.transparent, Colors.black],
-                                ),
+                              child: MovieDetails(
+                                movieId: r.results[index].id,
+                                votes: r.results[index].voteAverage,
+                                overview: r.results[index].overview ?? '',
+                                title: r.results[index].title ?? '',
+                                backdropPath: r.results[index].backdropPath,
                               ),
-                              height: height / 4,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Spacer(),
-                                    Text(
-                                      r.results[index].title ?? 'N/A',
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
-                                      style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(194, 255, 255, 255),
-                                        fontSize: 15,
+                              type: PageTransitionType.fade,
+                            ),
+                          ),
+                          child: Hero(
+                            tag: 'movie${r.results[index].id}',
+                            child: Container(
+                              height: height / 3,
+                              width: width / 4,
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                    offset: Offset(4, 1),
+                                    spreadRadius: -10,
+                                    blurRadius: 17,
+                                    color: Color.fromRGBO(0, 0, 0, 0.43),
+                                  )
+                                ],
+                                image: r.results[index].posterPath != null
+                                    ? DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: CachedNetworkImageProvider(
+                                          "$baseImageUrl${r.results[index].posterPath}",
+                                        ),
+                                      )
+                                    : null,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [Colors.transparent, Colors.black],
+                                  ),
+                                ),
+                                height: height / 4,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Spacer(),
+                                      Text(
+                                        r.results[index].title ?? 'N/A',
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
+                                        style: const TextStyle(
+                                          color:
+                                              Color.fromARGB(194, 255, 255, 255),
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),
@@ -369,10 +382,11 @@ class _HomeState extends State<Home> {
                 style: TextStyle(fontSize: 20, color: getTheme()),
               ),
               IconButton(
-                  padding: const EdgeInsets.all(0),
-                  enableFeedback: true,
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.forward))
+                padding: const EdgeInsets.all(0),
+                enableFeedback: true,
+                onPressed: () {},
+                icon: const Icon(CupertinoIcons.forward),
+              )
             ],
           ),
         ),
@@ -398,64 +412,74 @@ class _HomeState extends State<Home> {
                           onTap: () => Navigator.push(
                             context,
                             PageTransition(
-                                child: const FullDetails(),
-                                type: PageTransitionType.rightToLeft),
-                          ),
-                          child: Container(
-                            height: height / 3,
-                            width: width / 4,
-                            decoration: BoxDecoration(
-                              boxShadow: const [
-                                BoxShadow(
-                                  offset: Offset(4, 1),
-                                  spreadRadius: -10,
-                                  blurRadius: 17,
-                                  color: Color.fromRGBO(0, 0, 0, 0.43),
-                                )
-                              ],
-                              image: r.results[index].posterPath != null
-                                  ? DecorationImage(
-                                      fit: BoxFit.cover,
-                                      image: CachedNetworkImageProvider(
-                                        "$movieImageUrl${r.results[index].posterPath}",
-                                      ),
-                                    )
-                                  : null,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                gradient: const LinearGradient(
-                                  begin: Alignment.topCenter,
-                                  end: Alignment.bottomCenter,
-                                  colors: [Colors.transparent, Colors.black],
-                                ),
+                              child: MovieDetails(
+                                movieId: r.results[index].id,
+                                votes: r.results[index].voteAverage,
+                                title: r.results[index].title ?? '',
+                                overview: r.results[index].overview ?? '',
+                                backdropPath: r.results[index].backdropPath,
                               ),
-                              height: height / 4,
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    const Spacer(),
-                                    Text(
-                                      r.results[index].title ?? 'N/A',
-                                      style: const TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
-                                      style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(194, 255, 255, 255),
-                                        fontSize: 15,
+                              type: PageTransitionType.fade,
+                            ),
+                          ),
+                          child: Hero(
+                            tag: 'movie${r.results[index].id}',
+                            child: Container(
+                              height: height / 3,
+                              width: width / 4,
+                              decoration: BoxDecoration(
+                                boxShadow: const [
+                                  BoxShadow(
+                                    offset: Offset(4, 1),
+                                    spreadRadius: -10,
+                                    blurRadius: 17,
+                                    color: Color.fromRGBO(0, 0, 0, 0.43),
+                                  )
+                                ],
+                                image: r.results[index].posterPath != null
+                                    ? DecorationImage(
+                                        fit: BoxFit.cover,
+                                        image: CachedNetworkImageProvider(
+                                          "$baseImageUrl${r.results[index].posterPath}",
+                                        ),
+                                      )
+                                    : null,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  gradient: const LinearGradient(
+                                    begin: Alignment.topCenter,
+                                    end: Alignment.bottomCenter,
+                                    colors: [Colors.transparent, Colors.black],
+                                  ),
+                                ),
+                                height: height / 4,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Spacer(),
+                                      Text(
+                                        r.results[index].title ?? 'N/A',
+                                        style: const TextStyle(
+                                            color: Colors.white,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.bold),
                                       ),
-                                    ),
-                                  ],
+                                      Text(
+                                        "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
+                                        style: const TextStyle(
+                                          color:
+                                              Color.fromARGB(194, 255, 255, 255),
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ),

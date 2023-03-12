@@ -52,6 +52,7 @@ dependencies:
   iconsax: ^0.0.8
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
+  like_button: ^2.0.5
   page_transition: ^2.0.9
   shared_preferences: ^2.0.18
 
