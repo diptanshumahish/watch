@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:watch/app/constants/constants.dart';
 import 'package:watch/app/errors/errors.dart';
 import 'package:watch/src/models/all_genres_model.dart';
+import 'package:watch/src/models/cast_model.dart';
 import 'package:watch/src/models/genres_model.dart';
 import 'package:watch/src/providers/http_base_provider.dart';
 
@@ -27,6 +28,12 @@ final thrillerMovieProvider =
   (ref) async => await ref
       .watch(tmdbProvider)
       .getGenreWiseMovies(genre: MovieGenre.thriller.name),
+);
+
+//load cast from the movie Id
+final castProvider =
+    FutureProvider.autoDispose.family<Either<Failure, AllCredits>, int>(
+  (ref, id) async => await ref.watch(tmdbProvider).getCastDetails(id: id),
 );
 
 class TMDB {
@@ -56,6 +63,44 @@ class TMDB {
     return data.fold(
       (l) => left(l),
       (r) => right(GenreById.fromJson(jsonDecode(r))),
+    );
+  }
+
+  FutureEither<Map<String, dynamic>> findMoviewDetailsById(
+      {required int id}) async {
+    Either<Failure, String> data =
+        await _client.get('$movieUrl/$id?api_key=$apiKey');
+    return data.fold(
+      (l) => left(l),
+      (r) {
+        var result = jsonDecode(r);
+        return right(
+          {
+            "isAdult": result["adult"],
+            "genres": List<Genre>.from(result["genres"]),
+            "backdropPath": result["backdrop_path"],
+            "homepage": result["homepage"],
+            "id": result["id"],
+            "originalLanguage": result["original_language"],
+            "originalTitle": result["original_title"],
+            "overview": result["overview"],
+            "popularity": result["popularity"],
+            "posterPath": result["poster_path"],
+            "title": result["title"],
+            "tagline": result["tagline"],
+            "voteAverage": result["vote_average"],
+          },
+        );
+      },
+    );
+  }
+
+  FutureEither<AllCredits> getCastDetails({required int id}) async {
+    Either<Failure, String> data =
+        await _client.get('$movieUrl/$id/credits?api_key=$apiKey');
+    return data.fold(
+      (l) => left(l),
+      (r) => right(AllCredits.fromJson(jsonDecode(r))),
     );
   }
 }

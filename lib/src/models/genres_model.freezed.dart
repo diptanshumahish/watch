@@ -232,7 +232,7 @@ mixin _$Result {
   String? get releaseDate => throw _privateConstructorUsedError;
   String? get title => throw _privateConstructorUsedError;
   bool get video => throw _privateConstructorUsedError;
-  double get voteAverage => throw _privateConstructorUsedError;
+  double? get voteAverage => throw _privateConstructorUsedError;
   int get voteCount => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -258,7 +258,7 @@ abstract class $ResultCopyWith<$Res> {
       String? releaseDate,
       String? title,
       bool video,
-      double voteAverage,
+      double? voteAverage,
       int voteCount});
 }
 
@@ -287,7 +287,7 @@ class _$ResultCopyWithImpl<$Res, $Val extends Result>
     Object? releaseDate = freezed,
     Object? title = freezed,
     Object? video = null,
-    Object? voteAverage = null,
+    Object? voteAverage = freezed,
     Object? voteCount = null,
   }) {
     return _then(_value.copyWith(
@@ -339,10 +339,10 @@ class _$ResultCopyWithImpl<$Res, $Val extends Result>
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as bool,
-      voteAverage: null == voteAverage
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
@@ -370,7 +370,7 @@ abstract class _$$_ResultCopyWith<$Res> implements $ResultCopyWith<$Res> {
       String? releaseDate,
       String? title,
       bool video,
-      double voteAverage,
+      double? voteAverage,
       int voteCount});
 }
 
@@ -396,7 +396,7 @@ class __$$_ResultCopyWithImpl<$Res>
     Object? releaseDate = freezed,
     Object? title = freezed,
     Object? video = null,
-    Object? voteAverage = null,
+    Object? voteAverage = freezed,
     Object? voteCount = null,
   }) {
     return _then(_$_Result(
@@ -448,10 +448,10 @@ class __$$_ResultCopyWithImpl<$Res>
           ? _value.video
           : video // ignore: cast_nullable_to_non_nullable
               as bool,
-      voteAverage: null == voteAverage
+      voteAverage: freezed == voteAverage
           ? _value.voteAverage
           : voteAverage // ignore: cast_nullable_to_non_nullable
-              as double,
+              as double?,
       voteCount: null == voteCount
           ? _value.voteCount
           : voteCount // ignore: cast_nullable_to_non_nullable
@@ -476,7 +476,7 @@ class _$_Result implements _Result {
       this.releaseDate,
       this.title,
       this.video = false,
-      this.voteAverage = 0,
+      this.voteAverage,
       this.voteCount = 0})
       : _genreIds = genreIds;
 
@@ -514,8 +514,7 @@ class _$_Result implements _Result {
   @JsonKey()
   final bool video;
   @override
-  @JsonKey()
-  final double voteAverage;
+  final double? voteAverage;
   @override
   @JsonKey()
   final int voteCount;
@@ -602,7 +601,7 @@ abstract class _Result implements Result {
       final String? releaseDate,
       final String? title,
       final bool video,
-      final double voteAverage,
+      final double? voteAverage,
       final int voteCount}) = _$_Result;
 
   @override
@@ -630,7 +629,7 @@ abstract class _Result implements Result {
   @override
   bool get video;
   @override
-  double get voteAverage;
+  double? get voteAverage;
   @override
   int get voteCount;
   @override

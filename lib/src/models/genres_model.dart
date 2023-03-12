@@ -32,7 +32,7 @@ class Result with _$Result {
     String? releaseDate,
     String? title,
     @Default(false) bool video,
-    @Default(0) double voteAverage,
+    double? voteAverage,
     @Default(0) int voteCount,
   }) = _Result;
 

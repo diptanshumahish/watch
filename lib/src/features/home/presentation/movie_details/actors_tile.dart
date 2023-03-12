@@ -1,23 +1,25 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:watch/app/constants/api_urls.dart';
 
 class ActorTile extends StatelessWidget {
   final String name;
   final String role;
-  final String imageUrl;
-  const ActorTile(
-      {Key? key,
-      this.name = 'Maria Espaes',
-      this.role = 'As Maria',
-      this.imageUrl =
-          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzHQv_th9wq3ivQ1CVk7UZRxhbPq64oQrg5Q&usqp=CAU'})
-      : super(key: key);
+  final String? imageUrl;
+  const ActorTile({
+    Key? key,
+    this.name = 'Maria Espaes',
+    this.role = 'As Maria',
+    this.imageUrl,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width / 2,
-      height: 60,
+    return ConstrainedBox(
+      constraints: BoxConstraints(
+        maxWidth: MediaQuery.of(context).size.width / 2,
+        maxHeight: 60,
+      ),
       child: Stack(
         children: [
           Container(
@@ -62,7 +64,9 @@ class ActorTile extends StatelessWidget {
             ),
             width: 60,
             child: CachedNetworkImage(
-              imageUrl: imageUrl,
+              imageUrl: imageUrl != null
+                  ? '$baseImageUrl$imageUrl'
+                  : 'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
               imageBuilder: (_, ImageProvider<Object> imageProvider) =>
                   Container(
                 decoration: BoxDecoration(

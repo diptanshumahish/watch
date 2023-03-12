@@ -20,7 +20,7 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       releaseDate: json['release_date'] as String?,
       title: json['title'] as String?,
       video: json['video'] as bool,
-      voteAverage: (json['vote_average'] as num).toDouble(),
+      voteAverage: (json['vote_average'] as num?)?.toDouble(),
       voteCount: json['vote_count'] as int,
     );
 
