@@ -4,16 +4,16 @@ part 'genres_model.freezed.dart';
 part 'genres_model.g.dart';
 
 @freezed
-class GenreById with _$GenreById {
-  const factory GenreById({
+class MovieDetail with _$MovieDetail {
+  const factory MovieDetail({
     @Default(0) int page,
     @Default(<Result>[]) List<Result> results,
     @Default(0) int totalPages,
     @Default(0) int totalResults,
-  }) = _GenreById;
+  }) = _MovieDetail;
 
-  factory GenreById.fromJson(Map<String, dynamic> json) =>
-      _$GenreByIdFromJson(json);
+  factory MovieDetail.fromJson(Map<String, dynamic> json) =>
+      _$MovieDetailFromJson(json);
 }
 
 @Freezed(fromJson: false)
