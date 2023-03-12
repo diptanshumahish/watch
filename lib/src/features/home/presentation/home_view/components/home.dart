@@ -1,6 +1,10 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:watch/app/constants/api_urls.dart';
+import 'package:watch/src/features/home/data/tmdb_api.dart';
 import 'package:watch/src/features/home/presentation/home_view/components/fulldetails.dart';
 
 class Home extends StatefulWidget {
@@ -31,13 +35,20 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Welcome Friend",
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold,
-                      color: getTheme())),
-              const Text("Let's see what's here for you",
-                  style: TextStyle(fontSize: 25, color: Colors.grey))
+              Text(
+                "Welcome Friend",
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    color: getTheme()),
+              ),
+              const Text(
+                "Let's see what's here for you",
+                style: TextStyle(
+                  fontSize: 25,
+                  color: Colors.grey,
+                ),
+              )
             ],
           ),
         ),
@@ -239,87 +250,114 @@ class _HomeState extends State<Home> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
+              const Text(
                 "Horror Specials",
-                style: TextStyle(fontSize: 20, color: getTheme()),
+                style: TextStyle(fontSize: 20),
               ),
               IconButton(
-                  padding: const EdgeInsets.all(0),
-                  enableFeedback: true,
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.forward))
+                padding: const EdgeInsets.all(0),
+                enableFeedback: true,
+                onPressed: () {},
+                icon: const Icon(CupertinoIcons.forward),
+              )
             ],
           ),
         ),
         SizedBox(
           height: height / 3,
-          child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: InkWell(
-                    onTap: (() => Navigator.push(
-                        context,
-                        PageTransition(
-                            child: const FullDetails(),
-                            type: PageTransitionType.rightToLeft))),
-                    child: Container(
-                      height: height / 3,
-                      width: width / 4,
-                      decoration: BoxDecoration(
-                          boxShadow: const [
-                            BoxShadow(
-                              offset: Offset(4, 1),
-                              spreadRadius: -10,
-                              blurRadius: 17,
-                              color: Color.fromRGBO(0, 0, 0, 0.43),
-                            )
-                          ],
-                          image: const DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  "https://github.com/diptanshumahish/watch_images/raw/main/drama.webp")),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            gradient: const LinearGradient(
-                                begin: Alignment.topCenter,
-                                end: Alignment.bottomCenter,
-                                colors: [Colors.transparent, Colors.black])),
-                        height: height / 4,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              Spacer(),
-                              Text(
-                                "Joker",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                              Text(
-                                "Tragedy | 9.2 \u066D",
-                                style: TextStyle(
-                                  color: Color.fromARGB(194, 255, 255, 255),
-                                  fontSize: 15,
+          child: Consumer(
+            key: const ValueKey<String>("horror"),
+            builder: (context, ref, child) {
+              final horror = ref.watch(horrorMovieProvider);
+              return horror.when(
+                data: (data) => data.fold((l) => const Text("Error"), (r) {
+                  if (r.results.isEmpty) {
+                    return const SizedBox.shrink();
+                  }
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: r.results.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            PageTransition(
+                                child: const FullDetails(),
+                                type: PageTransitionType.rightToLeft),
+                          ),
+                          child: Container(
+                            height: height / 3,
+                            width: width / 4,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  offset: Offset(4, 1),
+                                  spreadRadius: -10,
+                                  blurRadius: 17,
+                                  color: Color.fromRGBO(0, 0, 0, 0.43),
+                                )
+                              ],
+                              image: r.results[index].posterPath != null
+                                  ? DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: CachedNetworkImageProvider(
+                                        "$movieImageUrl${r.results[index].posterPath}",
+                                      ),
+                                    )
+                                  : null,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.transparent, Colors.black],
                                 ),
                               ),
-                            ],
+                              height: height / 4,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Spacer(),
+                                    Text(
+                                      r.results[index].title ?? 'N/A',
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
+                                      style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(194, 255, 255, 255),
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ),
                         ),
-                      ),
-                    ),
-                  ),
-                );
-              }),
+                      );
+                    },
+                  );
+                }),
+                error: (error, stackTrace) => const Text("Error"),
+                loading: () =>
+                    const Center(child: CircularProgressIndicator.adaptive()),
+              );
+            },
+          ),
         ),
         Padding(
           padding: const EdgeInsets.all(15.0),
@@ -340,66 +378,99 @@ class _HomeState extends State<Home> {
         ),
         SizedBox(
           height: height / 3,
-          child: ListView.builder(
-              physics: const BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: height / 3,
-                    width: width / 4,
-                    decoration: BoxDecoration(
-                        boxShadow: const [
-                          BoxShadow(
-                            offset: Offset(4, 1),
-                            spreadRadius: -10,
-                            blurRadius: 17,
-                            color: Color.fromRGBO(0, 0, 0, 0.43),
-                          )
-                        ],
-                        image: const DecorationImage(
-                            fit: BoxFit.cover,
-                            image: NetworkImage(
-                                "https://github.com/diptanshumahish/watch_images/raw/main/action.webp")),
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          gradient: const LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [Colors.transparent, Colors.black])),
-                      height: height / 4,
-                      child: Padding(
+          child: Consumer(
+            key: const ValueKey<String>("thriller"),
+            builder: (context, ref, child) {
+              final thriller = ref.watch(thrillerMovieProvider);
+              return thriller.when(
+                data: (data) => data.fold((l) => const Text("Error"), (r) {
+                  if (r.results.isEmpty) {
+                    return const SizedBox.shrink();
+                  }
+                  return ListView.builder(
+                    physics: const BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    itemCount: r.results.length,
+                    itemBuilder: (context, index) {
+                      return Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            Spacer(),
-                            Text(
-                              "Joker",
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
+                        child: InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            PageTransition(
+                                child: const FullDetails(),
+                                type: PageTransitionType.rightToLeft),
+                          ),
+                          child: Container(
+                            height: height / 3,
+                            width: width / 4,
+                            decoration: BoxDecoration(
+                              boxShadow: const [
+                                BoxShadow(
+                                  offset: Offset(4, 1),
+                                  spreadRadius: -10,
+                                  blurRadius: 17,
+                                  color: Color.fromRGBO(0, 0, 0, 0.43),
+                                )
+                              ],
+                              image: r.results[index].posterPath != null
+                                  ? DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: CachedNetworkImageProvider(
+                                        "$movieImageUrl${r.results[index].posterPath}",
+                                      ),
+                                    )
+                                  : null,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            Text(
-                              "Tragedy | 9.2 \u066D",
-                              style: TextStyle(
-                                color: Color.fromARGB(194, 255, 255, 255),
-                                fontSize: 15,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                gradient: const LinearGradient(
+                                  begin: Alignment.topCenter,
+                                  end: Alignment.bottomCenter,
+                                  colors: [Colors.transparent, Colors.black],
+                                ),
+                              ),
+                              height: height / 4,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    const Spacer(),
+                                    Text(
+                                      r.results[index].title ?? 'N/A',
+                                      style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
+                                      style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(194, 255, 255, 255),
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
-                          ],
+                          ),
                         ),
-                      ),
-                    ),
-                  ),
-                );
-              }),
+                      );
+                    },
+                  );
+                }),
+                error: (error, stackTrace) => const Text("Error"),
+                loading: () =>
+                    const Center(child: CircularProgressIndicator.adaptive()),
+              );
+            },
+          ),
         )
       ],
     );

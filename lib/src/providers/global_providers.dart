@@ -5,3 +5,7 @@ import 'package:watch/src/features/authentication/data/auth_api.dart';
 final sessionStatusProvider = StreamProvider<User?>((ref) async* {
   yield* ref.watch(authAPIProvider.select((value) => value.user));
 });
+
+
+
+

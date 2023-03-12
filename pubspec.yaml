@@ -48,6 +48,7 @@ dependencies:
   google_fonts: ^3.0.1
   google_sign_in: ^6.0.0
   hooks_riverpod: ^2.3.1
+  http: ^0.13.5
   iconsax: ^0.0.8
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
