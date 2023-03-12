@@ -6,6 +6,7 @@ import 'package:like_button/like_button.dart';
 import 'package:watch/src/features/home/data/tmdb_api.dart';
 import 'package:watch/src/shared/background_painter.dart';
 import 'package:watch/src/shared/custom_paints.dart';
+import 'package:watch/src/shared/custom_hero.dart';
 
 import '../../../../../app/constants/api_urls.dart';
 import 'actors_tile.dart';
@@ -67,7 +68,7 @@ class MovieDescScreen extends ConsumerWidget {
                   background: Stack(
                     children: [
                       Positioned.fill(
-                        child: Hero(
+                        child: CustomHero(
                           tag: 'movie$movieId',
                           child: CachedNetworkImage(
                             imageUrl: backdropPath != null
