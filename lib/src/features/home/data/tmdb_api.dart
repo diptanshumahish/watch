@@ -50,9 +50,7 @@ class TMDB {
     );
   }
 
-  FutureEither<GenreById> getGenreWiseMovies({
-    String? genre,
-  }) async {
+  FutureEither<GenreById> getGenreWiseMovies({required String genre}) async {
     Either<Failure, String> data = await _client.get(
         '$searchUrl?api_key=$apiKey&language=en-US&sort_by=popularity.desc&query=$genre');
     return data.fold(
