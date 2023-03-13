@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import '../../../../models/all_genres_model.dart';
-import '../../../../models/genres_model.dart';
+import '../../../../models/movie_details_model.dart';
 
 part 'search_state.freezed.dart';
 

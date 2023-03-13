@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:watch/src/features/home/presentation/home_view/components/fav.dart';
+import 'package:watch/src/features/home/presentation/favourites/favourites_screen.dart';
 import 'package:watch/src/features/home/presentation/profile/profile.dart';
 
 import '../explore_screen/explore.dart';
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
       //TODO: uncomment this after checking the movie details page and remove it
       const ExploreScreen(),
       // const MovieDetails(),
-      const Fav(),
+      const FavScreen(),
       const ProfileScreen()
     ];
 

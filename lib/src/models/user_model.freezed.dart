@@ -21,7 +21,7 @@ mixin _$UserModel {
   String? get age => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   List<String>? get selectedGenres => throw _privateConstructorUsedError;
-  List<String>? get likedItems => throw _privateConstructorUsedError;
+  List<Result>? get likedItems => throw _privateConstructorUsedError;
   bool get isAdult => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,7 +41,7 @@ abstract class $UserModelCopyWith<$Res> {
       String? age,
       String? email,
       List<String>? selectedGenres,
-      List<String>? likedItems,
+      List<Result>? likedItems,
       bool isAdult});
 }
 
@@ -90,7 +90,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
       likedItems: freezed == likedItems
           ? _value.likedItems
           : likedItems // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Result>?,
       isAdult: null == isAdult
           ? _value.isAdult
           : isAdult // ignore: cast_nullable_to_non_nullable
@@ -112,7 +112,7 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
       String? age,
       String? email,
       List<String>? selectedGenres,
-      List<String>? likedItems,
+      List<Result>? likedItems,
       bool isAdult});
 }
 
@@ -159,7 +159,7 @@ class __$$_UserModelCopyWithImpl<$Res>
       likedItems: freezed == likedItems
           ? _value._likedItems
           : likedItems // ignore: cast_nullable_to_non_nullable
-              as List<String>?,
+              as List<Result>?,
       isAdult: null == isAdult
           ? _value.isAdult
           : isAdult // ignore: cast_nullable_to_non_nullable
@@ -177,7 +177,7 @@ class _$_UserModel implements _UserModel {
       this.age,
       this.email,
       final List<String>? selectedGenres,
-      final List<String>? likedItems,
+      final List<Result>? likedItems,
       this.isAdult = false})
       : _selectedGenres = selectedGenres,
         _likedItems = likedItems;
@@ -200,9 +200,9 @@ class _$_UserModel implements _UserModel {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<String>? _likedItems;
+  final List<Result>? _likedItems;
   @override
-  List<String>? get likedItems {
+  List<Result>? get likedItems {
     final value = _likedItems;
     if (value == null) return null;
     if (_likedItems is EqualUnmodifiableListView) return _likedItems;
@@ -269,7 +269,7 @@ abstract class _UserModel implements UserModel {
       final String? age,
       final String? email,
       final List<String>? selectedGenres,
-      final List<String>? likedItems,
+      final List<Result>? likedItems,
       final bool isAdult}) = _$_UserModel;
 
   @override
@@ -283,7 +283,7 @@ abstract class _UserModel implements UserModel {
   @override
   List<String>? get selectedGenres;
   @override
-  List<String>? get likedItems;
+  List<Result>? get likedItems;
   @override
   bool get isAdult;
   @override
