@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:watch/app/errors/errors.dart';
 
 import 'auth_api_impl.dart';
 
@@ -162,7 +163,7 @@ class AuthAPI implements AuthAPIImpl {
 
   /// Sign up with email & password
   @override
-  Future<SignUpEither> signUp(
+  FutureEither<UserCredential> signUp(
       {required String email, required String password}) async {
     try {
       UserCredential user = await _auth.createUserWithEmailAndPassword(
@@ -171,16 +172,10 @@ class AuthAPI implements AuthAPIImpl {
       );
       return right(user);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'weak-password') {
-        return left('The password is too weak');
-      } else if (e.code == 'email-already-in-use') {
-        return left('The account already exists for that email.');
-      } else if (e.code == 'invalid-email') {
-        return left('The email is invalid.');
-      } else if (e.code == 'operation-not-allowed') {
-        return left('Unable to create user.');
-      }
-      return left('Something went wrong.');
+      return left(e.toFailure());
+    } catch (e) {
+      log(e.toString(), name: 'AuthService', error: e);
+      return left(const Failure(message: 'Something went wrong'));
     }
   }
 

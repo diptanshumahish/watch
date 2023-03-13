@@ -32,3 +32,12 @@ extension FormatExt on FormatException {
   ///Converts [FormatException] to [Failure] object
   Failure toFailure() => Failure(message: message);
 }
+
+extension FirebaseExceptionExt on FirebaseException {
+  ///Converts [FirebaseException] to [Failure] object
+  Failure toFailure() => Failure(
+        message: message ?? 'Something went wrong',
+        code: code,
+        stackTrace: stackTrace,
+      );
+}

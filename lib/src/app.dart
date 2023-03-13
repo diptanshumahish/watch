@@ -34,7 +34,8 @@ class MyApp extends StatelessWidget {
                 return LoginScreen();
               }
             },
-            loading: () => const Center(child: CircularProgressIndicator()),
+            loading: () =>
+                const Center(child: CircularProgressIndicator.adaptive()),
             error: (error, stack) => const Center(child: Text('Error')),
           );
         },

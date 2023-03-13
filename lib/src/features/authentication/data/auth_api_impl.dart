@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:watch/app/errors/errors.dart';
 
 typedef SignOutEither = Either<Unit, Unit>;
 typedef SignInEither = Either<String, UserCredential>;
-typedef SignUpEither = Either<String, UserCredential>;
 
 abstract class AuthAPIImpl {
   ///Auth status change user stream
@@ -26,7 +26,7 @@ abstract class AuthAPIImpl {
   Future<SignInEither> signInWithApple();
 
   ///Sign up user with email & password
-  Future<SignUpEither> signUp(
+  FutureEither<UserCredential> signUp(
       {required String email, required String password});
 
   ///Sign out user

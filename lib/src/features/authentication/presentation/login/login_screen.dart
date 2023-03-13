@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:watch/app/utils/color_theme.dart';
 import 'package:watch/src/features/authentication/presentation/signup/signup_screen.dart';
 import 'package:watch/src/features/home/presentation/reccomendations.dart';
-import 'package:watch/app/utils/color_theme.dart';
 
 import '../../../home/presentation/home_view/home_screen.dart';
 
@@ -52,9 +52,7 @@ class LoginScreen extends StatelessWidget {
     var width = MediaQuery.of(context).size.height;
     return SafeArea(
       child: GestureDetector(
-        onTap: () {
-          FocusManager.instance.primaryFocus?.unfocus();
-        },
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
           backgroundColor: Colors.black,
           extendBody: true,
@@ -143,11 +141,13 @@ class LoginScreen extends StatelessWidget {
                         padding: const EdgeInsets.only(top: 10),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text("Forgot password?",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: ColorTheme.getTheme(context)))
+                          children: const [
+                            Text(
+                              "Forgot password?",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black),
+                            )
                           ],
                         ),
                       ),
@@ -191,8 +191,8 @@ class LoginScreen extends StatelessWidget {
                               child: Center(
                                 child: Text("Log In",
                                     style: TextStyle(
-                                        color:
-                                            ColorTheme.getThemeInv(context))),
+                                      color: ColorTheme.getThemeInv(context),
+                                    )),
                               ),
                             ),
                           ),
@@ -271,26 +271,26 @@ class LoginScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text(
+                                const Text(
                                   "Don't have an account? ",
                                   style: TextStyle(
-                                      color: ColorTheme.getTheme(context)
-                                          .withOpacity(0.7)),
+                                    color: Colors.black,
+                                  ),
                                 ),
                                 InkWell(
-                                  onTap: (() {
-                                    Navigator.pop(context);
-                                    Navigator.push(
-                                        context,
-                                        PageTransition(
-                                            child: SignUpPage(),
-                                            type: PageTransitionType
-                                                .rightToLeft));
-                                  }),
-                                  child: Text("Sign up now!",
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: ColorTheme.getTheme(context))),
+                                  onTap: () => Navigator.push(
+                                    context,
+                                    PageTransition(
+                                      child: const SignUpScreen(),
+                                      type: PageTransitionType.rightToLeft,
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    "Sign up now!",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black),
+                                  ),
                                 )
                               ],
                             )
