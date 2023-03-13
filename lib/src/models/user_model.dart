@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:watch/src/models/movie_details_model.dart' show Result;
 
 part 'user_model.freezed.dart';
 part 'user_model.g.dart';
@@ -12,7 +13,7 @@ class UserModel with _$UserModel {
     String? age,
     String? email,
     List<String>? selectedGenres,
-    List<String>? likedItems,
+    List<Result>? likedItems,
     @Default(false) bool isAdult,
   }) = _UserModel;
 

@@ -5,7 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../app/errors/errors.dart';
 import '../../../../models/all_genres_model.dart';
-import '../../../../models/genres_model.dart';
+import '../../../../models/movie_details_model.dart';
 import '../../data/tmdb_api.dart';
 import '../state/search_state.dart';
 

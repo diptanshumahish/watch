@@ -170,10 +170,11 @@ class _HomeState extends State<Home> {
                 style: TextStyle(fontSize: 20, color: getTheme()),
               ),
               IconButton(
-                  padding: const EdgeInsets.all(0),
-                  enableFeedback: true,
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.forward))
+                padding: const EdgeInsets.all(0),
+                enableFeedback: true,
+                onPressed: () {},
+                icon: const Icon(CupertinoIcons.forward),
+              )
             ],
           ),
         ),
@@ -289,13 +290,7 @@ class _HomeState extends State<Home> {
                           onTap: () => Navigator.push(
                             context,
                             PageTransition(
-                              child: MovieDescScreen(
-                                movieId: r.results[index].id,
-                                votes: r.results[index].voteAverage,
-                                overview: r.results[index].overview ?? '',
-                                title: r.results[index].title ?? '',
-                                backdropPath: r.results[index].backdropPath,
-                              ),
+                              child: MovieDescScreen(movie: r.results[index]),
                               type: PageTransitionType.fade,
                             ),
                           ),
@@ -329,10 +324,7 @@ class _HomeState extends State<Home> {
                                   gradient: const LinearGradient(
                                     begin: Alignment.topCenter,
                                     end: Alignment.bottomCenter,
-                                    colors: [
-                                      Colors.transparent,
-                                      Colors.black
-                                    ],
+                                    colors: [Colors.transparent, Colors.black],
                                   ),
                                 ),
                                 height: height / 4,
@@ -341,8 +333,7 @@ class _HomeState extends State<Home> {
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
                                       const Spacer(),
                                       Text(
@@ -418,13 +409,7 @@ class _HomeState extends State<Home> {
                           onTap: () => Navigator.push(
                             context,
                             PageTransition(
-                              child: MovieDescScreen(
-                                movieId: r.results[index].id,
-                                votes: r.results[index].voteAverage,
-                                title: r.results[index].title ?? '',
-                                overview: r.results[index].overview ?? '',
-                                backdropPath: r.results[index].backdropPath,
-                              ),
+                              child: MovieDescScreen(movie: r.results[index]),
                               type: PageTransitionType.fade,
                             ),
                           ),

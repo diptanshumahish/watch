@@ -6,7 +6,7 @@ import 'package:watch/app/constants/constants.dart';
 import 'package:watch/app/errors/errors.dart';
 import 'package:watch/src/models/all_genres_model.dart';
 import 'package:watch/src/models/cast_model.dart';
-import 'package:watch/src/models/genres_model.dart';
+import 'package:watch/src/models/movie_details_model.dart';
 import 'package:watch/src/providers/http_base_provider.dart';
 
 ///TMDb Provider

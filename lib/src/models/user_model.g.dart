@@ -15,7 +15,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) => UserModel(
           ?.map((e) => e as String)
           .toList(),
       likedItems: (json['likedItems'] as List<dynamic>?)
-          ?.map((e) => e as String)
+          ?.map((e) => Result.fromJson(e as Map<String, dynamic>))
           .toList(),
       isAdult: json['isAdult'] as bool,
     );

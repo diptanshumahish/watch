@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:watch/src/features/authentication/data/auth_api.dart';
+import 'package:watch/src/models/movie_details_model.dart';
 
 import '../models/user_model.dart';
 
@@ -19,9 +20,20 @@ class UserNotifier extends StateNotifier<UserModel> {
 
   bool get isUserAdult => state.isAdult;
 
+  UserModel get user => state;
+
   User? currentUser() => _ref.watch(firebaseAuthProvider).currentUser;
 
   void setUser(UserModel user) => state = user;
+
+  void updateLikedItems(Result likedItem) {
+    if (state.likedItems != null) {
+      state = state.copyWith(likedItems: [...state.likedItems!, likedItem]);
+      return;
+    }
+    state = state.copyWith(likedItems: [likedItem]);
+    return;
+  }
 
   void setUserProps({
     String? displayName,
@@ -29,7 +41,6 @@ class UserNotifier extends StateNotifier<UserModel> {
     String? uid,
     String? email,
     List<String>? selectedGenres,
-    List<String>? likedItems,
     bool isAdult = false,
   }) =>
       state = state.copyWith(
@@ -38,7 +49,6 @@ class UserNotifier extends StateNotifier<UserModel> {
         uid: uid,
         email: email,
         selectedGenres: selectedGenres,
-        likedItems: likedItems,
         isAdult: isAdult,
       );
 
