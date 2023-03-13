@@ -44,19 +44,18 @@ class AuthAPI implements AuthAPIImpl {
 
   /// Sign in with email & password
   @override
-  Future<SignInEither> signInWithEmailAndPassword(
+  FutureEither<UserCredential> signInWithEmailAndPassword(
       {required String email, required String password}) async {
     try {
       UserCredential result = await _auth.signInWithEmailAndPassword(
           email: email, password: password);
       return right(result);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        return left('No user found for these credentials.');
-      } else if (e.code == 'wrong-password') {
-        return left('Wrong password provided for the user');
-      }
-      return left('Something went wrong');
+      return left(e.toFailure());
+    } catch (e, stackTrace) {
+      return left(
+        Failure(message: 'Something went wrong', stackTrace: stackTrace),
+      );
     }
   }
 
