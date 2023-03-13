@@ -3,11 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:watch/app/utils/snackbar/snackbar.dart';
 import 'package:watch/app/utils/textfield_validators.dart';
-import 'package:watch/src/features/authentication/presentation/login/login_screen.dart';
-import 'package:watch/src/features/home/presentation/home_view/home_screen.dart';
+import 'package:watch/src/routes/app_routes.dart';
 import 'package:watch/src/shared/loading_dialog.dart';
 
 import '../../app/controller/signup_controller.dart';
@@ -35,13 +33,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       if (next is SignupSuccess) {
         context.hideLoaderDialog();
         context.showSnackBar(next.message);
-        Navigator.pushReplacement(
-          context,
-          PageTransition(
-            type: PageTransitionType.fade,
-            child: const HomeScreen(),
-          ),
-        );
+        Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
       } else if (next is SignUpFailure) {
         context.hideLoaderDialog();
         context.showSnackBar(next.error.message, isError: true);
@@ -292,16 +284,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                 style: TextStyle(color: Colors.black),
                               ),
                               InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                  Navigator.push(
-                                    context,
-                                    PageTransition(
-                                        curve: Curves.bounceOut,
-                                        child: LoginScreen(),
-                                        type: PageTransitionType.leftToRight),
-                                  );
-                                },
+                                onTap: () => Navigator.maybePop(context),
                                 child: const Text(
                                   "Sign in!",
                                   style: TextStyle(

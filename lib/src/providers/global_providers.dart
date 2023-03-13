@@ -9,7 +9,7 @@ import 'user_provider.dart';
 final sessionStatusProvider = StreamProvider<User?>((ref) async* {
   Stream<User?> user = ref.watch(authAPIProvider.select((value) => value.user));
   ref.listenSelf((previous, next) {
-    next.when(
+    next.maybeWhen(
       data: (user) {
         if (user != null) {
           ref.read(userNotifierProvider.notifier).setUserProps(
@@ -21,9 +21,9 @@ final sessionStatusProvider = StreamProvider<User?>((ref) async* {
           ref.read(userNotifierProvider.notifier).clearUser();
         }
       },
-      loading: () => log('Loading...'),
-      error: (error, stack) => log('Error Encountered'),
+      orElse: () => log('Session status changed'),
     );
   });
+  await Future.delayed(const Duration(seconds: 2));
   yield* user;
 });
