@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:watch/app/utils/color_theme.dart';
 import 'package:watch/src/features/authentication/presentation/signup/signup_screen.dart';
 import 'package:watch/src/features/home/presentation/reccomendations.dart';
 
@@ -28,7 +27,6 @@ class LoginScreen extends StatelessWidget {
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return false;
       }
-
       if (email == '') {
         const snackBar = SnackBar(
           backgroundColor: Colors.black,
@@ -38,13 +36,10 @@ class LoginScreen extends StatelessWidget {
         return false;
       }
       if (password == '') {
-        const snackBar = SnackBar(
-          content: Text('Password cannot be empty'),
-        );
+        const snackBar = SnackBar(content: Text('Password cannot be empty'));
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         return false;
       }
-
       return true;
     }
 
@@ -60,26 +55,20 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.25,
               child: Center(
-                child: Image.asset(
-                  'assets/logo.png',
-                  height: height / 5,
-                ),
+                child: Image.asset('assets/logo.png', height: height / 5),
               ),
             ),
             SingleChildScrollView(
               child: Container(
                 margin: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.25),
+                  top: MediaQuery.of(context).size.height * 0.25,
+                ),
                 height: MediaQuery.of(context).size.height * 0.7,
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topRight: Radius.circular(
-                      40,
-                    ),
-                    topLeft: Radius.circular(
-                      40,
-                    ),
+                    topRight: Radius.circular(40),
+                    topLeft: Radius.circular(40),
                   ),
                 ),
                 child: Padding(
@@ -94,44 +83,47 @@ class LoginScreen extends StatelessWidget {
                           child: Text(
                             "Login",
                             style: TextStyle(
-                                fontSize: height / 20,
-                                fontWeight: FontWeight.w900,
-                                color: ColorTheme.getTheme(context)),
+                              fontSize: height / 20,
+                              fontWeight: FontWeight.w900,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 5.0),
+                      const Padding(
+                        padding: EdgeInsets.only(bottom: 5.0),
                         child: Text(
                           "Email",
-                          style: TextStyle(color: ColorTheme.getTheme(context)),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                       CupertinoTextField(
                         padding: const EdgeInsets.all(13),
-                        style: TextStyle(color: ColorTheme.getTheme(context)),
+                        style: const TextStyle(color: Colors.grey),
                         onChanged: (value) {
                           email = value;
                         },
+                        placeholderStyle: const TextStyle(color: Colors.grey),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: const Color.fromARGB(52, 158, 158, 158)),
                         placeholder: "Enter your email",
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 8.0, bottom: 5),
+                      const Padding(
+                        padding: EdgeInsets.only(top: 8.0, bottom: 5),
                         child: Text(
                           "Password",
-                          style: TextStyle(color: ColorTheme.getTheme(context)),
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                       CupertinoTextField(
                         obscureText: true,
                         padding: const EdgeInsets.all(13),
-                        style: TextStyle(color: ColorTheme.getTheme(context)),
                         onChanged: (value) {
                           password = value;
                         },
+                        placeholderStyle: const TextStyle(color: Colors.grey),
+                        style: const TextStyle(color: Colors.grey),
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: const Color(0x349E9E9E)),
@@ -145,8 +137,9 @@ class LoginScreen extends StatelessWidget {
                             Text(
                               "Forgot password?",
                               style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
                             )
                           ],
                         ),
@@ -178,21 +171,24 @@ class LoginScreen extends StatelessWidget {
                               width: width,
                               height: 45,
                               decoration: BoxDecoration(
-                                  boxShadow: const [
-                                    BoxShadow(
-                                      offset: Offset(4, 1),
-                                      spreadRadius: -10,
-                                      blurRadius: 17,
-                                      color: Color.fromRGBO(0, 0, 0, 0.43),
-                                    )
-                                  ],
-                                  borderRadius: BorderRadius.circular(5),
-                                  color: ColorTheme.getTheme(context)),
-                              child: Center(
-                                child: Text("Log In",
-                                    style: TextStyle(
-                                      color: ColorTheme.getThemeInv(context),
-                                    )),
+                                boxShadow: const [
+                                  BoxShadow(
+                                    offset: Offset(4, 1),
+                                    spreadRadius: -10,
+                                    blurRadius: 17,
+                                    color: Color.fromRGBO(0, 0, 0, 0.43),
+                                  )
+                                ],
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.black,
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  "Log In",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -204,15 +200,18 @@ class LoginScreen extends StatelessWidget {
                           children: [
                             Column(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Text(
+                              children: const [
+                                Text(
                                   "By clicking sign in you agree to our",
                                   style: TextStyle(color: Colors.grey),
                                 ),
-                                Text("Terms and Conditions",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        color: ColorTheme.getTheme(context)))
+                                Text(
+                                  "Terms and Conditions",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.black,
+                                  ),
+                                )
                               ],
                             ),
                             Padding(
@@ -246,7 +245,8 @@ class LoginScreen extends StatelessWidget {
                                         child: IconButton(
                                           onPressed: () {},
                                           icon: const Icon(
-                                              FontAwesomeIcons.apple),
+                                            FontAwesomeIcons.apple,
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -259,9 +259,11 @@ class LoginScreen extends StatelessWidget {
                                           color: Color(0x2C9E9E9E)),
                                       child: Center(
                                         child: IconButton(
-                                            onPressed: () {},
-                                            icon: const Icon(
-                                                FontAwesomeIcons.facebookF)),
+                                          onPressed: () {},
+                                          icon: const Icon(
+                                            FontAwesomeIcons.facebookF,
+                                          ),
+                                        ),
                                       ),
                                     ),
                                   ),
