@@ -13,10 +13,8 @@ abstract class AuthAPIImpl {
   Future<SignInEither> signInAnonymously();
 
   /// Sign in with email & password
-  FutureEither<UserCredential> signInWithEmailAndPassword({
-    required String email,
-    required String password,
-  });
+  Future<SignInEither> signInWithEmailAndPassword(
+      {required String email, required String password});
 
   ///Sign in user with Facebook returns [SignInEither]
   Future<SignInEither> signInWithFacebook();

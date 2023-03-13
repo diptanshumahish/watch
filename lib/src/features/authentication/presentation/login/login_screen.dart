@@ -1,57 +1,66 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/app/utils/snackbar/snackbar.dart';
-import 'package:watch/app/utils/textfield_validators.dart';
-import 'package:watch/src/features/authentication/app/controller/login_controller.dart';
-import 'package:watch/src/features/authentication/app/state/login_state.dart';
 import 'package:watch/src/routes/app_routes.dart';
-import 'package:watch/src/shared/loading_dialog.dart';
 
-class LoginScreen extends HookConsumerWidget {
-  const LoginScreen({super.key});
+// ignore: must_be_immutable
+class LoginScreen extends StatelessWidget {
+  LoginScreen({super.key});
+
+  String email = "";
+  String password = "";
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(loginControllerProvider, (previous, next) {
-      if (next is LoginLoading) {
-        context.showLoaderDialog();
+  Widget build(BuildContext context) {
+    bool snackBar({
+      required String email,
+      required String password,
+    }) {
+      if (!email.contains('@')) {
+        const snackBar = SnackBar(
+          content: Text('Please enter a vaild email'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
       }
-      if (next is LoginFailure) {
-        context.hideLoaderDialog();
-        context.showSnackBar(next.error.message, isError: true);
+      if (email == '') {
+        const snackBar = SnackBar(
+          backgroundColor: Colors.black,
+          content: Text('Email cannot be empty'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
       }
-      if (next is LoginSuccess) {
-        context.hideLoaderDialog();
-        context.showSnackBar(next.message);
-        Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+      if (password == '') {
+        const snackBar = SnackBar(content: Text('Password cannot be empty'));
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        return false;
       }
-    });
-    Size size = MediaQuery.of(context).size;
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
-    return GestureDetector(
-      onTap: () => FocusScope.of(context).unfocus(),
-      child: Scaffold(
-        backgroundColor: Colors.black,
-        extendBody: true,
-        body: SafeArea(
-          child: Stack(
+      return true;
+    }
+
+    var height = MediaQuery.of(context).size.height;
+    var width = MediaQuery.of(context).size.height;
+    return SafeArea(
+      child: GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          backgroundColor: Colors.black,
+          extendBody: true,
+          body: Stack(
             children: [
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: Center(
-                  child:
-                      Image.asset('assets/logo.png', height: size.height / 5),
+                  child: Image.asset('assets/logo.png', height: height / 5),
                 ),
               ),
               SingleChildScrollView(
                 child: Container(
-                  margin: EdgeInsets.only(top: size.height * 0.25),
-                  height: size.height * 0.7,
+                  margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.25,
+                  ),
+                  height: MediaQuery.of(context).size.height * 0.7,
                   decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.only(
@@ -71,7 +80,7 @@ class LoginScreen extends HookConsumerWidget {
                             child: Text(
                               "Login",
                               style: TextStyle(
-                                fontSize: size.height / 24,
+                                fontSize: height / 20,
                                 fontWeight: FontWeight.w900,
                                 color: Colors.black,
                               ),
@@ -87,13 +96,10 @@ class LoginScreen extends HookConsumerWidget {
                         ),
                         CupertinoTextField(
                           padding: const EdgeInsets.all(13),
-                          controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          textInputAction: TextInputAction.next,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.deny(RegExp(r"\s")),
-                          ],
                           style: const TextStyle(color: Colors.grey),
+                          onChanged: (value) {
+                            email = value;
+                          },
                           placeholderStyle: const TextStyle(color: Colors.grey),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
@@ -109,13 +115,10 @@ class LoginScreen extends HookConsumerWidget {
                         ),
                         CupertinoTextField(
                           obscureText: true,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.deny(RegExp(r"\s")),
-                          ],
-                          keyboardType: TextInputType.visiblePassword,
-                          textInputAction: TextInputAction.done,
-                          controller: passwordController,
                           padding: const EdgeInsets.all(13),
+                          onChanged: (value) {
+                            password = value;
+                          },
                           placeholderStyle: const TextStyle(color: Colors.grey),
                           style: const TextStyle(color: Colors.grey),
                           decoration: BoxDecoration(
@@ -140,59 +143,54 @@ class LoginScreen extends HookConsumerWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                child: ValueListenableBuilder(
-                                  valueListenable: emailController,
-                                  builder: (_, val, child) {
-                                    return ElevatedButton(
-                                      onPressed: (val.text.isEmpty)
-                                          ? null
-                                          : () async {
-                                              if (validateForm(context,
-                                                  emailController:
-                                                      emailController,
-                                                  passwordController:
-                                                      passwordController)) {
-                                                await ref
-                                                    .read(
-                                                        loginControllerProvider
-                                                            .notifier)
-                                                    .loginWithEmail(
-                                                      email:
-                                                          emailController.text,
-                                                      password:
-                                                          passwordController
-                                                              .text,
-                                                    );
-                                              }
-                                            },
-                                      style: ElevatedButton.styleFrom(
-                                        fixedSize: const Size.fromHeight(45),
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        disabledBackgroundColor:
-                                            Colors.grey.shade400,
-                                        disabledForegroundColor:
-                                            Colors.grey.shade800,
-                                        backgroundColor: Colors.black,
-                                        foregroundColor: Colors.white,
-                                      ),
-                                      child: const Text(
-                                        "LOGIN",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w600,
-                                          letterSpacing: 1.1,
-                                        ),
-                                      ),
-                                    );
-                                  },
+                          child: InkWell(
+                            onTap: (() {
+                              // Navigator.pop(context);
+                              // Navigator.push(
+                              //     context,
+                              //     PageTransition(
+                              //         curve: Curves.bounceOut,
+                              //         child: const Reccomendations(),
+                              //         type: PageTransitionType.rightToLeft));
+                            }),
+                            child: InkWell(
+                              onTap: () {
+                                if (snackBar(
+                                    email: email, password: password)) {
+                                  // Navigator.
+                                  // Navigator.pushReplacement(
+                                  //   context,
+                                  //   MaterialPageRoute(
+                                  //     builder: (context) => const HomeScreen(),
+                                  //   ),
+                                  // );
+                                }
+                              },
+                              child: Container(
+                                width: width,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      offset: Offset(4, 1),
+                                      spreadRadius: -10,
+                                      blurRadius: 17,
+                                      color: Color.fromRGBO(0, 0, 0, 0.43),
+                                    )
+                                  ],
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.black,
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Log In",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
                         ),
                         Padding(
@@ -307,21 +305,5 @@ class LoginScreen extends HookConsumerWidget {
         ),
       ),
     );
-  }
-
-  bool validateForm(
-    BuildContext context, {
-    required TextEditingController emailController,
-    required TextEditingController passwordController,
-  }) {
-    if (!emailController.text.isValidEmail()) {
-      context.showSnackBar('Please enter a valid email', isError: true);
-      return false;
-    }
-    if (passwordController.text.isEmpty) {
-      context.showSnackBar('Please enter your password', isError: true);
-      return false;
-    }
-    return true;
   }
 }

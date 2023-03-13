@@ -19,7 +19,7 @@ class AppRouter {
         return PageTransition(
           curve: Curves.bounceOut,
           type: PageTransitionType.leftToRight,
-          child: const LoginScreen(),
+          child: LoginScreen(),
         );
       case signUpRoute:
         return PageTransition(
