@@ -8,6 +8,7 @@ import '../state/favourite_state.dart';
 ///exploreSearchControllerPage
 final favouritesControllerProvider =
     AsyncNotifierProvider.autoDispose<FavouritesController, FavouriteState>(
+  name: 'favouritesControllerProvider',
   FavouritesController.new,
 );
 

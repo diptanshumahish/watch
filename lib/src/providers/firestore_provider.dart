@@ -9,16 +9,18 @@ import 'package:watch/src/providers/user_provider.dart';
 ///Provider that will be used to provide the firestore instance
 final Provider<FirebaseFirestore> firestoreProvider =
     Provider<FirebaseFirestore>(
+  name: 'firestoreProvider',
   (ProviderRef<FirebaseFirestore> ref) => FirebaseFirestore.instance,
 );
 
 ///Provider that will be used to provide the firestore service
-final firestoreServiceProvider = Provider<CloudFirestoreAPI>((ref) {
-  return CloudFirestoreAPI(
+final firestoreServiceProvider = Provider.autoDispose<CloudFirestoreAPI>(
+  name: 'firestoreServiceProvider',
+  (ref) => CloudFirestoreAPI(
     firestore: ref.watch(firestoreProvider),
     userNotifier: ref.watch(userNotifierProvider.notifier),
-  );
-});
+  ),
+);
 
 class CloudFirestoreAPI {
   late final FirebaseFirestore _firestore;

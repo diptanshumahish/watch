@@ -11,12 +11,14 @@ import 'package:watch/src/providers/http_base_provider.dart';
 
 ///TMDb Provider
 final tmdbProvider = Provider<TMDB>(
+  name: 'tmdbProvider',
   (ref) => TMDB(client: ref.watch(httpClientProvider)),
 );
 
 ///Provider to load horror movies
 final horrorMovieProvider =
     FutureProvider.autoDispose<Either<Failure, MovieDetail>>(
+  name: 'horrorMovieProvider',
   (ref) async => await ref
       .watch(tmdbProvider)
       .getGenreWiseMovies(genre: MovieGenre.horror.name),
@@ -25,6 +27,7 @@ final horrorMovieProvider =
 ///Provider to load action movies
 final thrillerMovieProvider =
     FutureProvider.autoDispose<Either<Failure, MovieDetail>>(
+  name: 'thrillerMovieProvider',
   (ref) async => await ref
       .watch(tmdbProvider)
       .getGenreWiseMovies(genre: MovieGenre.thriller.name),
@@ -33,6 +36,7 @@ final thrillerMovieProvider =
 //load cast from the movie Id
 final castProvider =
     FutureProvider.autoDispose.family<Either<Failure, AllCredits>, int>(
+  name: 'castProvider',
   (ref, id) async => await ref.watch(tmdbProvider).getCastDetails(id: id),
 );
 

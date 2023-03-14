@@ -6,7 +6,8 @@ import 'package:watch/src/features/authentication/data/auth_api.dart';
 
 import 'user_provider.dart';
 
-final sessionStatusProvider = StreamProvider<User?>((ref) async* {
+final sessionStatusProvider =
+    StreamProvider<User?>(name: 'sessionStatusProvider', (ref) async* {
   Stream<User?> user = ref.watch(authAPIProvider.select((value) => value.user));
   ref.listenSelf((previous, next) {
     next.maybeWhen(

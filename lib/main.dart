@@ -5,6 +5,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:watch/src/app.dart';
+import 'package:watch/src/providers/provider_observer.dart';
 
 import 'firebase_options.dart';
 import 'src/providers/local_storage_provider.dart';
@@ -23,6 +24,7 @@ Future<void> main() async {
       overrides: [
         sharedPreferenceProvider.overrideWithValue(prefsInstance),
       ],
+      observers: [ProviderLogger()],
       child: const MyApp(),
     ),
   );

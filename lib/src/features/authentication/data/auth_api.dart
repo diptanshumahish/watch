@@ -10,10 +10,13 @@ import 'package:watch/app/errors/errors.dart';
 
 import 'auth_api_impl.dart';
 
-final firebaseAuthProvider =
-    Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
+final firebaseAuthProvider = Provider<FirebaseAuth>(
+  name: 'firebaseAuthProvider',
+  (ref) => FirebaseAuth.instance,
+);
 
 final authAPIProvider = Provider<AuthAPI>(
+  name: 'authAPIProvider',
   (ref) => AuthAPI(ref.watch(firebaseAuthProvider)),
 );
 
