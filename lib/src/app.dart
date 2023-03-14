@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:watch/src/features/splash/splash_screen.dart';
+import 'package:watch/src/routes/router.dart';
 
 import '../app/theme/app_theme.dart';
 import 'features/authentication/presentation/login/login_screen.dart';
@@ -18,11 +20,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Watch',
       scaffoldMessengerKey: scaffoldMessengerKey,
-      //TODO: fix the theming for the application as dark theme causes text to be white in color
-      // themeMode: context.watch<ThemeProvider>().themeMode,
       themeMode: ThemeMode.dark,
       theme: MyThemes.lightTheme,
       darkTheme: MyThemes.darkTheme,
+      onGenerateRoute: AppRouter.onGenerateRoute,
       home: Consumer(
         builder: (context, ref, child) {
           final user = ref.watch(sessionStatusProvider);
@@ -34,8 +35,7 @@ class MyApp extends StatelessWidget {
                 return LoginScreen();
               }
             },
-            loading: () =>
-                const Center(child: CircularProgressIndicator.adaptive()),
+            loading: () => const SplashScreen(),
             error: (error, stack) => const Center(child: Text('Error')),
           );
         },

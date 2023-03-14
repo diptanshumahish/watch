@@ -20,7 +20,7 @@ class FavouritesController extends AutoDisposeAsyncNotifier<FavouriteState> {
     return result.fold(
       (l) => FavouriteState.error(l),
       (r) {
-        if (r['likedItems'].isEmpty ?? true) {
+        if (r['likedItems']?.isEmpty ?? true) {
           return const FavouriteState.empty();
         }
         return FavouriteState.loaded(r['likedItems']);

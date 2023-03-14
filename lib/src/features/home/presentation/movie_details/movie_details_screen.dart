@@ -11,6 +11,7 @@ import 'package:watch/src/providers/firestore_provider.dart';
 import 'package:watch/src/shared/background_painter.dart';
 import 'package:watch/src/shared/custom_hero.dart';
 import 'package:watch/src/shared/custom_paints.dart';
+import 'package:watch/src/shared/loading_dialog.dart';
 
 import '../../../../../app/constants/api_urls.dart';
 import '../../../../../app/errors/failure.dart';
@@ -158,22 +159,27 @@ class MovieDescScreen extends HookConsumerWidget {
                               return LikeButton(
                                 isLiked: val,
                                 onTap: (isLiked) async {
-                                  Either<Failure, Unit> res = await ref
-                                      .read(firestoreServiceProvider)
-                                      .addLikedItem(likedItem: movie);
-                                  res.fold(
-                                    (l) {
-                                      context.showSnackBar(l.message,
-                                          isError: true);
-                                      return;
-                                    },
-                                    (r) {
-                                      context.showSnackBar('Added to Liked');
-                                      likeNotifier.value = !val;
-                                      return;
-                                    },
-                                  );
-                                  return null;
+                                  try {
+                                    context.showLoaderDialog();
+                                    Either<Failure, Unit> res = await ref
+                                        .read(firestoreServiceProvider)
+                                        .addLikedItem(likedItem: movie);
+                                    res.fold(
+                                      (l) {
+                                        context.showSnackBar(l.message,
+                                            isError: true);
+                                        return;
+                                      },
+                                      (r) {
+                                        context.showSnackBar('Added to Liked');
+                                        likeNotifier.value = !val;
+                                        return;
+                                      },
+                                    );
+                                    return null;
+                                  } finally {
+                                    context.hideLoaderDialog();
+                                  }
                                 },
                               );
                             },
