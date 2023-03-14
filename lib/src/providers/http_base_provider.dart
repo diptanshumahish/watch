@@ -7,6 +7,7 @@ import 'package:watch/app/errors/errors.dart';
 
 ///Provider that will be used to provide the http client
 final httpClientProvider = Provider<HttpBaseClient>(
+  name: 'httpClientProvider',
   (ref) => HttpBaseClient(Client()),
 );
 

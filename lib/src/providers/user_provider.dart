@@ -7,6 +7,7 @@ import '../models/user_model.dart';
 
 ///User notifier provider
 final userNotifierProvider = StateNotifierProvider<UserNotifier, UserModel>(
+  name: 'userNotifierProvider',
   (Ref ref) => UserNotifier(ref: ref),
 );
 

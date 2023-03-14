@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final themeProvider = ChangeNotifierProvider((ref) => ThemeNotifier());
+final themeProvider = ChangeNotifierProvider.autoDispose(
+  name: 'themeProvider',
+  (ref) => ThemeNotifier(),
+);
 
 class ThemeNotifier extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;

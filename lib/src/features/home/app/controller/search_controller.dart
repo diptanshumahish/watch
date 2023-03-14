@@ -13,6 +13,7 @@ import '../state/search_state.dart';
 final exploreControllerProvider =
     AsyncNotifierProvider<ExploreController, ExploreState>(
   ExploreController.new,
+  name: 'exploreControllerProvider',
 );
 
 class ExploreController extends AsyncNotifier<ExploreState> {

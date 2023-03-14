@@ -7,10 +7,12 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 
 final sharedPreferenceProvider = Provider<SharedPreferences>(
+  name: 'sharedPreferenceProvider',
   (ref) => throw UnimplementedError(),
 );
 
 final localStorageAPIProvider = Provider<LocalStorageAPI>(
+  name: 'localStorageAPIProvider',
   (ref) => LocalStorageAPI(ref.watch(sharedPreferenceProvider)),
 );
 
