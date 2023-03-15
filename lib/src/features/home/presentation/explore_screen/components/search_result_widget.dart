@@ -186,7 +186,8 @@ class SearchResult extends StatelessWidget {
                                   Text(
                                     movies.results[index].overview ?? 'N/A',
                                     style: const TextStyle(
-                                        color: Color(0xFFCBCACA)),
+                                      color: Color(0xFFCBCACA),
+                                    ),
                                     maxLines: 3,
                                   )
                                 ],

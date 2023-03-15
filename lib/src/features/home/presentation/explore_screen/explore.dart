@@ -77,18 +77,17 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
+            children: const [
               Text(
-                "Explore &",
+                "Explore & Search",
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,
-                  color: getTheme(),
                 ),
               ),
               Text(
                 "Search for movies/Web series",
-                style: TextStyle(fontSize: 20, color: getTheme()),
+                style: TextStyle(fontSize: 20),
               )
             ],
           ),
