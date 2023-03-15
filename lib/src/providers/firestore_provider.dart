@@ -25,10 +25,10 @@ final firestoreServiceProvider = Provider<CloudFirestoreAPI>(
 class CloudFirestoreAPI {
   late final FirebaseFirestore _firestore;
   late final UserNotifier _userNotifier;
-  CloudFirestoreAPI(
-      {required FirebaseFirestore firestore,
-      required UserNotifier userNotifier})
-      : _firestore = firestore,
+  CloudFirestoreAPI({
+    required FirebaseFirestore firestore,
+    required UserNotifier userNotifier,
+  })  : _firestore = firestore,
         _userNotifier = userNotifier;
 
   ///Get the collection reference

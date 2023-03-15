@@ -13,6 +13,8 @@ final favouritesControllerProvider =
 );
 
 class FavouritesController extends AsyncNotifier<FavouriteState> {
+  
+
   @override
   Future<FavouriteState> build() async {
     state = const AsyncLoading();
