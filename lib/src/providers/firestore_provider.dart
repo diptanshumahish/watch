@@ -14,7 +14,7 @@ final Provider<FirebaseFirestore> firestoreProvider =
 );
 
 ///Provider that will be used to provide the firestore service
-final firestoreServiceProvider = Provider.autoDispose<CloudFirestoreAPI>(
+final firestoreServiceProvider = Provider<CloudFirestoreAPI>(
   name: 'firestoreServiceProvider',
   (ref) => CloudFirestoreAPI(
     firestore: ref.watch(firestoreProvider),
