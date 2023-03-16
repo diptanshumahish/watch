@@ -96,72 +96,40 @@ class AuthAPI implements AuthAPIImpl {
   ///the user is signed in successfully then it returns [UserCredential]else
   ///it returns [String] error message
   @override
-  Future<SignInEither> signInWithGoogle() async {
+  FutureEither<UserCredential> signInWithGoogle() async {
     try {
       GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
       GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
-      var credential = GoogleAuthProvider.credential(
+      OAuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
       return right(await _auth.signInWithCredential(credential));
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'account-exists-with-different-credential') {
-        return left('The account already exists with a different credential.');
-      } else if (e.code == 'invalid-credential') {
-        return left('Error occurred while accessing credentials. Try again.');
-      } else if (e.code == 'operation-not-allowed') {
-        return left('Unable to sign in with Google.');
-      } else if (e.code == 'user-disabled') {
-        return left('The user account has been disabled by an administrator.');
-      } else if (e.code == 'user-not-found') {
-        return left('No user found for these credentials');
-      } else if (e.code == 'wrong-password') {
-        return left('Wrong password provided for the user');
-      } else if (e.code == 'invalid-verification-code') {
-        return left('The verification code is invalid.');
-      }
-      return left('The verification ID is invalid.');
+      return left(e.toFailure());
     } catch (e) {
-      log(e.toString(), name: 'AuthService.signInWithGoogle', error: e);
-      return left('Something went wrong');
+      return left(const Failure(message: 'Something went wrong'));
     }
   }
 
   ///Sign in with Facebook
   @override
-  Future<SignInEither> signInWithFacebook() async {
+  FutureEither<UserCredential> signInWithFacebook() async {
     try {
       LoginResult result = await FacebookAuth.instance.login();
       OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(result.accessToken!.token);
       return right(await _auth.signInWithCredential(facebookAuthCredential));
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'account-exists-with-different-credential') {
-        return left('The account already exists with a different credential.');
-      } else if (e.code == 'invalid-credential') {
-        return left('Error occurred while accessing credentials. Try again.');
-      } else if (e.code == 'operation-not-allowed') {
-        return left('Unable to sign in with Facebook.');
-      } else if (e.code == 'user-disabled') {
-        return left('The user account has been disabled by an administrator.');
-      } else if (e.code == 'user-not-found') {
-        return left('No user found for these credentials');
-      } else if (e.code == 'wrong-password') {
-        return left('Wrong password provided for the user');
-      } else if (e.code == 'invalid-verification-code') {
-        return left('Invalid verification code');
-      }
-      return left('Inavlid verification ID');
+      return left(e.toFailure());
     } catch (e) {
-      log(e.toString(), name: 'AuthService.signInWithFacebook', error: e);
-      return left('Something went wrong');
+      return left(const Failure(message: 'Something went wrong'));
     }
   }
 
   ///Sign in user with apple
   @override
-  Future<SignInEither> signInWithApple() async {
+  FutureEither<UserCredential> signInWithApple() async {
     try {
       AppleAuthProvider appleProvider = AppleAuthProvider();
       if (!kIsWeb) {
@@ -170,25 +138,9 @@ class AuthAPI implements AuthAPIImpl {
         return right(await _auth.signInWithPopup(appleProvider));
       }
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'account-exists-with-different-credential') {
-        return left('The account already exists with a different credential.');
-      } else if (e.code == 'invalid-credential') {
-        return left('Error occurred while accessing credentials. Try again.');
-      } else if (e.code == 'operation-not-allowed') {
-        return left('Unable to sign in with Apple.');
-      } else if (e.code == 'user-disabled') {
-        return left('The user account has been disabled by an administrator.');
-      } else if (e.code == 'user-not-found') {
-        return left('No user found for these credentials');
-      } else if (e.code == 'wrong-password') {
-        return left('Wrong password provided for the user');
-      } else if (e.code == 'invalid-verification-code') {
-        return left('Invalid verification code');
-      }
-      return left('Inavlid verification ID');
+      return left(e.toFailure());
     } catch (e) {
-      log(e.toString(), name: 'AuthService.signInWithApple', error: e);
-      return left('Something went wrong');
+      return left(const Failure(message: 'Something went wrong'));
     }
   }
 

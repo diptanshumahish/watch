@@ -231,16 +231,26 @@ class LoginScreen extends HookConsumerWidget {
                                       padding: const EdgeInsets.only(right: 2),
                                       child: Container(
                                         decoration: const BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: Color(0x2C9E9E9E)),
+                                          shape: BoxShape.circle,
+                                          color: Color(0x2C9E9E9E),
+                                        ),
                                         child: Center(
                                           child: IconButton(
-                                              onPressed: () {},
-                                              icon: const Icon(
-                                                  FontAwesomeIcons.google)),
+                                            onPressed: () async {
+                                              await ref
+                                                  .read(loginControllerProvider
+                                                      .notifier)
+                                                  .loginWithGoogle();
+                                            },
+                                            icon: const Icon(
+                                              FontAwesomeIcons.google,
+                                              color: Colors.black,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
+                                    const SizedBox(width: 10),
                                     Padding(
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 2),
@@ -253,11 +263,13 @@ class LoginScreen extends HookConsumerWidget {
                                             onPressed: () {},
                                             icon: const Icon(
                                               FontAwesomeIcons.apple,
+                                              color: Colors.black,
                                             ),
                                           ),
                                         ),
                                       ),
                                     ),
+                                    const SizedBox(width: 10),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 2),
                                       child: Container(
@@ -269,6 +281,7 @@ class LoginScreen extends HookConsumerWidget {
                                             onPressed: () {},
                                             icon: const Icon(
                                               FontAwesomeIcons.facebookF,
+                                              color: Colors.black,
                                             ),
                                           ),
                                         ),

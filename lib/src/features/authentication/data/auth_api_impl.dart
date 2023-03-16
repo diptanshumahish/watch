@@ -24,13 +24,13 @@ abstract class AuthAPIImpl {
   FutureEither<void> verifyResetPassword(String code);
 
   ///Sign in user with Facebook returns [SignInEither]
-  Future<SignInEither> signInWithFacebook();
+  FutureEither<UserCredential> signInWithFacebook();
 
   ///Sign in user with Google returns [SignInEither]
-  Future<SignInEither> signInWithGoogle();
+  FutureEither<UserCredential> signInWithGoogle();
 
   ///Sign in user with Apple returns [SignInEither]
-  Future<SignInEither> signInWithApple();
+ FutureEither<UserCredential> signInWithApple();
 
   ///Sign up user with email & password
   FutureEither<UserCredential> signUp(
