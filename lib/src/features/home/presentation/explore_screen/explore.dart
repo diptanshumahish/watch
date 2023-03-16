@@ -79,7 +79,8 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               Text(
-                "Explore & Search",
+                "Explore",
+                maxLines: 1,
                 style: TextStyle(
                   fontSize: 30,
                   fontWeight: FontWeight.bold,

@@ -13,11 +13,13 @@ final favouritesControllerProvider =
 );
 
 class FavouritesController extends AsyncNotifier<FavouriteState> {
-  
-
   @override
   Future<FavouriteState> build() async {
     state = const AsyncLoading();
+    return await onInit();
+  }
+
+  Future<FavouriteState> onInit() async {
     Either<Failure, Map<String, dynamic>> result =
         await ref.watch(firestoreServiceProvider).fetchLikedMovies();
     return result.fold(
