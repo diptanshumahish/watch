@@ -1,0 +1,26 @@
+targets:
+  $default:
+    builders:
+      build_web_compilers|entrypoint:
+        generate_for:
+          - web/main.dart
+          - web/index.html
+      json_serializable:
+        options:
+          any_map: false
+          checked: false
+          create_factory: true
+          create_field_map: false
+          disallow_unrecognized_keys: false
+          explicit_to_json: false
+          generic_argument_factories: false
+          ignore_unannotated: false
+          include_if_null: false
+      freezed:
+        options:
+          generate_copy_with: true
+          generate_equals: true
+          generate_hashcode: true
+          generate_to_string: true
+          ignore_unannotated: false
+          from_json: false
