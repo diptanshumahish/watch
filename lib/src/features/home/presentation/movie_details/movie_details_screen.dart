@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dartz/dartz.dart' show Either, Unit;
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -152,7 +153,6 @@ class MovieDescScreen extends HookConsumerWidget {
                             ),
                           ),
                           const SizedBox(width: 30),
-                          //TODO: ADD firebase auth then we can get the user id
                           ValueListenableBuilder(
                             valueListenable: likeNotifier,
                             builder: (_, val, child) {
@@ -254,7 +254,14 @@ class MovieDescScreen extends HookConsumerWidget {
                               fontSize: 16,
                             ),
                           ),
-                        ).,
+                        )
+                            .animate(
+                              onComplete: (controller) => controller.repeat(),
+                            )
+                            .shimmer(
+                              duration: const Duration(milliseconds: 2500),
+                              color: Colors.white54,
+                            ),
                       ),
                     ],
                   ),

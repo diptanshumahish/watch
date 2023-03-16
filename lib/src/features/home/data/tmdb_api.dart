@@ -110,4 +110,14 @@ class TMDB {
       (r) => right(MovieDetail.fromJson(jsonDecode(r))),
     );
   }
+
+  ///Get the trending/popular movies from TMDB
+  FutureEither<MovieDetail> getTrendingMovies({int page = 1}) async {
+    Either<Failure, String> data =
+        await _client.get('$movieUrl/popular?api_key=$apiKey&page=$page');
+    return data.fold(
+      (l) => left(l),
+      (r) => right(MovieDetail.fromJson(jsonDecode(r))),
+    );
+  }
 }

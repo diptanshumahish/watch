@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:watch/src/providers/user_provider.dart';
+import 'package:watch/src/routes/app_routes.dart';
 
 import '../../../../shared/background_painter.dart';
 
@@ -190,9 +191,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ],
                         ),
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 20,
+                        trailing: IconButton(
+                          onPressed: e == 'Trending'
+                              ? () =>
+                                  Navigator.pushNamed(context, trendingRoute)
+                              : null,
+                          icon: const Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
@@ -231,9 +238,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ],
                         ),
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 20,
+                        trailing: const IconButton(
+                          onPressed: null,
+                          icon: Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),
@@ -270,9 +280,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             ),
                           ],
                         ),
-                        trailing: const Icon(
-                          Icons.arrow_forward_ios_rounded,
-                          size: 20,
+                        trailing: const IconButton(
+                          onPressed: null,
+                          icon: Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            size: 20,
+                          ),
                         ),
                       ),
                     ),

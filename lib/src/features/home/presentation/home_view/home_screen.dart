@@ -20,9 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     var pages = [
       const Home(),
-      //TODO: uncomment this after checking the movie details page and remove it
       const ExploreScreen(),
-      // const MovieDetails(),
       const FavScreen(),
       const ProfileScreen()
     ];

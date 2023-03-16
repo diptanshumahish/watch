@@ -54,26 +54,3 @@ Map<String, dynamic> _$CastToJson(Cast instance) => <String, dynamic>{
       'department': instance.department,
       'job': instance.job,
     };
-
-Map<String, dynamic> _$$_AllCreditsToJson(_$_AllCredits instance) =>
-    <String, dynamic>{
-      'id': instance.id,
-      'cast': instance.cast,
-      'crew': instance.crew,
-    };
-
-Map<String, dynamic> _$$_CastToJson(_$_Cast instance) => <String, dynamic>{
-      'adult': instance.adult,
-      'gender': instance.gender,
-      'id': instance.id,
-      'name': instance.name,
-      'originalName': instance.originalName,
-      'popularity': instance.popularity,
-      'profilePath': instance.profilePath,
-      'castId': instance.castId,
-      'character': instance.character,
-      'creditId': instance.creditId,
-      'order': instance.order,
-      'department': instance.department,
-      'job': instance.job,
-    };

@@ -20,7 +20,6 @@ mixin _$AllCredits {
   List<Cast> get cast => throw _privateConstructorUsedError;
   List<Cast> get crew => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $AllCreditsCopyWith<AllCredits> get copyWith =>
       throw _privateConstructorUsedError;
@@ -113,7 +112,7 @@ class __$$_AllCreditsCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable(createFactory: false)
+
 class _$_AllCredits implements _AllCredits {
   const _$_AllCredits(
       {this.id,
@@ -157,7 +156,6 @@ class _$_AllCredits implements _AllCredits {
             const DeepCollectionEquality().equals(other._crew, _crew));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -170,13 +168,6 @@ class _$_AllCredits implements _AllCredits {
   @pragma('vm:prefer-inline')
   _$$_AllCreditsCopyWith<_$_AllCredits> get copyWith =>
       __$$_AllCreditsCopyWithImpl<_$_AllCredits>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_AllCreditsToJson(
-      this,
-    );
-  }
 }
 
 abstract class _AllCredits implements AllCredits {
@@ -215,7 +206,6 @@ mixin _$Cast {
   String? get department => throw _privateConstructorUsedError;
   String? get job => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $CastCopyWith<Cast> get copyWith => throw _privateConstructorUsedError;
 }
@@ -428,7 +418,7 @@ class __$$_CastCopyWithImpl<$Res> extends _$CastCopyWithImpl<$Res, _$_Cast>
 }
 
 /// @nodoc
-@JsonSerializable(createFactory: false)
+
 class _$_Cast implements _Cast {
   const _$_Cast(
       {this.adult = false,
@@ -506,7 +496,6 @@ class _$_Cast implements _Cast {
             (identical(other.job, job) || other.job == job));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -529,13 +518,6 @@ class _$_Cast implements _Cast {
   @pragma('vm:prefer-inline')
   _$$_CastCopyWith<_$_Cast> get copyWith =>
       __$$_CastCopyWithImpl<_$_Cast>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_CastToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Cast implements Cast {
