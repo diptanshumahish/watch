@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'cast_model.freezed.dart';
 part 'cast_model.g.dart';
 
-@Freezed(fromJson: false)
+@Freezed(fromJson: false,toJson: false)
 @JsonSerializable(fieldRename: FieldRename.snake)
 class AllCredits with _$AllCredits {
   const factory AllCredits({
@@ -18,7 +18,7 @@ class AllCredits with _$AllCredits {
       _$AllCreditsFromJson(json);
 }
 
-@Freezed(fromJson: false)
+@Freezed(fromJson: false,toJson: false)
 @JsonSerializable(fieldRename: FieldRename.snake)
 class Cast with _$Cast {
   const factory Cast({
