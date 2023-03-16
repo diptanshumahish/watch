@@ -6,8 +6,8 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/app/errors/errors.dart';
 
+import '../../../../app/errors/errors.dart';
 import 'auth_api_impl.dart';
 
 final firebaseAuthProvider = Provider<FirebaseAuth>(
@@ -28,6 +28,36 @@ class AuthAPI implements AuthAPIImpl {
   ///Auth status change user stream
   @override
   Stream<User?> get user => _auth.authStateChanges();
+
+  @override
+  FutureEither<void> verifyResetPassword(String code) async {
+    try {
+      await _auth.verifyPasswordResetCode(code);
+      return right(null);
+    } on FirebaseAuthException catch (e) {
+      return left(e.toFailure());
+    } catch (e, stackTrace) {
+      return left(
+        Failure(message: 'Something went wrong', stackTrace: stackTrace),
+      );
+    }
+  }
+
+  @override
+  FutureEither<void> resetPassword({
+    required String email,
+  }) async {
+    try {
+      await _auth.sendPasswordResetEmail(email: email);
+      return right(null);
+    } on FirebaseAuthException catch (e) {
+      return left(e.toFailure());
+    } catch (e, stackTrace) {
+      return left(
+        Failure(message: 'Something went wrong', stackTrace: stackTrace),
+      );
+    }
+  }
 
   ///Signin user anonymously
   @override
@@ -68,10 +98,9 @@ class AuthAPI implements AuthAPIImpl {
   @override
   Future<SignInEither> signInWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-      final GoogleSignInAuthentication googleAuth =
-          await googleUser!.authentication;
-      final credential = GoogleAuthProvider.credential(
+      GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+      GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+      var credential = GoogleAuthProvider.credential(
         accessToken: googleAuth.accessToken,
         idToken: googleAuth.idToken,
       );
@@ -103,8 +132,8 @@ class AuthAPI implements AuthAPIImpl {
   @override
   Future<SignInEither> signInWithFacebook() async {
     try {
-      final LoginResult result = await FacebookAuth.instance.login();
-      final OAuthCredential facebookAuthCredential =
+      LoginResult result = await FacebookAuth.instance.login();
+      OAuthCredential facebookAuthCredential =
           FacebookAuthProvider.credential(result.accessToken!.token);
       return right(await _auth.signInWithCredential(facebookAuthCredential));
     } on FirebaseAuthException catch (e) {
