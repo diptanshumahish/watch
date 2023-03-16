@@ -24,10 +24,10 @@ Future<void> main() async {
   runApp(
     ProviderScope(
       key: const Key('GlobalProviderScope'),
-      overrides: [
+      overrides: <Override>[
         sharedPreferenceProvider.overrideWithValue(prefsInstance),
       ],
-      observers: [
+      observers: <ProviderObserver>[
         ProviderLogger(),
       ],
       child: const MyApp(),

@@ -5,7 +5,7 @@ import '../../../../../app/errors/failure.dart';
 abstract class ForgotPasswordState extends Equatable {
   const ForgotPasswordState();
   @override
-  List<Object> get props => [];
+  List<Object> get props => <Object>[];
 }
 
 class ForgotInitial extends ForgotPasswordState {
@@ -21,7 +21,7 @@ class NewEmailVerified extends ForgotPasswordState {
   const NewEmailVerified({this.message = 'Password Reset Successfully'});
 
   @override
-  List<String> get props => [message];
+  List<String> get props => <String>[message];
 }
 
 class ForgotEmailSent extends ForgotPasswordState {
@@ -29,14 +29,14 @@ class ForgotEmailSent extends ForgotPasswordState {
   const ForgotEmailSent({this.message = 'Password Reset Email Sent'});
 
   @override
-  List<String> get props => [message];
+  List<String> get props => <String>[message];
 }
 
 class ForgotFailure extends ForgotPasswordState {
   final Failure error;
   const ForgotFailure(this.error);
   @override
-  List<Object> get props => [error];
+  List<Object> get props => <Object>[error];
   @override
   String toString() => 'SignupFailure { error: $error }';
 }

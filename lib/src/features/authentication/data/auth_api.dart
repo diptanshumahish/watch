@@ -10,14 +10,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../../../../app/errors/errors.dart';
 import 'auth_api_impl.dart';
 
-final firebaseAuthProvider = Provider<FirebaseAuth>(
+final Provider<FirebaseAuth> firebaseAuthProvider = Provider<FirebaseAuth>(
   name: 'firebaseAuthProvider',
-  (ref) => FirebaseAuth.instance,
+  (ProviderRef<FirebaseAuth> ref) => FirebaseAuth.instance,
 );
 
-final authAPIProvider = Provider<AuthAPI>(
+final Provider<AuthAPI> authAPIProvider = Provider<AuthAPI>(
   name: 'authAPIProvider',
-  (ref) => AuthAPI(ref.watch(firebaseAuthProvider)),
+  (ProviderRef<AuthAPI> ref) => AuthAPI(ref.watch(firebaseAuthProvider)),
 );
 
 class AuthAPI implements AuthAPIImpl {

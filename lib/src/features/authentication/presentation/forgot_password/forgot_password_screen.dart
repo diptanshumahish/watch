@@ -16,7 +16,8 @@ class ForgotPasswordScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(forgotScreenControllerProvider, (previous, next) {
+    ref.listen(forgotScreenControllerProvider,
+        (ForgotPasswordState? previous, ForgotPasswordState next) {
       if (next is ForgotLoading) {
         context.showLoaderDialog();
       }
@@ -54,7 +55,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
         extendBody: true,
         body: SafeArea(
           child: Stack(
-            children: [
+            children: <Widget>[
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: Center(
@@ -78,7 +79,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                         horizontal: 15, vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20, top: 10),
                           child: Center(
@@ -104,7 +105,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
-                          inputFormatters: [
+                          inputFormatters: <FilteringTextInputFormatter>[
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           style: const TextStyle(color: Colors.grey),
@@ -117,11 +118,12 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: Row(
-                            children: [
+                            children: <Widget>[
                               Expanded(
-                                child: ValueListenableBuilder(
+                                child: ValueListenableBuilder<TextEditingValue>(
                                   valueListenable: emailController,
-                                  builder: (_, val, child) {
+                                  builder:
+                                      (_, TextEditingValue val, Widget? child) {
                                     return ElevatedButton(
                                       onPressed: (val.text.isEmpty)
                                           ? null
@@ -162,7 +164,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                           ),
                         ),
                         const SizedBox(height: 20),
-                        if (isMobileReset) ...[
+                        if (isMobileReset) ...<Widget>[
                           Center(
                             child: Text(
                               'Enter the code',
@@ -227,11 +229,13 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 20),
                             child: Row(
-                              children: [
+                              children: <Widget>[
                                 Expanded(
-                                  child: ValueListenableBuilder(
+                                  child:
+                                      ValueListenableBuilder<TextEditingValue>(
                                     valueListenable: pinputController,
-                                    builder: (_, val, child) {
+                                    builder: (_, TextEditingValue val,
+                                        Widget? child) {
                                       return ElevatedButton(
                                         onPressed: (val.text.isEmpty)
                                             ? null

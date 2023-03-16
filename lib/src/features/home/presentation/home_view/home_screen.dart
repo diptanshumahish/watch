@@ -18,7 +18,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    var pages = [
+    List<Widget> pages = <Widget>[
       const Home(),
       const ExploreScreen(),
       const FavScreen(),
@@ -35,12 +35,12 @@ class _HomeScreenState extends State<HomeScreen> {
           enableFeedback: true,
           currentIndex: currenIndex,
           showUnselectedLabels: true,
-          onTap: (index) {
+          onTap: (int index) {
             setState(() {
               currenIndex = index;
             });
           },
-          items: const [
+          items: const <BottomNavigationBarItem>[
             BottomNavigationBarItem(label: 'Home', icon: Icon(Iconsax.home)),
             BottomNavigationBarItem(
                 label: 'Search', icon: Icon(Iconsax.search_normal)),

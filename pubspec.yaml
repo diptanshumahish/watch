@@ -31,6 +31,7 @@ dependencies:
   equatable: ^2.0.5
   firebase_auth: ^4.2.10
   firebase_core: ^2.7.1
+  firebase_storage: ^11.0.16
   flutter:
     sdk: flutter
   flutter_animate: ^4.1.0
@@ -46,6 +47,7 @@ dependencies:
   hooks_riverpod: ^2.3.1
   http: ^0.13.5
   iconsax: ^0.0.8
+  image_picker: ^0.8.7
   json_annotation: ^4.8.0
   json_serializable: ^6.6.1
   like_button: ^2.0.5

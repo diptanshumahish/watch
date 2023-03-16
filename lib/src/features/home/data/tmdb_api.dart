@@ -11,33 +11,38 @@ import '../../../models/movie_details_model.dart';
 import '../../../providers/http_base_provider.dart';
 
 ///TMDb Provider
-final tmdbProvider = Provider<TMDB>(
+final Provider<TMDB> tmdbProvider = Provider<TMDB>(
   name: 'tmdbProvider',
-  (ref) => TMDB(client: ref.watch(httpClientProvider)),
+  (ProviderRef<TMDB> ref) => TMDB(client: ref.watch(httpClientProvider)),
 );
 
 ///Provider to load horror movies
-final horrorMovieProvider =
+final AutoDisposeFutureProvider<Either<Failure, MovieDetail>>
+    horrorMovieProvider =
     FutureProvider.autoDispose<Either<Failure, MovieDetail>>(
   name: 'horrorMovieProvider',
-  (ref) async =>
+  (AutoDisposeFutureProviderRef<Either<Failure, MovieDetail>> ref) async =>
       ref.watch(tmdbProvider).getGenreWiseMovies(genre: MovieGenre.horror.name),
 );
 
 ///Provider to load action movies
-final thrillerMovieProvider =
+final AutoDisposeFutureProvider<Either<Failure, MovieDetail>>
+    thrillerMovieProvider =
     FutureProvider.autoDispose<Either<Failure, MovieDetail>>(
   name: 'thrillerMovieProvider',
-  (ref) async => ref
+  (AutoDisposeFutureProviderRef<Either<Failure, MovieDetail>> ref) async => ref
       .watch(tmdbProvider)
       .getGenreWiseMovies(genre: MovieGenre.thriller.name),
 );
 
 //load cast from the movie Id
-final castProvider =
+final AutoDisposeFutureProviderFamily<Either<Failure, AllCredits>, int>
+    castProvider =
     FutureProvider.autoDispose.family<Either<Failure, AllCredits>, int>(
   name: 'castProvider',
-  (ref, id) async => ref.watch(tmdbProvider).getCastDetails(id: id),
+  (AutoDisposeFutureProviderRef<Either<Failure, AllCredits>> ref,
+          int id) async =>
+      ref.watch(tmdbProvider).getCastDetails(id: id),
 );
 
 class TMDB {
@@ -50,7 +55,7 @@ class TMDB {
         await _client.get('$genreUrl?api_key=$apiKey');
     return data.fold(
       left,
-      (r) => right(AllGenres.fromJson(jsonDecode(r))),
+      (String r) => right(AllGenres.fromJson(jsonDecode(r))),
     );
   }
 
@@ -59,7 +64,7 @@ class TMDB {
         '$searchUrl?api_key=$apiKey&language=en-US&sort_by=popularity.desc&query=$genre');
     return data.fold(
       left,
-      (r) => right(MovieDetail.fromJson(jsonDecode(r))),
+      (String r) => right(MovieDetail.fromJson(jsonDecode(r))),
     );
   }
 
@@ -69,10 +74,10 @@ class TMDB {
         await _client.get('$movieUrl/$id?api_key=$apiKey');
     return data.fold(
       left,
-      (r) {
-        var result = jsonDecode(r);
+      (String r) {
+        dynamic result = jsonDecode(r);
         return right(
-          {
+          <String, dynamic>{
             'isAdult': result['adult'],
             'genres': List<Genre>.from(result['genres']),
             'backdropPath': result['backdrop_path'],
@@ -97,7 +102,7 @@ class TMDB {
         await _client.get('$movieUrl/$id/credits?api_key=$apiKey');
     return data.fold(
       left,
-      (r) => right(AllCredits.fromJson(jsonDecode(r))),
+      (String r) => right(AllCredits.fromJson(jsonDecode(r))),
     );
   }
 
@@ -107,7 +112,7 @@ class TMDB {
         '$searchUrl?api_key=$apiKey&language=en-US&query=$query&page=$page&include_adult=$isAdult');
     return data.fold(
       left,
-      (r) => right(MovieDetail.fromJson(jsonDecode(r))),
+      (String r) => right(MovieDetail.fromJson(jsonDecode(r))),
     );
   }
 
@@ -117,7 +122,7 @@ class TMDB {
         await _client.get('$movieUrl/popular?api_key=$apiKey&page=$page');
     return data.fold(
       left,
-      (r) => right(MovieDetail.fromJson(jsonDecode(r))),
+      (String r) => right(MovieDetail.fromJson(jsonDecode(r))),
     );
   }
 }

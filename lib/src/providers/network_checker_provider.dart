@@ -130,7 +130,7 @@ class AddressCheckOptions extends Equatable {
   });
 
   @override
-  List<Object?> get props => [address, port, timeout];
+  List<Object?> get props => <Object?>[address, port, timeout];
 }
 
 class AddressCheckResult extends Equatable {
@@ -140,5 +140,5 @@ class AddressCheckResult extends Equatable {
   const AddressCheckResult(this.options, this.isSuccess);
 
   @override
-  List<Object?> get props => [options, isSuccess];
+  List<Object?> get props => <Object?>[options, isSuccess];
 }

@@ -30,12 +30,12 @@ class _FullDetailsState extends State<FullDetails> {
       }
     }
 
-    var height = MediaQuery.of(context).size.height;
-    var width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    double width = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
         body: ListView(
-          children: [
+          children: <Widget>[
             Container(
               height: height / 2,
               decoration: const BoxDecoration(
@@ -49,7 +49,7 @@ class _FullDetailsState extends State<FullDetails> {
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
-                        colors: [
+                        colors: <Color>[
                       Color.fromARGB(162, 0, 0, 0),
                       Color.fromARGB(24, 0, 0, 0),
                       Colors.black
@@ -58,9 +58,9 @@ class _FullDetailsState extends State<FullDetails> {
                   padding: const EdgeInsets.all(20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       Row(
-                        children: [
+                        children: <Widget>[
                           InkWell(
                             onTap: (() => Navigator.pop(context)),
                             child: Container(
@@ -115,7 +115,7 @@ class _FullDetailsState extends State<FullDetails> {
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 10),
                         child: Row(
-                          children: [
+                          children: <Widget>[
                             Container(
                               height: 20,
                               decoration: BoxDecoration(
@@ -128,7 +128,7 @@ class _FullDetailsState extends State<FullDetails> {
                                 child: Center(
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: const [
+                                    children: const <Widget>[
                                       Text('Rating: ',
                                           style: TextStyle(
                                               color: Color.fromARGB(
@@ -172,12 +172,12 @@ class _FullDetailsState extends State<FullDetails> {
               padding: const EdgeInsets.all(10.0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children: <Widget>[
                   Container(
                     width: width * 0.8,
                     height: 45,
                     decoration: BoxDecoration(
-                        boxShadow: const [
+                        boxShadow: const <BoxShadow>[
                           BoxShadow(
                             offset: Offset(4, 1),
                             spreadRadius: -10,
@@ -190,7 +190,7 @@ class _FullDetailsState extends State<FullDetails> {
                     child: Center(
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
+                        children: <Widget>[
                           Icon(CupertinoIcons.play_arrow_solid,
                               color: getThemeInv()),
                           Text('Watch Trailer',

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-final themeProvider = ChangeNotifierProvider.autoDispose(
+final AutoDisposeChangeNotifierProvider<ThemeNotifier> themeProvider = ChangeNotifierProvider.autoDispose(
   name: 'themeProvider',
-  (ref) => ThemeNotifier(),
+  (AutoDisposeChangeNotifierProviderRef<ThemeNotifier> ref) => ThemeNotifier(),
 );
 
 class ThemeNotifier extends ChangeNotifier {
@@ -12,7 +12,7 @@ class ThemeNotifier extends ChangeNotifier {
 
   bool get isDarkMode {
     if (themeMode == ThemeMode.system) {
-      final brightness = SchedulerBinding.instance.window.platformBrightness;
+       Brightness brightness = SchedulerBinding.instance.window.platformBrightness;
       return brightness == Brightness.dark;
     } else {
       return themeMode == ThemeMode.dark;

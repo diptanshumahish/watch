@@ -1,10 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/app/errors/errors.dart';
-import 'package:watch/src/models/movie_details_model.dart';
-import 'package:watch/src/models/user_model.dart';
-import 'package:watch/src/providers/user_provider.dart';
+
+import '../../app/errors/errors.dart';
+import '../models/movie_details_model.dart';
+import '../models/user_model.dart';
+import 'user_provider.dart';
 
 ///Provider that will be used to provide the firestore instance
 final Provider<FirebaseFirestore> firestoreProvider =
@@ -14,9 +15,10 @@ final Provider<FirebaseFirestore> firestoreProvider =
 );
 
 ///Provider that will be used to provide the firestore service
-final firestoreServiceProvider = Provider<CloudFirestoreAPI>(
+final Provider<CloudFirestoreAPI> firestoreServiceProvider =
+    Provider<CloudFirestoreAPI>(
   name: 'firestoreServiceProvider',
-  (ref) => CloudFirestoreAPI(
+  (ProviderRef<CloudFirestoreAPI> ref) => CloudFirestoreAPI(
     firestore: ref.watch(firestoreProvider),
     userNotifier: ref.watch(userNotifierProvider.notifier),
   ),
@@ -82,8 +84,9 @@ class CloudFirestoreAPI {
       if (_userNotifier.user.uid == null) {
         return left(const Failure(message: 'User not found'));
       }
-      final fetchRes = await getDocument('User', _userNotifier.user.uid!);
-      return right(fetchRes.data() ?? {});
+      DocumentSnapshot<Map<String, dynamic>> fetchRes =
+          await getDocument('User', _userNotifier.user.uid!);
+      return right(fetchRes.data() ?? <String, dynamic>{});
     } catch (e, stackTrace) {
       return left(Failure(message: e.toString(), stackTrace: stackTrace));
     }
@@ -102,8 +105,8 @@ class CloudFirestoreAPI {
       await _firestore
           .collection(collectionPath)
           .doc(_userNotifier.user.uid!)
-          .update({
-        'likedItems': FieldValue.arrayUnion([likedItem.toJson()])
+          .update(<Object, Object?>{
+        'likedItems': FieldValue.arrayUnion(<dynamic>[likedItem.toJson()])
       });
       _userNotifier.updateLikedItems(likedItem);
       return right(unit);
@@ -125,8 +128,8 @@ class CloudFirestoreAPI {
       await _firestore
           .collection(collectionPath)
           .doc(_userNotifier.user.uid!)
-          .update({
-        'likedItems': FieldValue.arrayRemove([dislikedItem.toJson()])
+          .update(<Object, Object?>{
+        'likedItems': FieldValue.arrayRemove(<dynamic>[dislikedItem.toJson()])
       });
       return right(unit);
     } catch (e, stackTrace) {
@@ -142,10 +145,8 @@ class CloudFirestoreAPI {
     String collectionPath = 'User',
   }) async {
     try {
-      await _firestore
-          .collection(collectionPath)
-          .doc(userId)
-          .update({'selectedGenres': FieldValue.arrayUnion(genres)});
+      await _firestore.collection(collectionPath).doc(userId).update(
+          <Object, Object?>{'selectedGenres': FieldValue.arrayUnion(genres)});
       return right(unit);
     } catch (e, stackTrace) {
       return left(Failure(message: e.toString(), stackTrace: stackTrace));
@@ -160,8 +161,11 @@ class CloudFirestoreAPI {
     String collectionPath = 'User',
   }) async {
     try {
-      await _firestore.collection(collectionPath).doc(userId).update({
-        'selectedGenres': FieldValue.arrayRemove([genre])
+      await _firestore
+          .collection(collectionPath)
+          .doc(userId)
+          .update(<Object, Object?>{
+        'selectedGenres': FieldValue.arrayRemove(<dynamic>[genre])
       });
       return right(unit);
     } catch (e, stackTrace) {

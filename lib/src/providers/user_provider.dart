@@ -1,12 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/src/features/authentication/data/auth_api.dart';
-import 'package:watch/src/models/movie_details_model.dart';
 
+import '../features/authentication/data/auth_api.dart';
+import '../models/movie_details_model.dart';
 import '../models/user_model.dart';
 
 ///User notifier provider
-final userNotifierProvider = StateNotifierProvider<UserNotifier, UserModel>(
+final StateNotifierProvider<UserNotifier, UserModel> userNotifierProvider =
+    StateNotifierProvider<UserNotifier, UserModel>(
   name: 'userNotifierProvider',
   (Ref ref) => UserNotifier(ref: ref),
 );
@@ -29,10 +30,11 @@ class UserNotifier extends StateNotifier<UserModel> {
 
   void updateLikedItems(Result likedItem) {
     if (state.likedItems != null) {
-      state = state.copyWith(likedItems: [...state.likedItems!, likedItem]);
+      state =
+          state.copyWith(likedItems: <Result>[...state.likedItems!, likedItem]);
       return;
     }
-    state = state.copyWith(likedItems: [likedItem]);
+    state = state.copyWith(likedItems: <Result>[likedItem]);
     return;
   }
 

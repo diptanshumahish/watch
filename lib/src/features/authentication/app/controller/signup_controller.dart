@@ -1,19 +1,20 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/app/errors/errors.dart';
-import 'package:watch/src/features/authentication/app/state/signup_state.dart';
-import 'package:watch/src/features/authentication/data/auth_api.dart';
-import 'package:watch/src/providers/firestore_provider.dart';
 
+import '../../../../../app/errors/errors.dart';
+import '../../../../providers/firestore_provider.dart';
 import '../../../../providers/user_provider.dart';
+import '../../data/auth_api.dart';
+import '../state/signup_state.dart';
 
 /// Provider for the sign up state
 final AutoDisposeStateNotifierProvider<SignUpController, SignUpState>
     signUpControllerProvider =
     StateNotifierProvider.autoDispose<SignUpController, SignUpState>(
   name: 'signUpControllerProvider',
-  (ref) => SignUpController(
+  (AutoDisposeStateNotifierProviderRef<SignUpController, SignUpState> ref) =>
+      SignUpController(
     auth: ref.watch(authAPIProvider),
     userNotifier: ref.watch(userNotifierProvider.notifier),
     firestoreAPI: ref.watch(firestoreServiceProvider),
@@ -41,7 +42,8 @@ class SignUpController extends StateNotifier<SignUpState> {
     required String password,
   }) async {
     state = const SignUpLoading();
-    var result = await _auth.signUp(email: email, password: password);
+    Either<Failure, UserCredential> result =
+        await _auth.signUp(email: email, password: password);
     result.fold(
       (Failure failure) => state = SignUpFailure(failure),
       (UserCredential credential) async {

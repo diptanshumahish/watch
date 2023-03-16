@@ -3,7 +3,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 
 class ShimmerGridSkeleton extends StatelessWidget {
   final EdgeInsetsGeometry? padding;
-  const ShimmerGridSkeleton({super.key,  this.padding});
+  const ShimmerGridSkeleton({super.key, this.padding});
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +14,14 @@ class ShimmerGridSkeleton extends StatelessWidget {
         crossAxisSpacing: 10,
         mainAxisSpacing: 10,
       ),
-      padding: padding ??const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 10,
-      ),
+      padding: padding ??
+          const EdgeInsets.symmetric(
+            horizontal: 20,
+            vertical: 10,
+          ),
       physics: const ClampingScrollPhysics(),
       itemCount: 6,
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index) {
         return Container(
           decoration: BoxDecoration(
             color: Colors.grey.shade900,
@@ -28,7 +29,8 @@ class ShimmerGridSkeleton extends StatelessWidget {
           ),
         )
             .animate(
-              onComplete: (controller) => controller.repeat(),
+              onComplete: (AnimationController controller) =>
+                  controller.repeat(),
             )
             .shimmer(
               duration: const Duration(milliseconds: 1000),

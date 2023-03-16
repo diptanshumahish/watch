@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../app/constants/api_urls.dart';
+import '../../../../../app/errors/failure.dart';
 import '../../../../shared/shimmer_loaders.dart';
 import '../../app/controller/favourites_controller.dart';
+import '../../app/state/favourite_state.dart';
 
 class FavScreen extends StatelessWidget {
   const FavScreen({super.key});
@@ -11,11 +13,11 @@ class FavScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: [
+      children: <Widget>[
         const SizedBox(height: 15),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
+          children: const <Widget>[
             Flexible(
               child: Text(
                 'Your Favourites',
@@ -31,12 +33,13 @@ class FavScreen extends StatelessWidget {
         const SizedBox(height: 30),
         Expanded(
           child: Consumer(
-            builder: (context, ref, child) {
-              var result = ref.watch(favouritesControllerProvider);
+            builder: (BuildContext context, WidgetRef ref, Widget? child) {
+              AsyncValue<FavouriteState> result =
+                  ref.watch(favouritesControllerProvider);
               return result.maybeWhen(
-                data: (result) {
+                data: (FavouriteState result) {
                   return result.when(
-                    loaded: (results) {
+                    loaded: (List<dynamic> results) {
                       return RefreshIndicator(
                         onRefresh: () async {
                           ref.invalidate(favouritesControllerProvider);
@@ -51,7 +54,7 @@ class FavScreen extends StatelessWidget {
                     empty: () => const Center(
                       child: Text('No Favourites'),
                     ),
-                    error: (failure) => Center(
+                    error: (Failure failure) => Center(
                       child: Text(failure.toString()),
                     ),
                   );
@@ -87,9 +90,9 @@ class GridBuilder extends StatelessWidget {
         crossAxisCount: 2,
         childAspectRatio: 9 / 16,
       ),
-      itemBuilder: (context, index) => Container(
+      itemBuilder: (BuildContext context, int index) => Container(
         decoration: BoxDecoration(
-          boxShadow: const [
+          boxShadow: const <BoxShadow>[
             BoxShadow(
               offset: Offset(7, 6),
               spreadRadius: -10,
@@ -108,7 +111,7 @@ class GridBuilder extends StatelessWidget {
           ),
         ),
         child: Stack(
-          children: [
+          children: <Widget>[
             Container(
               height: size.height / 2,
               decoration: BoxDecoration(
@@ -116,7 +119,7 @@ class GridBuilder extends StatelessWidget {
                 gradient: const LinearGradient(
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
-                  colors: [Colors.transparent, Colors.black],
+                  colors: <Color>[Colors.transparent, Colors.black],
                 ),
               ),
             ),
@@ -126,7 +129,7 @@ class GridBuilder extends StatelessWidget {
                 padding: const EdgeInsets.all(14.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+                  children: <Widget>[
                     Text(
                       res[index]['title'] ?? 'N/A',
                       textAlign: TextAlign.center,

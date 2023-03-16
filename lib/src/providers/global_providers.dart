@@ -2,16 +2,17 @@ import 'dart:developer';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/src/features/authentication/data/auth_api.dart';
 
+import '../features/authentication/data/auth_api.dart';
 import 'user_provider.dart';
 
-final sessionStatusProvider =
-    StreamProvider<User?>(name: 'sessionStatusProvider', (ref) async* {
-  Stream<User?> user = ref.watch(authAPIProvider.select((value) => value.user));
-  ref.listenSelf((previous, next) {
+final StreamProvider<User?> sessionStatusProvider = StreamProvider<User?>(
+    name: 'sessionStatusProvider', (StreamProviderRef<User?> ref) async* {
+  Stream<User?> user =
+      ref.watch(authAPIProvider.select((AuthAPI value) => value.user));
+  ref.listenSelf((AsyncValue<User?>? previous, AsyncValue<User?> next) {
     next.maybeWhen(
-      data: (user) {
+      data: (User? user) {
         if (user != null) {
           ref.read(userNotifierProvider.notifier).setUserProps(
                 displayName: user.displayName,
@@ -25,6 +26,6 @@ final sessionStatusProvider =
       orElse: () => log('Session status changed'),
     );
   });
-  await Future.delayed(const Duration(seconds: 2));
+  await Future<void>.delayed(const Duration(seconds: 2));
   yield* user;
 });
