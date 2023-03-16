@@ -83,12 +83,16 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                 maxLines: 1,
                 style: TextStyle(
                   fontSize: 30,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               Text(
                 "Search for movies/Web series",
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(
+                  fontSize: 20,
+                  color: Colors.white,
+                ),
               )
             ],
           ),

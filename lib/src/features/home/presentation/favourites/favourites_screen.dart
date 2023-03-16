@@ -21,13 +21,14 @@ class FavScreen extends StatelessWidget {
                 'Your Favourites',
                 style: TextStyle(
                   fontSize: 20,
+                  color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ),
           ],
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 30),
         Expanded(
           child: Consumer(
             builder: (context, ref, child) {

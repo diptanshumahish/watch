@@ -250,10 +250,11 @@ class MovieDescScreen extends HookConsumerWidget {
                             'Watch Now',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
+                              color: Colors.white,
                               fontSize: 16,
                             ),
                           ),
-                        ),
+                        ).,
                       ),
                     ],
                   ),
