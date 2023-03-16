@@ -7,12 +7,14 @@ import '../state/favourite_state.dart';
 
 ///exploreSearchControllerPage
 final favouritesControllerProvider =
-    AsyncNotifierProvider.autoDispose<FavouritesController, FavouriteState>(
+    AsyncNotifierProvider<FavouritesController, FavouriteState>(
   name: 'favouritesControllerProvider',
   FavouritesController.new,
 );
 
-class FavouritesController extends AutoDisposeAsyncNotifier<FavouriteState> {
+class FavouritesController extends AsyncNotifier<FavouriteState> {
+  
+
   @override
   Future<FavouriteState> build() async {
     state = const AsyncLoading();

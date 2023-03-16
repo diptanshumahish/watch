@@ -1,5 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:watch/src/providers/user_provider.dart';
 
 import '../../../../shared/background_painter.dart';
 
@@ -122,6 +124,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     ),
                     const SizedBox(height: 43),
+                    Consumer(builder: (context, ref, child) {
+                      final name = ref.watch(userNotifierProvider
+                          .select((value) => value.displayName));
+                      return Text(
+                        'Name :${name ?? 'N/A'}',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      );
+                    }),
+                    const SizedBox(height: 5),
+                    Consumer(builder: (context, ref, child) {
+                      final e = ref.watch(
+                          userNotifierProvider.select((value) => value.email));
+                      return Text(
+                        'Email :${e ?? 'N/A'}',
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      );
+                    }),
+                    const SizedBox(height: 40),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [

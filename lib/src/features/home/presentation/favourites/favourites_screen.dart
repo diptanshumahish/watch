@@ -33,7 +33,16 @@ class FavScreen extends StatelessWidget {
               return result.maybeWhen(
                 data: (result) {
                   return result.when(
-                    loaded: (results) => GridBuilder(res: results),
+                    loaded: (results) => RefreshIndicator(
+                      onRefresh: () async {
+                        ref.invalidate(favouritesControllerProvider);
+                        ref.read(favouritesControllerProvider);
+                        return;
+                      },
+                      child: GridBuilder(
+                        res: results,
+                      ),
+                    ),
                     empty: () => const Center(child: Text('No Favourites')),
                     error: (failure) => Center(
                       child: Text(failure.toString()),

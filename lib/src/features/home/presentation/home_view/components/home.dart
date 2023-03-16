@@ -7,6 +7,7 @@ import 'package:watch/app/constants/api_urls.dart';
 import 'package:watch/src/features/home/data/tmdb_api.dart';
 import 'package:watch/src/shared/custom_hero.dart';
 
+import '../../../../../providers/user_provider.dart';
 import '../../movie_details/movie_details_screen.dart';
 
 class Home extends StatefulWidget {
@@ -37,12 +38,19 @@ class _HomeState extends State<Home> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                "Welcome Friend",
-                style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                    color: getTheme()),
+              Consumer(
+                builder: (context, ref, child) {
+                  String? name = ref.watch(userNotifierProvider
+                      .select((value) => value.displayName));
+                  return Text(
+                    "Welcome, ${name ?? "Friend"}",
+                    maxLines: 1,
+                    style: const TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  );
+                },
               ),
               const Text(
                 "Let's see what's here for you",
