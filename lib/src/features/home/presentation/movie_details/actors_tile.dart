@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:watch/app/constants/api_urls.dart';
+
+import '../../../../../app/constants/api_urls.dart';
 
 class ActorTile extends StatelessWidget {
   final String name;

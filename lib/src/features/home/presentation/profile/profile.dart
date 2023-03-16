@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/src/providers/user_provider.dart';
-import 'package:watch/src/routes/app_routes.dart';
 
+import '../../../../providers/user_provider.dart';
+import '../../../../routes/app_routes.dart';
 import '../../../../shared/background_painter.dart';
+import 'components/logout_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -58,6 +59,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               color: Colors.white,
                               fontWeight: FontWeight.w700,
                             ),
+                          ),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () async {
+                            await showDialog(
+                              context: context,
+                              builder: (context) => const LogoutDialog(),
+                            );
+                          },
+                          tooltip: 'Sign Out',
+                          icon: const Icon(
+                            Icons.logout_rounded,
+                            size: 30,
+                            color: Colors.orange,
                           ),
                         ),
                         const Icon(
@@ -132,7 +148,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                     const SizedBox(height: 43),
                     Consumer(builder: (context, ref, child) {
-                      final name = ref.watch(userNotifierProvider
+                      var name = ref.watch(userNotifierProvider
                           .select((value) => value.displayName));
                       return Text(
                         'Name : ${name ?? 'N/A'}',
@@ -145,7 +161,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     }),
                     const SizedBox(height: 5),
                     Consumer(builder: (context, ref, child) {
-                      final e = ref.watch(
+                      var e = ref.watch(
                           userNotifierProvider.select((value) => value.email));
                       return Text(
                         'Email : ${e ?? 'N/A'}',

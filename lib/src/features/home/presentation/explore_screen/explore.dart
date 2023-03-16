@@ -16,36 +16,36 @@ class ExploreScreen extends ConsumerStatefulWidget {
 
 class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   final List<String> images = [
-    "https://github.com/diptanshumahish/watch_images/raw/main/horror.webp",
-    "https://github.com/diptanshumahish/watch_images/raw/main/scifi.webp",
-    "https://github.com/diptanshumahish/watch_images/raw/main/thriller.webp",
-    "https://github.com/diptanshumahish/watch_images/raw/main/drama.webp",
-    "https://github.com/diptanshumahish/watch_images/raw/main/anime.webp",
-    "https://github.com/diptanshumahish/watch_images/raw/main/action.webp",
-    "https://github.com/diptanshumahish/watch_images/raw/main/comedy.webp",
-    "https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp",
+    'https://github.com/diptanshumahish/watch_images/raw/main/horror.webp',
+    'https://github.com/diptanshumahish/watch_images/raw/main/scifi.webp',
+    'https://github.com/diptanshumahish/watch_images/raw/main/thriller.webp',
+    'https://github.com/diptanshumahish/watch_images/raw/main/drama.webp',
+    'https://github.com/diptanshumahish/watch_images/raw/main/anime.webp',
+    'https://github.com/diptanshumahish/watch_images/raw/main/action.webp',
+    'https://github.com/diptanshumahish/watch_images/raw/main/comedy.webp',
+    'https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp',
   ];
   final List<String> searchTags = [
-    "horror",
-    "Sci-Fi",
-    "Thriller",
-    "Drama",
-    "Anime",
-    "Action",
-    "Comedy",
-    "Tragedy",
+    'horror',
+    'Sci-Fi',
+    'Thriller',
+    'Drama',
+    'Anime',
+    'Action',
+    'Comedy',
+    'Tragedy',
   ];
   final List<String> tagLines = [
-    "Shivers all around!",
-    "the modern days!",
-    "Some thrillers here",
-    "The dramatical things",
-    "The anime lovers!",
-    "Fully packed in here",
+    'Shivers all around!',
+    'the modern days!',
+    'Some thrillers here',
+    'The dramatical things',
+    'The anime lovers!',
+    'Fully packed in here',
     "let's laugh a bit?",
-    "some sad stories"
+    'some sad stories'
   ];
-  getTheme() {
+  Color getTheme() {
     if (Theme.of(context).brightness == Brightness.dark) {
       return Colors.white;
     } else {
@@ -79,7 +79,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: const [
               Text(
-                "Explore",
+                'Explore',
                 maxLines: 1,
                 style: TextStyle(
                   fontSize: 30,
@@ -88,7 +88,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
                 ),
               ),
               Text(
-                "Search for movies/Web series",
+                'Search for movies/Web series',
                 style: TextStyle(
                   fontSize: 20,
                   color: Colors.white,
@@ -112,7 +112,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
               }
             },
             padding: const EdgeInsets.all(10),
-            placeholder: "Search for movies/webseries",
+            placeholder: 'Search for movies/webseries',
             style: TextStyle(color: getTheme()),
           ),
         ),

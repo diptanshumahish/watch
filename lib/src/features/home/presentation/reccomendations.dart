@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:watch/src/features/home/presentation/home_view/home_screen.dart';
+
+import 'home_view/home_screen.dart';
 
 var selectedList = [];
 bool isLoaded = false;
@@ -27,7 +28,7 @@ class _ReccomendationsState extends State<Reccomendations> {
   var filter = Colors.transparent;
   @override
   Widget build(BuildContext context) {
-    getTheme() {
+    Color getTheme() {
       if (Theme.of(context).brightness == Brightness.dark) {
         return Colors.white;
       } else {
@@ -35,7 +36,7 @@ class _ReccomendationsState extends State<Reccomendations> {
       }
     }
 
-    getThemeInv() {
+    Color getThemeInv() {
       if (Theme.of(context).brightness == Brightness.light) {
         return Colors.white;
       } else {
@@ -44,15 +45,15 @@ class _ReccomendationsState extends State<Reccomendations> {
     }
 
     var image = [
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp",
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/beng.webp",
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/dc.webp",
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/anime.webp",
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/comedy.webp",
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/dark.webp",
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi.webp",
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/horror.webp",
-      "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi3.webp"
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp',
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/beng.webp',
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/dc.webp',
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/anime.webp',
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/comedy.webp',
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/dark.webp',
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi.webp',
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/horror.webp',
+      'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi3.webp'
     ];
 
     var height = MediaQuery.of(context).size.height;
@@ -73,14 +74,14 @@ class _ReccomendationsState extends State<Reccomendations> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Chose 3 shows",
+                          'Chose 3 shows',
                           style: TextStyle(
                               fontSize: height / 22,
                               fontWeight: FontWeight.w600,
                               color: getTheme()),
                         ),
                         Text(
-                          "that interest you",
+                          'that interest you',
                           style: TextStyle(
                               fontSize: height / 24, color: getTheme()),
                         ),
@@ -91,7 +92,7 @@ class _ReccomendationsState extends State<Reccomendations> {
                       child: const Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Text(
-                          "Skip",
+                          'Skip',
                           style: TextStyle(
                               fontSize: 15, fontWeight: FontWeight.w600),
                         ),
@@ -153,7 +154,7 @@ class _ReccomendationsState extends State<Reccomendations> {
                                         color: Colors.white,
                                         size: 35,
                                       )
-                                    : const Text(""),
+                                    : const Text(''),
                               )),
                         )),
                   );
@@ -180,7 +181,7 @@ class _ReccomendationsState extends State<Reccomendations> {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(5), color: getTheme()),
                 child: Center(
-                  child: Text("Done", style: TextStyle(color: getThemeInv())),
+                  child: Text('Done', style: TextStyle(color: getThemeInv())),
                 ),
               ),
             ),

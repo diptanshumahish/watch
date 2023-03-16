@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:watch/src/features/home/presentation/favourites/favourites_screen.dart';
-import 'package:watch/src/features/home/presentation/profile/profile.dart';
 
 import '../explore_screen/explore.dart';
+import '../favourites/favourites_screen.dart';
+import '../profile/profile.dart';
 import 'components/home.dart';
 
 int currenIndex = 0;
@@ -41,12 +41,12 @@ class _HomeScreenState extends State<HomeScreen> {
             });
           },
           items: const [
-            BottomNavigationBarItem(label: "Home", icon: Icon(Iconsax.home)),
+            BottomNavigationBarItem(label: 'Home', icon: Icon(Iconsax.home)),
             BottomNavigationBarItem(
-                label: "Search", icon: Icon(Iconsax.search_normal)),
+                label: 'Search', icon: Icon(Iconsax.search_normal)),
             BottomNavigationBarItem(
-                label: "Favorites", icon: Icon(Iconsax.heart)),
-            BottomNavigationBarItem(label: "Profile", icon: Icon(Iconsax.user)),
+                label: 'Favorites', icon: Icon(Iconsax.heart)),
+            BottomNavigationBarItem(label: 'Profile', icon: Icon(Iconsax.user)),
           ],
         ),
       ),
