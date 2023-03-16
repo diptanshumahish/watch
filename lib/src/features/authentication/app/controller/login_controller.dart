@@ -58,8 +58,9 @@ class LoginController extends StateNotifier<LoginState> {
       (UserCredential user) {
         if (user.user?.uid == null) {
           state = LoginFailure(Failure(
-              message: 'Unable to get user id',
-              stackTrace: StackTrace.current));
+            message: 'Unable to get user id',
+            stackTrace: StackTrace.current,
+          ));
           return;
         }
         _userNotifier.setUserProps(
