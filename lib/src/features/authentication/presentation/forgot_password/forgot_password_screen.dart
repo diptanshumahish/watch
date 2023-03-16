@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:pinput/pinput.dart';
 
 import '../../../../../app/utils/snackbar/snackbar.dart';
 import '../../../../shared/loading_dialog.dart';
@@ -10,7 +11,8 @@ import '../../app/controller/forgot_password_controller.dart';
 import '../../app/state/forgot_password_state.dart';
 
 class ForgotPasswordScreen extends HookConsumerWidget {
-  const ForgotPasswordScreen({super.key});
+  final bool isMobileReset;
+  const ForgotPasswordScreen({super.key, this.isMobileReset = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -22,14 +24,24 @@ class ForgotPasswordScreen extends HookConsumerWidget {
         context.hideLoaderDialog();
         context.showSnackBar(next.error.message, isError: true);
       }
-      if (next is ForgotSuccess) {
+      if (next is ForgotEmailSent) {
         context.hideLoaderDialog();
-        // context.showSnackBar(next.message);
-        // Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.of(context).pop();
+        });
+        context.showSnackBar(next.message);
+      }
+      if (next is NewEmailVerified) {
+        context.hideLoaderDialog();
+        context.showSnackBar(next.message);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          Navigator.of(context).pop();
+        });
       }
     });
     Size size = MediaQuery.of(context).size;
-    var emailController = useTextEditingController();
+    TextEditingController emailController = useTextEditingController();
+    TextEditingController pinputController = useTextEditingController();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -73,7 +85,7 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                             child: Text(
                               'Forgot Password',
                               style: TextStyle(
-                                fontSize: size.height / 24,
+                                fontSize: size.height / 30,
                                 fontWeight: FontWeight.w900,
                                 color: Colors.black,
                               ),
@@ -118,8 +130,9 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                                                   .read(
                                                       forgotScreenControllerProvider
                                                           .notifier)
-                                                  .resetPassword(
-                                                      emailController.text);
+                                                  .resetPassword(emailController
+                                                      .text
+                                                      .trim());
                                             },
                                       style: ElevatedButton.styleFrom(
                                         fixedSize: const Size.fromHeight(45),
@@ -148,6 +161,116 @@ class ForgotPasswordScreen extends HookConsumerWidget {
                             ],
                           ),
                         ),
+                        const SizedBox(height: 20),
+                        if (isMobileReset) ...[
+                          Center(
+                            child: Text(
+                              'Enter the code',
+                              style: TextStyle(
+                                fontSize: size.height / 50,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+                          Pinput(
+                            length: 6,
+                            autofillHints: const <String>[
+                              AutofillHints.oneTimeCode
+                            ],
+                            androidSmsAutofillMethod:
+                                AndroidSmsAutofillMethod.smsUserConsentApi,
+                            listenForMultipleSmsOnAndroid: true,
+                            hapticFeedbackType: HapticFeedbackType.lightImpact,
+                            defaultPinTheme: PinTheme(
+                              width: 60,
+                              height: 60,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                color: Colors.white,
+                                boxShadow: <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.grey.shade300,
+                                    blurRadius: 4,
+                                    spreadRadius: 1.5,
+                                    offset: const Offset(2, 2),
+                                  )
+                                ],
+                              ),
+                            ),
+                            showCursor: true,
+                            cursor: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: Container(
+                                width: 19,
+                                height: 1,
+                                margin: const EdgeInsets.only(bottom: 12),
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                              ),
+                            ),
+                            onClipboardFound: (String value) {
+                              pinputController.text = value;
+                            },
+                            closeKeyboardWhenCompleted: true,
+                            keyboardType: TextInputType.number,
+                            onCompleted: (String value) async {
+                              await ref
+                                  .read(forgotScreenControllerProvider.notifier)
+                                  .verifyResetPassword(value);
+                            },
+                          ),
+                          const SizedBox(height: 20),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 20),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: ValueListenableBuilder(
+                                    valueListenable: pinputController,
+                                    builder: (_, val, child) {
+                                      return ElevatedButton(
+                                        onPressed: (val.text.isEmpty)
+                                            ? null
+                                            : () async {
+                                                await ref
+                                                    .read(
+                                                        forgotScreenControllerProvider
+                                                            .notifier)
+                                                    .verifyResetPassword(
+                                                        pinputController.text);
+                                              },
+                                        style: ElevatedButton.styleFrom(
+                                          fixedSize: const Size.fromHeight(45),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          disabledBackgroundColor:
+                                              Colors.grey.shade400,
+                                          disabledForegroundColor:
+                                              Colors.grey.shade800,
+                                          backgroundColor: Colors.black,
+                                          foregroundColor: Colors.white,
+                                        ),
+                                        child: const Text(
+                                          'VERIFY',
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w600,
+                                            letterSpacing: 1.1,
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]
                       ],
                     ),
                   ),

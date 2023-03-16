@@ -765,6 +765,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.1.0"
+  pinput:
+    dependency: "direct main"
+    description:
+      name: pinput
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.2.21"
   platform:
     dependency: transitive
     description:
@@ -896,6 +903,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.99"
+  smart_auth:
+    dependency: transitive
+    description:
+      name: smart_auth
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.8"
   source_gen:
     dependency: transitive
     description:

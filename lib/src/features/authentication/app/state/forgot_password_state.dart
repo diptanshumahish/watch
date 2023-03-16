@@ -16,9 +16,17 @@ class ForgotLoading extends ForgotPasswordState {
   const ForgotLoading();
 }
 
-class ForgotSuccess extends ForgotPasswordState {
+class NewEmailVerified extends ForgotPasswordState {
   final String message;
-  const ForgotSuccess({this.message = 'Password Reset Email Sent'});
+  const NewEmailVerified({this.message = 'Password Reset Successfully'});
+
+  @override
+  List<String> get props => [message];
+}
+
+class ForgotEmailSent extends ForgotPasswordState {
+  final String message;
+  const ForgotEmailSent({this.message = 'Password Reset Email Sent'});
 
   @override
   List<String> get props => [message];

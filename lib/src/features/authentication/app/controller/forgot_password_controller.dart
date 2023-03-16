@@ -27,7 +27,18 @@ class ForgotScreenController extends StateNotifier<ForgotPasswordState> {
     Either<Failure, void> result = await _auth.resetPassword(email: email);
     return result.fold(
       (Failure failure) => state = ForgotFailure(failure),
-      (void user) => state = const ForgotSuccess(),
+      (void user) => state = const ForgotEmailSent(),
     );
   }
+
+  Future<void> verifyResetPassword(String code) async {
+    state = const ForgotLoading();
+    Either<Failure, void> result = await _auth.verifyResetPassword(code);
+    return result.fold(
+      (Failure failure) => state = ForgotFailure(failure),
+      (void user) => state = const NewEmailVerified(),
+    );
+  }
+
+
 }
