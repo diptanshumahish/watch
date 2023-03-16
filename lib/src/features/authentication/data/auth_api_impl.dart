@@ -18,6 +18,13 @@ abstract class AuthAPIImpl {
     required String password,
   });
 
+
+  FutureEither<void> resetPassword({
+    required String email
+  });
+
+  FutureEither<void> verifyResetPassword(String code);
+
   ///Sign in user with Facebook returns [SignInEither]
   Future<SignInEither> signInWithFacebook();
 

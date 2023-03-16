@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:watch/src/features/authentication/presentation/signup/signup_screen.dart';
-import 'package:watch/src/features/home/presentation/home_view/home_screen.dart';
-import 'package:watch/src/features/home/presentation/trending/trending_movies_screen.dart';
-import 'package:watch/src/routes/app_routes.dart';
 
+import '../features/authentication/presentation/forgot_password/forgot_password_screen.dart';
 import '../features/authentication/presentation/login/login_screen.dart';
+import '../features/authentication/presentation/signup/signup_screen.dart';
+import '../features/home/presentation/home_view/home_screen.dart';
+import '../features/home/presentation/trending/trending_movies_screen.dart';
+import 'app_routes.dart';
 
 class AppRouter {
   ///onGenerateRoute
@@ -27,6 +28,12 @@ class AppRouter {
           curve: Curves.bounceOut,
           type: PageTransitionType.leftToRight,
           child: const SignUpScreen(),
+        );
+      case resetPasswordRoute:
+        return PageTransition(
+          curve: Curves.bounceOut,
+          type: PageTransitionType.leftToRight,
+          child: const ForgotPasswordScreen(),
         );
       case trendingRoute:
         return PageTransition(

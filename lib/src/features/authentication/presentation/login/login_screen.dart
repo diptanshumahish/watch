@@ -4,12 +4,13 @@ import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/app/utils/snackbar/snackbar.dart';
-import 'package:watch/app/utils/textfield_validators.dart';
-import 'package:watch/src/features/authentication/app/controller/login_controller.dart';
-import 'package:watch/src/features/authentication/app/state/login_state.dart';
-import 'package:watch/src/routes/app_routes.dart';
-import 'package:watch/src/shared/loading_dialog.dart';
+
+import '../../../../../app/utils/snackbar/snackbar.dart';
+import '../../../../../app/utils/textfield_validators.dart';
+import '../../../../routes/app_routes.dart';
+import '../../../../shared/loading_dialog.dart';
+import '../../app/controller/login_controller.dart';
+import '../../app/state/login_state.dart';
 
 class LoginScreen extends HookConsumerWidget {
   const LoginScreen({super.key});
@@ -31,8 +32,8 @@ class LoginScreen extends HookConsumerWidget {
       }
     });
     Size size = MediaQuery.of(context).size;
-    final emailController = useTextEditingController();
-    final passwordController = useTextEditingController();
+    var emailController = useTextEditingController();
+    var passwordController = useTextEditingController();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -69,7 +70,7 @@ class LoginScreen extends HookConsumerWidget {
                           padding: const EdgeInsets.only(bottom: 20, top: 10),
                           child: Center(
                             child: Text(
-                              "Login",
+                              'Login',
                               style: TextStyle(
                                 fontSize: size.height / 24,
                                 fontWeight: FontWeight.w900,
@@ -81,7 +82,7 @@ class LoginScreen extends HookConsumerWidget {
                         const Padding(
                           padding: EdgeInsets.only(bottom: 5.0),
                           child: Text(
-                            "Email",
+                            'Email',
                             style: TextStyle(color: Colors.black),
                           ),
                         ),
@@ -91,26 +92,26 @@ class LoginScreen extends HookConsumerWidget {
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
                           inputFormatters: [
-                            FilteringTextInputFormatter.deny(RegExp(r"\s")),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           style: const TextStyle(color: Colors.grey),
                           placeholderStyle: const TextStyle(color: Colors.grey),
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: const Color.fromARGB(52, 158, 158, 158)),
-                          placeholder: "Enter your email",
+                          placeholder: 'Enter your email',
                         ),
                         const Padding(
                           padding: EdgeInsets.only(top: 8.0, bottom: 5),
                           child: Text(
-                            "Password",
+                            'Password',
                             style: TextStyle(color: Colors.black),
                           ),
                         ),
                         CupertinoTextField(
                           obscureText: true,
                           inputFormatters: [
-                            FilteringTextInputFormatter.deny(RegExp(r"\s")),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.done,
@@ -121,21 +122,25 @@ class LoginScreen extends HookConsumerWidget {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: const Color(0x349E9E9E)),
-                          placeholder: "Enter your password",
+                          placeholder: 'Enter your password',
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 10),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: const [
-                              Text(
-                                "Forgot password?",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                ),
-                              )
-                            ],
+                          child: GestureDetector(
+                            onTap: () => Navigator.pushNamed(
+                                context, resetPasswordRoute),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: const [
+                                Text(
+                                  'Forgot password?',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         Padding(
@@ -182,7 +187,7 @@ class LoginScreen extends HookConsumerWidget {
                                         foregroundColor: Colors.white,
                                       ),
                                       child: const Text(
-                                        "LOGIN",
+                                        'LOGIN',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w600,
                                           letterSpacing: 1.1,
@@ -204,11 +209,11 @@ class LoginScreen extends HookConsumerWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: const [
                                   Text(
-                                    "By clicking sign in you agree to our",
+                                    'By clicking sign in you agree to our',
                                     style: TextStyle(color: Colors.grey),
                                   ),
                                   Text(
-                                    "Terms and Conditions",
+                                    'Terms and Conditions',
                                     style: TextStyle(
                                       fontWeight: FontWeight.w600,
                                       color: Colors.black,
@@ -282,11 +287,12 @@ class LoginScreen extends HookConsumerWidget {
                                     ),
                                   ),
                                   InkWell(
-                                    onTap: () async =>
-                                        await Navigator.pushNamed(
-                                            context, signUpRoute),
+                                    onTap: () async {
+                                      await Navigator.pushNamed(
+                                          context, signUpRoute);
+                                    },
                                     child: const Text(
-                                      "Sign up now!",
+                                      'Sign up now!',
                                       style: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: Colors.black),
