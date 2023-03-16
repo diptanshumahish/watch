@@ -13,36 +13,36 @@ class AppRouter {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case homeRoute:
-        return PageTransition(
+        return PageTransition<dynamic>(
           type: PageTransitionType.fade,
           child: const HomeScreen(),
         );
       case loginRoute:
-        return PageTransition(
+        return PageTransition<dynamic>(
           curve: Curves.bounceOut,
           type: PageTransitionType.leftToRight,
           child: const LoginScreen(),
         );
       case signUpRoute:
-        return PageTransition(
+        return PageTransition<dynamic>(
           curve: Curves.bounceOut,
           type: PageTransitionType.leftToRight,
           child: const SignUpScreen(),
         );
       case resetPasswordRoute:
-        return PageTransition(
+        return PageTransition<dynamic>(
           curve: Curves.bounceOut,
           type: PageTransitionType.leftToRight,
           child: const ForgotPasswordScreen(),
         );
       case trendingRoute:
-        return PageTransition(
+        return PageTransition<dynamic>(
           curve: Curves.bounceOut,
           type: PageTransitionType.fade,
           child: const TrendingMoviesScreen(),
         );
       default:
-        return MaterialPageRoute(
+        return MaterialPageRoute<dynamic>(
           builder: (_) => const Scaffold(
             body: Center(child: Text('Unkonwn route')),
           ),

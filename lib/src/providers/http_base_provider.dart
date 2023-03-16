@@ -3,12 +3,13 @@ import 'dart:io';
 import 'package:dartz/dartz.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:http/http.dart';
-import 'package:watch/app/errors/errors.dart';
+
+import '../../app/errors/errors.dart';
 
 ///Provider that will be used to provide the http client
-final httpClientProvider = Provider<HttpBaseClient>(
+final Provider<HttpBaseClient> httpClientProvider = Provider<HttpBaseClient>(
   name: 'httpClientProvider',
-  (ref) => HttpBaseClient(Client()),
+  (ProviderRef<HttpBaseClient> ref) => HttpBaseClient(Client()),
 );
 
 ///BaseApi class that will be used to make CRUD operations

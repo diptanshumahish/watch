@@ -11,7 +11,10 @@ final AutoDisposeStateNotifierProvider<ForgotScreenController,
     StateNotifierProvider.autoDispose<ForgotScreenController,
         ForgotPasswordState>(
   name: 'LoginControllerProvider',
-  (ref) => ForgotScreenController(
+  (AutoDisposeStateNotifierProviderRef<ForgotScreenController,
+              ForgotPasswordState>
+          ref) =>
+      ForgotScreenController(
     auth: ref.watch(authAPIProvider),
   ),
 );
@@ -39,6 +42,4 @@ class ForgotScreenController extends StateNotifier<ForgotPasswordState> {
       (void user) => state = const NewEmailVerified(),
     );
   }
-
-
 }

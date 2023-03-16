@@ -17,7 +17,8 @@ class LoginScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.listen(loginControllerProvider, (previous, next) {
+    ref.listen(loginControllerProvider,
+        (LoginState? previous, LoginState next) {
       if (next is LoginLoading) {
         context.showLoaderDialog();
       }
@@ -28,12 +29,13 @@ class LoginScreen extends HookConsumerWidget {
       if (next is LoginSuccess) {
         context.hideLoaderDialog();
         context.showSnackBar(next.message);
-        Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, homeRoute, (Route<dynamic> route) => false);
       }
     });
     Size size = MediaQuery.of(context).size;
-    var emailController = useTextEditingController();
-    var passwordController = useTextEditingController();
+    TextEditingController emailController = useTextEditingController();
+    TextEditingController passwordController = useTextEditingController();
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -41,7 +43,7 @@ class LoginScreen extends HookConsumerWidget {
         extendBody: true,
         body: SafeArea(
           child: Stack(
-            children: [
+            children: <Widget>[
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.25,
                 child: Center(
@@ -65,7 +67,7 @@ class LoginScreen extends HookConsumerWidget {
                         horizontal: 15, vertical: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
+                      children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(bottom: 20, top: 10),
                           child: Center(
@@ -91,7 +93,7 @@ class LoginScreen extends HookConsumerWidget {
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
-                          inputFormatters: [
+                          inputFormatters: <FilteringTextInputFormatter>[
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           style: const TextStyle(color: Colors.grey),
@@ -110,7 +112,7 @@ class LoginScreen extends HookConsumerWidget {
                         ),
                         CupertinoTextField(
                           obscureText: true,
-                          inputFormatters: [
+                          inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           keyboardType: TextInputType.visiblePassword,
@@ -131,7 +133,7 @@ class LoginScreen extends HookConsumerWidget {
                                 context, resetPasswordRoute),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.end,
-                              children: const [
+                              children: const <Widget>[
                                 Text(
                                   'Forgot password?',
                                   style: TextStyle(
@@ -146,11 +148,12 @@ class LoginScreen extends HookConsumerWidget {
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 20),
                           child: Row(
-                            children: [
+                            children: <Widget>[
                               Expanded(
-                                child: ValueListenableBuilder(
+                                child: ValueListenableBuilder<TextEditingValue>(
                                   valueListenable: emailController,
-                                  builder: (_, val, child) {
+                                  builder:
+                                      (_, TextEditingValue val, Widget? child) {
                                     return ElevatedButton(
                                       onPressed: (val.text.isEmpty)
                                           ? null
@@ -203,11 +206,11 @@ class LoginScreen extends HookConsumerWidget {
                         Padding(
                           padding: const EdgeInsets.all(15.0),
                           child: Column(
-                            children: [
+                            children: <Widget>[
                               Column(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
-                                children: const [
+                                children: const <Widget>[
                                   Text(
                                     'By clicking sign in you agree to our',
                                     style: TextStyle(color: Colors.grey),
@@ -226,7 +229,7 @@ class LoginScreen extends HookConsumerWidget {
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
+                                  children: <Widget>[
                                     Padding(
                                       padding: const EdgeInsets.only(right: 2),
                                       child: Container(
@@ -292,7 +295,7 @@ class LoginScreen extends HookConsumerWidget {
                               ),
                               Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
+                                children: <Widget>[
                                   const Text(
                                     "Don't have an account? ",
                                     style: TextStyle(

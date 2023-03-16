@@ -1,10 +1,15 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:image_picker/image_picker.dart';
 
+import '../../../../../app/utils/snackbar/snackbar.dart';
 import '../../../../providers/user_provider.dart';
 import '../../../../routes/app_routes.dart';
 import '../../../../shared/background_painter.dart';
+import '../../app/controller/profile_controller.dart';
 import 'components/logout_dialog.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -96,56 +101,73 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ],
                     ),
                     const SizedBox(height: 40),
-                    Container(
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        shape: BoxShape.circle,
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFFC4C4C4).withOpacity(0.89),
-                            blurRadius: 60,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                      ),
-                      height: 128,
-                      width: 128,
-                      child: Stack(
-                        children: [
-                          CachedNetworkImage(
-                            imageUrl:
-                                'https://images.unsplash.com/photo-1601925662822-510b76665bd9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=580&q=80',
-                            imageBuilder:
-                                (_, ImageProvider<Object> imageProvider) =>
-                                    Container(
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                  image: imageProvider,
-                                  fit: BoxFit.cover,
+                    Consumer(builder: (context, ref, child) {
+                      return Container(
+                        padding: const EdgeInsets.all(4),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          shape: BoxShape.circle,
+                          boxShadow: [
+                            BoxShadow(
+                              color: const Color(0xFFC4C4C4).withOpacity(0.89),
+                              blurRadius: 60,
+                              spreadRadius: 5,
+                            ),
+                          ],
+                        ),
+                        height: 128,
+                        width: 128,
+                        child: Stack(
+                          children: [
+                            CachedNetworkImage(
+                              imageUrl: ref
+                                      .watch(profileNotifier.notifier)
+                                      .userPhotoURL ??
+                                  'https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png',
+                              imageBuilder:
+                                  (_, ImageProvider<Object> imageProvider) =>
+                                      Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  image: DecorationImage(
+                                    image: imageProvider,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                              errorWidget: (_, String url, error) => const Icon(
+                                Icons.error,
+                                color: Colors.red,
+                              ),
+                            ),
+                            Positioned(
+                              bottom: -15,
+                              right: 65,
+                              child: IconButton(
+                                onPressed: () async {
+                                  ImagePicker picker = ImagePicker();
+                                  XFile? image = await picker.pickImage(
+                                    source: ImageSource.gallery,
+                                  );
+                                  if (image == null) {
+                                    showSnackbar('No Image Selected',
+                                        backgroundColor: Colors.red);
+                                    return;
+                                  }
+                                  await ref
+                                      .read(profileNotifier.notifier)
+                                      .uploadFile(File(image.path));
+                                },
+                                icon: const Icon(
+                                  Icons.edit,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
-                            errorWidget: (_, String url, error) => const Icon(
-                              Icons.error,
-                              color: Colors.red,
-                            ),
-                          ),
-                          Positioned(
-                            bottom: -15,
-                            right: 65,
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
+                          ],
+                        ),
+                      );
+                    }),
                     const SizedBox(height: 43),
                     Consumer(builder: (context, ref, child) {
                       var name = ref.watch(userNotifierProvider

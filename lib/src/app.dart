@@ -1,12 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/src/features/splash/splash_screen.dart';
-import 'package:watch/src/routes/router.dart';
 
 import '../app/theme/app_theme.dart';
 import 'features/authentication/presentation/login/login_screen.dart';
 import 'features/home/presentation/home_view/home_screen.dart';
+import 'features/splash/splash_screen.dart';
 import 'providers/global_providers.dart';
+import 'routes/router.dart';
 
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
@@ -25,10 +26,10 @@ class MyApp extends StatelessWidget {
       darkTheme: MyThemes.darkTheme,
       onGenerateRoute: AppRouter.onGenerateRoute,
       home: Consumer(
-        builder: (context, ref, child) {
-          final user = ref.watch(sessionStatusProvider);
+        builder: (BuildContext context, WidgetRef ref, Widget? child) {
+          AsyncValue<User?> user = ref.watch(sessionStatusProvider);
           return user.when(
-            data: (user) {
+            data: (User? user) {
               if (user != null) {
                 return const HomeScreen();
               } else {

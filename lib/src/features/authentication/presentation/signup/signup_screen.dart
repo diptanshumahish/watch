@@ -21,19 +21,22 @@ class SignUpScreen extends StatefulHookConsumerWidget {
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    var fullNameController = useTextEditingController();
-    var emailController = useTextEditingController();
-    var ageController = useTextEditingController();
-    var passwordController = useTextEditingController();
-    var confirmPasswordController = useTextEditingController();
-    ref.listen<SignUpState>(signUpControllerProvider, (old, next) {
+    TextEditingController fullNameController = useTextEditingController();
+    TextEditingController emailController = useTextEditingController();
+    TextEditingController ageController = useTextEditingController();
+    TextEditingController passwordController = useTextEditingController();
+    TextEditingController confirmPasswordController =
+        useTextEditingController();
+    ref.listen<SignUpState>(signUpControllerProvider,
+        (SignUpState? old, SignUpState next) {
       if (next is SignUpLoading) {
         context.showLoaderDialog();
       }
       if (next is SignupSuccess) {
         context.hideLoaderDialog();
         context.showSnackBar(next.message);
-        Navigator.pushNamedAndRemoveUntil(context, homeRoute, (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, homeRoute, (Route<dynamic> route) => false);
       } else if (next is SignUpFailure) {
         context.hideLoaderDialog();
         context.showSnackBar(next.error.message, isError: true);
@@ -43,7 +46,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
       backgroundColor: Colors.black,
       body: SafeArea(
         child: Stack(
-          children: [
+          children: <Widget>[
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.25,
               child: Center(child: Image.asset('assets/logo.png')),
@@ -65,7 +68,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                   padding: const EdgeInsets.all(10.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
+                    children: <Widget>[
                       Padding(
                         padding: const EdgeInsets.only(bottom: 20, top: 10),
                         child: Center(
@@ -90,7 +93,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CupertinoTextField(
                           autofocus: true,
-                          autofillHints: const [AutofillHints.name],
+                          autofillHints: const <String>[AutofillHints.name],
                           controller: fullNameController,
                           textInputAction: TextInputAction.next,
                           padding: const EdgeInsets.all(13),
@@ -115,12 +118,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CupertinoTextField(
                           controller: emailController,
-                          inputFormatters: [
+                          inputFormatters: <FilteringTextInputFormatter>[
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
-                          autofillHints: const [AutofillHints.email],
+                          autofillHints: const <String>[AutofillHints.email],
                           padding: const EdgeInsets.all(13),
                           placeholderStyle: const TextStyle(color: Colors.grey),
                           style: const TextStyle(color: Colors.black),
@@ -143,7 +146,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CupertinoTextField(
                           controller: ageController,
-                          inputFormatters: [
+                          inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.digitsOnly,
                             LengthLimitingTextInputFormatter(2)
                           ],
@@ -171,9 +174,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CupertinoTextField(
                           obscureText: true,
-                          autofillHints: const [AutofillHints.password],
+                          autofillHints: const <String>[AutofillHints.password],
                           controller: passwordController,
-                          inputFormatters: [
+                          inputFormatters: <FilteringTextInputFormatter>[
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           textInputAction: TextInputAction.next,
@@ -201,12 +204,12 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CupertinoTextField(
                           obscureText: true,
-                          inputFormatters: [
+                          inputFormatters: <FilteringTextInputFormatter>[
                             FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.done,
-                          autofillHints: const [AutofillHints.password],
+                          autofillHints: const <String>[AutofillHints.password],
                           controller: confirmPasswordController,
                           placeholderStyle: const TextStyle(color: Colors.grey),
                           padding: const EdgeInsets.all(13),
@@ -266,9 +269,9 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: const EdgeInsets.all(5.0),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
+                          children: <Widget>[
                             Column(
-                              children: const [
+                              children: const <Widget>[
                                 Text(
                                   'By clicking sign up you agree to our',
                                   style: TextStyle(color: Colors.grey),
@@ -285,7 +288,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             const SizedBox(height: 20),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
+                              children: <Widget>[
                                 const Text(
                                   'Alreday have an account? ',
                                   style: TextStyle(color: Colors.black),

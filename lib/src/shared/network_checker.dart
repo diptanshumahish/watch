@@ -1,8 +1,8 @@
 import 'package:flutter/widgets.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/src/providers/network_checker_provider.dart';
 
 import '../../app/constants/enums.dart';
+import '../providers/network_checker_provider.dart';
 
 class NetworkChecker extends StatelessWidget {
   final Widget onlineChild;
@@ -16,11 +16,12 @@ class NetworkChecker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer(
-      key: const ValueKey('NetworkChecker'),
-      builder: (context, ref, child) {
-        final status = ref.watch(connectivityNotifierProvider);
+      key: const ValueKey<String>('NetworkChecker'),
+      builder: (BuildContext context, WidgetRef ref, Widget? child) {
+        AsyncValue<ConnectionStatus> status =
+            ref.watch(connectivityNotifierProvider);
         return status.maybeWhen(
-          data: (status) {
+          data: (ConnectionStatus status) {
             if (status == ConnectionStatus.online) {
               return onlineChild;
             } else {

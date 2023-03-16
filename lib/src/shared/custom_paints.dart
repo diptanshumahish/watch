@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 class RedShaderPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    const rect = Rect.fromLTRB(-150, -150, 270, 270);
-    final paint = Paint();
+    const Rect rect = Rect.fromLTRB(-150, -150, 270, 270);
+    Paint paint = Paint();
     canvas.drawRect(Offset.zero & size, paint);
     paint.shader = RadialGradient(
-      colors: [
+      colors: <Color>[
         const Color(0xFFF41521).withOpacity(0.53),
         const Color(0xFFEE1520).withOpacity(0.20),
       ],
@@ -31,8 +31,8 @@ class VariableColorPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final rect = Rect.fromLTWH(0, size.height - 300, size.width, 600);
-    final paint = Paint()
+    Rect rect = Rect.fromLTWH(0, size.height - 300, size.width, 600);
+    Paint paint = Paint()
       ..shader = RadialGradient(
         colors: colors,
       ).createShader(rect)

@@ -5,7 +5,7 @@ import '../../../../../app/errors/failure.dart';
 abstract class LoginState extends Equatable {
   const LoginState();
   @override
-  List<Object> get props => [];
+  List<Object> get props => <Object>[];
 }
 
 class LoginInitial extends LoginState {
@@ -21,14 +21,14 @@ class LoginSuccess extends LoginState {
   const LoginSuccess({this.message = 'Logged In Successfully'});
 
   @override
-  List<String> get props => [message];
+  List<String> get props => <String>[message];
 }
 
 class LoginFailure extends LoginState {
   final Failure error;
   const LoginFailure(this.error);
   @override
-  List<Object> get props => [error];
+  List<Object> get props => <Object>[error];
   @override
   String toString() => 'SignupFailure { error: $error }';
 }

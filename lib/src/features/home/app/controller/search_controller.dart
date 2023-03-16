@@ -10,7 +10,8 @@ import '../../data/tmdb_api.dart';
 import '../state/search_state.dart';
 
 ///exploreSearchControllerPage
-final exploreControllerProvider =
+final AutoDisposeAsyncNotifierProvider<ExploreController, ExploreState>
+    exploreControllerProvider =
     AsyncNotifierProvider.autoDispose<ExploreController, ExploreState>(
   name: 'exploreControllerProvider',
   ExploreController.new,
@@ -22,18 +23,20 @@ class ExploreController extends AutoDisposeAsyncNotifier<ExploreState> {
     Either<Failure, AllGenres> result =
         await ref.watch(tmdbProvider).getAllGenres();
     return result.fold(
-      (l) => const ExploreState.initial([]),
-      (r) => ExploreState.initial(r.genres),
+      (Failure l) => const ExploreState.initial(<Genre>[]),
+      (AllGenres r) => ExploreState.initial(r.genres),
     );
   }
 
   Future<void> onSearch(String query) async {
-    state = const AsyncLoading();
+    state = const AsyncLoading<ExploreState>();
     Either<Failure, MovieDetail> result =
         await ref.watch(tmdbProvider).getGenreWiseMovies(genre: query);
     result.fold(
-      (l) => state = AsyncValue.error(l, StackTrace.current),
-      (r) => state = AsyncValue.data(ExploreState.loaded(r)),
+      (Failure l) =>
+          state = AsyncValue<ExploreState>.error(l, StackTrace.current),
+      (MovieDetail r) =>
+          state = AsyncValue<ExploreState>.data(ExploreState.loaded(r)),
     );
   }
 }

@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import '../../../../../../app/constants/constants.dart';
+import '../../../../../models/all_genres_model.dart';
+import '../../../../../models/movie_details_model.dart';
 import '../../../../../shared/shimmer_loaders.dart';
 import '../../../app/controller/search_controller.dart';
+import '../../../app/state/search_state.dart';
 
 class SearchResult extends StatelessWidget {
   const SearchResult({
@@ -21,20 +24,21 @@ class SearchResult extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Consumer(
-      builder: (_, ref, child) {
-        var exploreController = ref.watch(exploreControllerProvider);
+      builder: (_, WidgetRef ref, Widget? child) {
+        AsyncValue<ExploreState> exploreController =
+            ref.watch(exploreControllerProvider);
         return exploreController.when(
-          data: (data) => data.when(
-            initial: (genres) => Column(
-              children: [
+          data: (ExploreState data) => data.when(
+            initial: (List<Genre> genres) => Column(
+              children: <Widget>[
                 SizedBox(
                   height: 40,
                   child: ListView.separated(
                     scrollDirection: Axis.horizontal,
                     itemCount: genres.length,
-                    separatorBuilder: (context, index) =>
+                    separatorBuilder: (BuildContext context, int index) =>
                         const SizedBox(width: 10),
-                    itemBuilder: (context, index) {
+                    itemBuilder: (BuildContext context, int index) {
                       return Chip(
                         label: Text(genres[index].name),
                       );
@@ -52,12 +56,12 @@ class SearchResult extends StatelessWidget {
                     crossAxisCount: 2,
                     childAspectRatio: 9 / 16,
                   ),
-                  itemBuilder: (context, index) {
+                  itemBuilder: (BuildContext context, int index) {
                     return InkWell(
                       onTap: () {},
                       child: Container(
                         decoration: BoxDecoration(
-                          boxShadow: const [
+                          boxShadow: const <BoxShadow>[
                             BoxShadow(
                               offset: Offset(7, 6),
                               spreadRadius: -10,
@@ -74,7 +78,7 @@ class SearchResult extends StatelessWidget {
                           ),
                         ),
                         child: Stack(
-                          children: [
+                          children: <Widget>[
                             Container(
                               height: size.height / 2,
                               decoration: BoxDecoration(
@@ -82,7 +86,10 @@ class SearchResult extends StatelessWidget {
                                 gradient: const LinearGradient(
                                   begin: Alignment.topCenter,
                                   end: Alignment.bottomCenter,
-                                  colors: [Colors.transparent, Colors.black],
+                                  colors: <Color>[
+                                    Colors.transparent,
+                                    Colors.black
+                                  ],
                                 ),
                               ),
                             ),
@@ -92,7 +99,7 @@ class SearchResult extends StatelessWidget {
                                 padding: const EdgeInsets.all(14.0),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
+                                  children: <Widget>[
                                     Text(
                                       searchTags[index],
                                       textAlign: TextAlign.center,
@@ -118,7 +125,7 @@ class SearchResult extends StatelessWidget {
                 ),
               ],
             ),
-            loaded: (movies) {
+            loaded: (MovieDetail movies) {
               if (movies.results.isEmpty) {
                 return const Center(child: Text('No Results Found'));
               }
@@ -131,7 +138,7 @@ class SearchResult extends StatelessWidget {
                     mainAxisSpacing: 10,
                     crossAxisCount: 2,
                     childAspectRatio: 9 / 16),
-                itemBuilder: (context, index) {
+                itemBuilder: (BuildContext context, int index) {
                   return InkWell(
                     onTap: () {},
                     child: Container(
@@ -203,7 +210,7 @@ class SearchResult extends StatelessWidget {
               );
             },
           ),
-          error: (error, stack) => Column(
+          error: (Object error, StackTrace stack) => Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Text>[
               Text('Error: $error'),

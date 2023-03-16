@@ -1,5 +1,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.diptanshumahish.watch">
+    <uses-permission android:name="android.name.INTERNET"/>
+    <uses-permission android:name="android.name.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.name.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.name.CAMERA"/>
    <application
         android:label="watch"
         android:name="${applicationName}"

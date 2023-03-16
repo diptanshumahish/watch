@@ -15,7 +15,7 @@ class ExploreScreen extends ConsumerStatefulWidget {
 }
 
 class _ExploreScreenState extends ConsumerState<ExploreScreen> {
-  final List<String> images = [
+  final List<String> images = <String>[
     'https://github.com/diptanshumahish/watch_images/raw/main/horror.webp',
     'https://github.com/diptanshumahish/watch_images/raw/main/scifi.webp',
     'https://github.com/diptanshumahish/watch_images/raw/main/thriller.webp',
@@ -25,7 +25,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
     'https://github.com/diptanshumahish/watch_images/raw/main/comedy.webp',
     'https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp',
   ];
-  final List<String> searchTags = [
+  final List<String> searchTags = <String>[
     'horror',
     'Sci-Fi',
     'Thriller',
@@ -35,7 +35,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
     'Comedy',
     'Tragedy',
   ];
-  final List<String> tagLines = [
+  final List<String> tagLines = <String>[
     'Shivers all around!',
     'the modern days!',
     'Some thrillers here',
@@ -72,12 +72,12 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
   @override
   Widget build(BuildContext context) {
     return ListView(
-      children: [
+      children: <Widget>[
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
+            children: const <Widget>[
               Text(
                 'Explore',
                 maxLines: 1,
@@ -100,7 +100,7 @@ class _ExploreScreenState extends ConsumerState<ExploreScreen> {
         Padding(
           padding: const EdgeInsets.all(15.0),
           child: CupertinoSearchTextField(
-            onChanged: (value) {
+            onChanged: (String value) {
               String query = value.trim();
               if (value.length > 2 && query != lastQuery) {
                 debounce(() async {

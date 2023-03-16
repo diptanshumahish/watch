@@ -4,7 +4,7 @@ class AllGenres {
   AllGenres({required this.genres});
 
   factory AllGenres.fromJson(Map<String, dynamic> json) => AllGenres(
-        genres: List<Genre>.from(json['genres'].map((x) => Genre.fromJson(x))),
+        genres: List<Genre>.from(json['genres'].map(Genre.fromJson)),
       );
 }
 

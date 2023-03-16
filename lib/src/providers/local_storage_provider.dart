@@ -6,14 +6,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../models/user_model.dart';
 
-final sharedPreferenceProvider = Provider<SharedPreferences>(
+final Provider<SharedPreferences> sharedPreferenceProvider =
+    Provider<SharedPreferences>(
   name: 'sharedPreferenceProvider',
-  (ref) => throw UnimplementedError(),
+  (ProviderRef<SharedPreferences> ref) => throw UnimplementedError(),
 );
 
-final localStorageAPIProvider = Provider<LocalStorageAPI>(
+final Provider<LocalStorageAPI> localStorageAPIProvider =
+    Provider<LocalStorageAPI>(
   name: 'localStorageAPIProvider',
-  (ref) => LocalStorageAPI(ref.watch(sharedPreferenceProvider)),
+  (ProviderRef<LocalStorageAPI> ref) =>
+      LocalStorageAPI(ref.watch(sharedPreferenceProvider)),
 );
 
 class LocalStorageAPI {
@@ -29,7 +32,7 @@ class LocalStorageAPI {
     required String email,
     bool? isAdult = false,
   }) async {
-    return await setValue<String>(
+    return setValue<String>(
       'user',
       jsonEncode(UserModel(
         displayName: displayName,
@@ -53,13 +56,13 @@ class LocalStorageAPI {
   ///Clear the current user data from the disk
   ///Returns [true] if the data is cleared successfully
   Future<bool> clearUser() async {
-    return await remove('user');
+    return remove('user');
   }
 
   ///Remove a particular entry from the disk
   ///Returns [true] if the data is removed successfully
   Future<bool> remove(String key) async {
-    return await _prefs.remove(key);
+    return _prefs.remove(key);
   }
 
   ///Check if the key exists in the disk
@@ -67,7 +70,7 @@ class LocalStorageAPI {
 
   ///Save the current theme to the disk
   Future<bool> setTheme(bool isDarkMode) async {
-    return await setValue<bool>('isDark', isDarkMode);
+    return setValue<bool>('isDark', isDarkMode);
   }
 
   ///Get the current theme from the disk
@@ -77,15 +80,15 @@ class LocalStorageAPI {
   ///and [value] in the method. Returns [true] if the value is set successfully
   Future<bool> setValue<T>(String key, T value) async {
     if (value is String) {
-      return await _prefs.setString(key, value);
+      return _prefs.setString(key, value);
     } else if (value is int) {
-      return await _prefs.setInt(key, value);
+      return _prefs.setInt(key, value);
     } else if (value is bool) {
-      return await _prefs.setBool(key, value);
+      return _prefs.setBool(key, value);
     } else if (value is double) {
-      return await _prefs.setDouble(key, value);
+      return _prefs.setDouble(key, value);
     } else if (value is List<String>) {
-      return await _prefs.setStringList(key, value);
+      return _prefs.setStringList(key, value);
     } else {
       return false;
     }
@@ -121,6 +124,6 @@ class LocalStorageAPI {
   ///Clear all the data from the disk
   ///Returns [true] if the data is cleared successfully
   Future<bool> clearAll() async {
-    return await _prefs.clear();
+    return _prefs.clear();
   }
 }

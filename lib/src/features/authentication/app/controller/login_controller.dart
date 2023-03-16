@@ -12,7 +12,8 @@ final AutoDisposeStateNotifierProvider<LoginController, LoginState>
     loginControllerProvider =
     StateNotifierProvider.autoDispose<LoginController, LoginState>(
   name: 'LoginControllerProvider',
-  (ref) => LoginController(
+  (AutoDisposeStateNotifierProviderRef<LoginController, LoginState> ref) =>
+      LoginController(
     auth: ref.watch(authAPIProvider),
     userNotifier: ref.watch(userNotifierProvider.notifier),
   ),
