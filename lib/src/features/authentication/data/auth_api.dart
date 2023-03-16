@@ -213,11 +213,8 @@ class AuthAPI implements AuthAPIImpl {
   /// Sign out user and end the session
   /// Optional [futures] is a list of futures that will be executed before signing out
   @override
-  Future<SignOutEither> signOut({
-    List<Future<void>>? futures,
-  }) async {
+  Future<SignOutEither> signOut() async {
     try {
-      await Future.wait(futures ?? []);
       await _auth.signOut();
       return right(unit);
     } catch (e) {

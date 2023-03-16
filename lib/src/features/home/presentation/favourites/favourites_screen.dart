@@ -32,7 +32,7 @@ class FavScreen extends StatelessWidget {
         Expanded(
           child: Consumer(
             builder: (context, ref, child) {
-              final result = ref.watch(favouritesControllerProvider);
+              var result = ref.watch(favouritesControllerProvider);
               return result.maybeWhen(
                 data: (result) {
                   return result.when(
@@ -103,7 +103,7 @@ class GridBuilder extends StatelessWidget {
             image: NetworkImage(
               res[index]['posterPath'] != null
                   ? "$baseImageUrl${res[index]['posterPath']}"
-                  : "https://www.woolha.com/media/2020/03/eevee.png",
+                  : 'https://www.woolha.com/media/2020/03/eevee.png',
             ),
           ),
         ),

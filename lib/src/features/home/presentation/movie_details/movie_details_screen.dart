@@ -6,17 +6,17 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:like_button/like_button.dart';
-import 'package:watch/app/utils/snackbar/snackbar.dart';
-import 'package:watch/src/features/home/data/tmdb_api.dart';
-import 'package:watch/src/providers/firestore_provider.dart';
-import 'package:watch/src/shared/background_painter.dart';
-import 'package:watch/src/shared/custom_hero.dart';
-import 'package:watch/src/shared/custom_paints.dart';
-import 'package:watch/src/shared/loading_dialog.dart';
 
 import '../../../../../app/constants/api_urls.dart';
 import '../../../../../app/errors/failure.dart';
+import '../../../../../app/utils/snackbar/snackbar.dart';
 import '../../../../models/movie_details_model.dart';
+import '../../../../providers/firestore_provider.dart';
+import '../../../../shared/background_painter.dart';
+import '../../../../shared/custom_hero.dart';
+import '../../../../shared/custom_paints.dart';
+import '../../../../shared/loading_dialog.dart';
+import '../../data/tmdb_api.dart';
 import 'actors_tile.dart';
 
 class MovieDescScreen extends HookConsumerWidget {
@@ -28,7 +28,7 @@ class MovieDescScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final likeNotifier = useState(false);
+    var likeNotifier = useState(false);
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: SafeArea(

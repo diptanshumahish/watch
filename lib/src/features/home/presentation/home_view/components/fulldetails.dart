@@ -14,7 +14,7 @@ class FullDetails extends StatefulWidget {
 class _FullDetailsState extends State<FullDetails> {
   @override
   Widget build(BuildContext context) {
-    getTheme() {
+    Color getTheme() {
       if (Theme.of(context).brightness == Brightness.dark) {
         return Colors.white;
       } else {
@@ -22,7 +22,7 @@ class _FullDetailsState extends State<FullDetails> {
       }
     }
 
-    getThemeInv() {
+    Color getThemeInv() {
       if (Theme.of(context).brightness == Brightness.light) {
         return Colors.white;
       } else {
@@ -42,7 +42,7 @@ class _FullDetailsState extends State<FullDetails> {
                   image: DecorationImage(
                       fit: BoxFit.cover,
                       image: NetworkImage(
-                          "https://github.com/diptanshumahish/watch_images/raw/main/action.webp"))),
+                          'https://github.com/diptanshumahish/watch_images/raw/main/action.webp'))),
               child: Container(
                 height: height / 2,
                 decoration: const BoxDecoration(
@@ -99,14 +99,14 @@ class _FullDetailsState extends State<FullDetails> {
                       ),
                       const Spacer(),
                       const Text(
-                        "Annabelle",
+                        'Annabelle',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 35,
                             fontWeight: FontWeight.bold),
                       ),
                       const Text(
-                        "Miss me?",
+                        'Miss me?',
                         style: TextStyle(
                           color: Color.fromARGB(143, 255, 255, 255),
                           fontSize: 15,
@@ -129,11 +129,11 @@ class _FullDetailsState extends State<FullDetails> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: const [
-                                      Text("Rating: ",
+                                      Text('Rating: ',
                                           style: TextStyle(
                                               color: Color.fromARGB(
                                                   192, 255, 255, 255))),
-                                      Text("8.4",
+                                      Text('8.4',
                                           style: TextStyle(
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white)),
@@ -154,7 +154,7 @@ class _FullDetailsState extends State<FullDetails> {
                                 child: const Padding(
                                   padding: EdgeInsets.symmetric(horizontal: 5),
                                   child: Center(
-                                    child: Text("Horror",
+                                    child: Text('Horror',
                                         style: TextStyle(color: Colors.white)),
                                   ),
                                 ),
@@ -193,7 +193,7 @@ class _FullDetailsState extends State<FullDetails> {
                         children: [
                           Icon(CupertinoIcons.play_arrow_solid,
                               color: getThemeInv()),
-                          Text("Watch Trailer",
+                          Text('Watch Trailer',
                               style: TextStyle(color: getThemeInv())),
                         ],
                       ),

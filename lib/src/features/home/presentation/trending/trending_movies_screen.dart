@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:marquee/marquee.dart';
-import 'package:watch/src/features/home/app/controller/trending_controller.dart';
-import 'package:watch/src/shared/shimmer_loaders.dart';
 
 import '../../../../../app/constants/api_urls.dart';
+import '../../../../shared/shimmer_loaders.dart';
+import '../../app/controller/trending_controller.dart';
 
 class TrendingMoviesScreen extends StatelessWidget {
   const TrendingMoviesScreen({super.key});
@@ -22,7 +22,7 @@ class TrendingMoviesScreen extends StatelessWidget {
       body: SafeArea(
         child: Consumer(
           builder: (context, ref, child) {
-            final trending = ref.watch(trendingControllerProvider);
+            var trending = ref.watch(trendingControllerProvider);
             return trending.maybeWhen(
               data: (data) => data.when(
                 empty: () => const Center(child: Text('No data')),
@@ -56,7 +56,7 @@ class TrendingMoviesScreen extends StatelessWidget {
                         image: NetworkImage(
                           movies[index].posterPath != null
                               ? "$baseImageUrl${movies[index].posterPath}"
-                              : "https://www.woolha.com/media/2020/03/eevee.png",
+                              : 'https://www.woolha.com/media/2020/03/eevee.png',
                         ),
                       ),
                     ),

@@ -3,11 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:watch/app/constants/api_urls.dart';
-import 'package:watch/src/features/home/data/tmdb_api.dart';
-import 'package:watch/src/shared/custom_hero.dart';
 
+import '../../../../../../app/constants/api_urls.dart';
 import '../../../../../providers/user_provider.dart';
+import '../../../../../shared/custom_hero.dart';
+import '../../../data/tmdb_api.dart';
 import '../../movie_details/movie_details_screen.dart';
 
 class Home extends StatefulWidget {
@@ -18,7 +18,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  getTheme() {
+  Color getTheme() {
     if (Theme.of(context).brightness == Brightness.dark) {
       return Colors.white;
     } else {
@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
         const Padding(
           padding: EdgeInsets.all(15.0),
           child: Text(
-            "Top Picks for you",
+            'Top Picks for you',
             style: TextStyle(fontSize: 20),
           ),
         ),
@@ -96,7 +96,7 @@ class _HomeState extends State<Home> {
                       image: const DecorationImage(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                              "https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp")),
+                              'https://github.com/diptanshumahish/watch_images/raw/main/movie_rec/scifi2.webp')),
                       borderRadius: BorderRadius.circular(10)),
                   child: InkWell(
                     onTap: () {
@@ -120,15 +120,15 @@ class _HomeState extends State<Home> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Spacer(),
-                              const Text("Tenet",
+                              const Text('Tenet',
                                   style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 25)),
-                              const Text("Sci-Fi | 2020-08-26",
+                              const Text('Sci-Fi | 2020-08-26',
                                   style: TextStyle(color: Colors.white)),
                               const Text(
-                                "The Protagonist, a CIA operative, participates in an extraction at the Kyiv Opera House. His team retrieves an artifact but he is captured, tortured by mercenaries, and ultimately consumes a suicide pill. Some time later, the Protagonist awakens to learn the artifact was lost and the pill was a fake, designed as a test. A highly secretive organization called Tenet recruits him and briefs him on bullets with  entropy, meaning they move backward through time. After meeting his handler, Neil, they trace the inverted bullets to arms dealer Priya Singh in Mumbai.",
+                                'The Protagonist, a CIA operative, participates in an extraction at the Kyiv Opera House. His team retrieves an artifact but he is captured, tortured by mercenaries, and ultimately consumes a suicide pill. Some time later, the Protagonist awakens to learn the artifact was lost and the pill was a fake, designed as a test. A highly secretive organization called Tenet recruits him and briefs him on bullets with  entropy, meaning they move backward through time. After meeting his handler, Neil, they trace the inverted bullets to arms dealer Priya Singh in Mumbai.',
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
                                     color: Color.fromARGB(171, 255, 255, 255)),
@@ -148,11 +148,11 @@ class _HomeState extends State<Home> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
                                       children: const [
-                                        Text("Rating: ",
+                                        Text('Rating: ',
                                             style: TextStyle(
                                                 color: Color.fromARGB(
                                                     192, 255, 255, 255))),
-                                        Text("8.4",
+                                        Text('8.4',
                                             style: TextStyle(
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.white)),
@@ -176,7 +176,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Specialy picked for you",
+                'Specialy picked for you',
                 style: TextStyle(fontSize: 20, color: getTheme()),
               ),
               IconButton(
@@ -218,7 +218,7 @@ class _HomeState extends State<Home> {
                           image: const DecorationImage(
                             fit: BoxFit.cover,
                             image: NetworkImage(
-                              "https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp",
+                              'https://github.com/diptanshumahish/watch_images/raw/main/tragedy.webp',
                             ),
                           ),
                           borderRadius: BorderRadius.circular(8)),
@@ -238,14 +238,14 @@ class _HomeState extends State<Home> {
                             children: const [
                               Spacer(),
                               Text(
-                                "Joker",
+                                'Joker',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                "Tragedy | 9.2 \u066D",
+                                'Tragedy | 9.2 \u066D',
                                 style: TextStyle(
                                   color: Color.fromARGB(194, 255, 255, 255),
                                   fontSize: 15,
@@ -266,7 +266,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "Horror Specials",
+                'Horror Specials',
                 style: TextStyle(fontSize: 20),
               ),
               IconButton(
@@ -281,11 +281,11 @@ class _HomeState extends State<Home> {
         SizedBox(
           height: height / 3,
           child: Consumer(
-            key: const ValueKey<String>("horror"),
+            key: const ValueKey<String>('horror'),
             builder: (context, ref, child) {
-              final horror = ref.watch(horrorMovieProvider);
+              var horror = ref.watch(horrorMovieProvider);
               return horror.when(
-                data: (data) => data.fold((l) => const Text("Error"), (r) {
+                data: (data) => data.fold((l) => const Text('Error'), (r) {
                   if (r.results.isEmpty) {
                     return const SizedBox.shrink();
                   }
@@ -354,7 +354,7 @@ class _HomeState extends State<Home> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
+                                        '${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D',
                                         style: const TextStyle(
                                           color: Color.fromARGB(
                                               194, 255, 255, 255),
@@ -372,7 +372,7 @@ class _HomeState extends State<Home> {
                     },
                   );
                 }),
-                error: (error, stackTrace) => const Text("Error"),
+                error: (error, stackTrace) => const Text('Error'),
                 loading: () =>
                     const Center(child: CircularProgressIndicator.adaptive()),
               );
@@ -385,7 +385,7 @@ class _HomeState extends State<Home> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Thrillers",
+                'Thrillers',
                 style: TextStyle(fontSize: 20, color: getTheme()),
               ),
               IconButton(
@@ -400,11 +400,11 @@ class _HomeState extends State<Home> {
         SizedBox(
           height: height / 3,
           child: Consumer(
-            key: const ValueKey<String>("thriller"),
+            key: const ValueKey<String>('thriller'),
             builder: (context, ref, child) {
-              final thriller = ref.watch(thrillerMovieProvider);
+              var thriller = ref.watch(thrillerMovieProvider);
               return thriller.when(
-                data: (data) => data.fold((l) => const Text("Error"), (r) {
+                data: (data) => data.fold((l) => const Text('Error'), (r) {
                   if (r.results.isEmpty) {
                     return const SizedBox.shrink();
                   }
@@ -473,7 +473,7 @@ class _HomeState extends State<Home> {
                                             fontWeight: FontWeight.bold),
                                       ),
                                       Text(
-                                        "${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D",
+                                        '${r.results[index].originalTitle} | ${r.results[index].voteAverage} \u066D',
                                         style: const TextStyle(
                                           color: Color.fromARGB(
                                               194, 255, 255, 255),
@@ -491,7 +491,7 @@ class _HomeState extends State<Home> {
                     },
                   );
                 }),
-                error: (error, stackTrace) => const Text("Error"),
+                error: (error, stackTrace) => const Text('Error'),
                 loading: () =>
                     const Center(child: CircularProgressIndicator.adaptive()),
               );

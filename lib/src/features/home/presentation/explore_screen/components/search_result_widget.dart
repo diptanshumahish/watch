@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/src/shared/shimmer_loaders.dart';
 
 import '../../../../../../app/constants/constants.dart';
+import '../../../../../shared/shimmer_loaders.dart';
 import '../../../app/controller/search_controller.dart';
 
 class SearchResult extends StatelessWidget {
@@ -22,7 +22,7 @@ class SearchResult extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Consumer(
       builder: (_, ref, child) {
-        final exploreController = ref.watch(exploreControllerProvider);
+        var exploreController = ref.watch(exploreControllerProvider);
         return exploreController.when(
           data: (data) => data.when(
             initial: (genres) => Column(
@@ -120,7 +120,7 @@ class SearchResult extends StatelessWidget {
             ),
             loaded: (movies) {
               if (movies.results.isEmpty) {
-                return const Center(child: Text("No Results Found"));
+                return const Center(child: Text('No Results Found'));
               }
               return GridView.builder(
                 physics: const NeverScrollableScrollPhysics(),
@@ -150,7 +150,7 @@ class SearchResult extends StatelessWidget {
                           image: NetworkImage(
                             movies.results[index].posterPath != null
                                 ? "$baseImageUrl${movies.results[index].posterPath}"
-                                : "https://www.woolha.com/media/2020/03/eevee.png",
+                                : 'https://www.woolha.com/media/2020/03/eevee.png',
                           ),
                         ),
                       ),

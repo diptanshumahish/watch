@@ -1,6 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:watch/app/errors/errors.dart';
+
+import '../../../../app/errors/errors.dart';
 
 typedef SignOutEither = Either<Unit, Unit>;
 typedef SignInEither = Either<String, UserCredential>;
@@ -18,10 +19,7 @@ abstract class AuthAPIImpl {
     required String password,
   });
 
-
-  FutureEither<void> resetPassword({
-    required String email
-  });
+  FutureEither<void> resetPassword({required String email});
 
   FutureEither<void> verifyResetPassword(String code);
 
@@ -39,5 +37,5 @@ abstract class AuthAPIImpl {
       {required String email, required String password});
 
   ///Sign out user
-  Future<SignOutEither> signOut({List<Future<void>>? futures});
+  Future<SignOutEither> signOut();
 }

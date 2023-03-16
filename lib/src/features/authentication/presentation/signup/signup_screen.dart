@@ -3,11 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:watch/app/utils/snackbar/snackbar.dart';
-import 'package:watch/app/utils/textfield_validators.dart';
-import 'package:watch/src/routes/app_routes.dart';
-import 'package:watch/src/shared/loading_dialog.dart';
 
+import '../../../../../app/utils/snackbar/snackbar.dart';
+import '../../../../../app/utils/textfield_validators.dart';
+import '../../../../routes/app_routes.dart';
+import '../../../../shared/loading_dialog.dart';
 import '../../app/controller/signup_controller.dart';
 import '../../app/state/signup_state.dart';
 
@@ -21,11 +21,11 @@ class SignUpScreen extends StatefulHookConsumerWidget {
 class _SignUpScreenState extends ConsumerState<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    final fullNameController = useTextEditingController();
-    final emailController = useTextEditingController();
-    final ageController = useTextEditingController();
-    final passwordController = useTextEditingController();
-    final confirmPasswordController = useTextEditingController();
+    var fullNameController = useTextEditingController();
+    var emailController = useTextEditingController();
+    var ageController = useTextEditingController();
+    var passwordController = useTextEditingController();
+    var confirmPasswordController = useTextEditingController();
     ref.listen<SignUpState>(signUpControllerProvider, (old, next) {
       if (next is SignUpLoading) {
         context.showLoaderDialog();
@@ -70,7 +70,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: const EdgeInsets.only(bottom: 20, top: 10),
                         child: Center(
                           child: Text(
-                            "Sign Up",
+                            'Sign Up',
                             style: TextStyle(
                               fontSize: MediaQuery.of(context).size.height / 20,
                               fontWeight: FontWeight.w900,
@@ -82,7 +82,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                       const Padding(
                         padding: EdgeInsets.only(left: 20, right: 20),
                         child: Text(
-                          "Full name",
+                          'Full name',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
@@ -99,7 +99,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: const Color(0x349E9E9E)),
-                          placeholder: "Enter your full name",
+                          placeholder: 'Enter your full name',
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -107,7 +107,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: EdgeInsets.only(
                             bottom: 5.0, top: 8, left: 20, right: 20),
                         child: Text(
-                          "Email",
+                          'Email',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
@@ -116,7 +116,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         child: CupertinoTextField(
                           controller: emailController,
                           inputFormatters: [
-                            FilteringTextInputFormatter.deny(RegExp(r"\s")),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           keyboardType: TextInputType.emailAddress,
                           textInputAction: TextInputAction.next,
@@ -127,7 +127,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: const Color.fromARGB(52, 158, 158, 158)),
-                          placeholder: "Enter your email",
+                          placeholder: 'Enter your email',
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -135,7 +135,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: EdgeInsets.only(
                             top: 8.0, bottom: 5, left: 20, right: 20),
                         child: Text(
-                          "Age",
+                          'Age',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
@@ -155,7 +155,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: const Color(0x349E9E9E)),
-                          placeholder: "Enter your age here",
+                          placeholder: 'Enter your age here',
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -163,7 +163,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: EdgeInsets.only(
                             top: 8.0, bottom: 5, left: 20, right: 20),
                         child: Text(
-                          "Password",
+                          'Password',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
@@ -174,7 +174,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           autofillHints: const [AutofillHints.password],
                           controller: passwordController,
                           inputFormatters: [
-                            FilteringTextInputFormatter.deny(RegExp(r"\s")),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           textInputAction: TextInputAction.next,
                           keyboardType: TextInputType.visiblePassword,
@@ -184,7 +184,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: const Color(0x349E9E9E)),
-                          placeholder: "Enter your password",
+                          placeholder: 'Enter your password',
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -192,7 +192,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         padding: EdgeInsets.only(
                             top: 8.0, bottom: 5, left: 20, right: 20),
                         child: Text(
-                          "Re-enter your password",
+                          'Re-enter your password',
                           style: TextStyle(color: Colors.black),
                         ),
                       ),
@@ -202,7 +202,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                         child: CupertinoTextField(
                           obscureText: true,
                           inputFormatters: [
-                            FilteringTextInputFormatter.deny(RegExp(r"\s")),
+                            FilteringTextInputFormatter.deny(RegExp(r'\s')),
                           ],
                           keyboardType: TextInputType.visiblePassword,
                           textInputAction: TextInputAction.done,
@@ -214,7 +214,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(5),
                               color: const Color(0x349E9E9E)),
-                          placeholder: "Re-enter your password",
+                          placeholder: 'Re-enter your password',
                         ),
                       ),
                       const SizedBox(height: 20),
@@ -251,7 +251,7 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               ),
                               child: const Center(
                                 child: Text(
-                                  "SIGN UP",
+                                  'SIGN UP',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600,
@@ -270,11 +270,11 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                             Column(
                               children: const [
                                 Text(
-                                  "By clicking sign up you agree to our",
+                                  'By clicking sign up you agree to our',
                                   style: TextStyle(color: Colors.grey),
                                 ),
                                 Text(
-                                  "Terms and Conditions",
+                                  'Terms and Conditions',
                                   style: TextStyle(
                                     fontWeight: FontWeight.w600,
                                     color: Colors.black,
@@ -287,13 +287,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 const Text(
-                                  "Alreday have an account? ",
+                                  'Alreday have an account? ',
                                   style: TextStyle(color: Colors.black),
                                 ),
                                 InkWell(
                                   onTap: () => Navigator.maybePop(context),
                                   child: const Text(
-                                    "Sign in!",
+                                    'Sign in!',
                                     style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       color: Colors.black,
