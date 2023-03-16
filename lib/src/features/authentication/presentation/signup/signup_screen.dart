@@ -250,7 +250,13 @@ class _SignUpScreenState extends ConsumerState<SignUpScreen> {
                                 color: Colors.black,
                               ),
                               child: const Center(
-                                child: Text("Sign up"),
+                                child: Text(
+                                  "SIGN UP",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ),
                             ),
                           ),

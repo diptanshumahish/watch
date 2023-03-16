@@ -47,16 +47,18 @@ class _HomeState extends State<Home> {
                     maxLines: 1,
                     style: const TextStyle(
                       fontSize: 24,
+                      color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
                   );
                 },
               ),
-              const Text(
+              const SizedBox(height: 10),
+              Text(
                 "Let's see what's here for you",
                 style: TextStyle(
                   fontSize: 25,
-                  color: Colors.grey,
+                  color: Colors.grey.shade300,
                 ),
               )
             ],

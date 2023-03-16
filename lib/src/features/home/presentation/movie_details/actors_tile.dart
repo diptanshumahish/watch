@@ -44,14 +44,18 @@ class ActorTile extends StatelessWidget {
                 Text(
                   name,
                   maxLines: 1,
-                  style: const TextStyle(overflow: TextOverflow.ellipsis),
+                  style: const TextStyle(
+                      overflow: TextOverflow.ellipsis, color: Colors.white),
                 ),
                 const SizedBox(height: 2),
                 Text(
                   role,
                   maxLines: 1,
                   style: const TextStyle(
-                      fontSize: 11, overflow: TextOverflow.ellipsis),
+                    fontSize: 11,
+                    overflow: TextOverflow.ellipsis,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             ),

@@ -30,13 +30,13 @@ class MyApp extends StatelessWidget {
           return user.when(
             data: (user) {
               if (user != null) {
-                return const HomeScreen();
+                return const LoginScreen();
               } else {
-                return LoginScreen();
+                return const HomeScreen();
               }
             },
             loading: () => const SplashScreen(),
-            error: (error, stack) => const Center(child: Text('Error')),
+            error: (_, __) => const Center(child: Text('Error')),
           );
         },
       ),

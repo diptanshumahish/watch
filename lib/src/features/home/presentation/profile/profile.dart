@@ -53,7 +53,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         Flexible(
                           child: Text(
                             'My Profile',
-                            style: textTheme.headlineSmall,
+                            style: textTheme.headlineSmall?.copyWith(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
                         const Icon(
@@ -68,7 +71,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       children: [
                         Text(
                           'Here are all your favorites',
-                          style: textTheme.bodyText2,
+                          style: textTheme.bodyText2?.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w700,
+                          ),
                         ),
                       ],
                     ),
@@ -128,10 +134,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       final name = ref.watch(userNotifierProvider
                           .select((value) => value.displayName));
                       return Text(
-                        'Name :${name ?? 'N/A'}',
+                        'Name : ${name ?? 'N/A'}',
                         style: const TextStyle(
                           fontSize: 18,
-                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
                         ),
                       );
                     }),
@@ -140,9 +147,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       final e = ref.watch(
                           userNotifierProvider.select((value) => value.email));
                       return Text(
-                        'Email :${e ?? 'N/A'}',
+                        'Email : ${e ?? 'N/A'}',
                         style: const TextStyle(
                           fontSize: 14,
+                          color: Colors.white,
                           fontWeight: FontWeight.w500,
                         ),
                       );
@@ -156,6 +164,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             'Headlines',
                             style: textTheme.headlineSmall?.copyWith(
                               fontSize: 18,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -175,7 +184,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   fontSize: 16,
                                   color: e == 'Trending'
                                       ? const Color(0XFF00FF38)
-                                      : null,
+                                      : Colors.white,
                                 ),
                               ),
                             ),
@@ -196,6 +205,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             'Content',
                             style: textTheme.headlineSmall?.copyWith(
                               fontSize: 18,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -215,7 +225,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                   fontSize: 16,
                                   color: e == 'Favorites'
                                       ? const Color(0XFFFFD914)
-                                      : null,
+                                      : Colors.white,
                                 ),
                               ),
                             ),
@@ -236,6 +246,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             'Preferences',
                             style: textTheme.headlineSmall?.copyWith(
                               fontSize: 18,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -251,8 +262,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             Expanded(
                               child: Text(
                                 e,
-                                style: textTheme.bodyMedium
-                                    ?.copyWith(fontSize: 16),
+                                style: textTheme.bodyMedium?.copyWith(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ],
