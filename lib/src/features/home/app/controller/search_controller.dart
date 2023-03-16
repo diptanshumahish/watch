@@ -11,12 +11,12 @@ import '../state/search_state.dart';
 
 ///exploreSearchControllerPage
 final exploreControllerProvider =
-    AsyncNotifierProvider<ExploreController, ExploreState>(
-  ExploreController.new,
+    AsyncNotifierProvider.autoDispose<ExploreController, ExploreState>(
   name: 'exploreControllerProvider',
+  ExploreController.new,
 );
 
-class ExploreController extends AsyncNotifier<ExploreState> {
+class ExploreController extends AutoDisposeAsyncNotifier<ExploreState> {
   @override
   Future<ExploreState> build() async {
     Either<Failure, AllGenres> result =

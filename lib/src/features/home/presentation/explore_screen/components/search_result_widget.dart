@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:watch/src/shared/shimmer_loaders.dart';
 
 import '../../../../../../app/constants/constants.dart';
 import '../../../app/controller/search_controller.dart';
@@ -208,9 +209,12 @@ class SearchResult extends StatelessWidget {
               Text('Error: $error'),
             ],
           ),
-          loading: () => const SizedBox.square(
-            dimension: 50,
-            child: Center(child: CircularProgressIndicator.adaptive()),
+          loading: () => SizedBox(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            child: const ShimmerGridSkeleton(
+              padding: EdgeInsets.symmetric(vertical: 5),
+            ),
           ),
         );
       },

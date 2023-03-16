@@ -24,7 +24,9 @@ Future<void> main() async {
       overrides: [
         sharedPreferenceProvider.overrideWithValue(prefsInstance),
       ],
-      observers: [ProviderLogger()],
+      observers: [
+        ProviderLogger(),
+      ],
       child: const MyApp(),
     ),
   );
